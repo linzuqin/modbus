@@ -31,7 +31,7 @@
 #endif
 
 
-#define MODBUS_SLAVE_ENABLE        1
+#define MODBUS_SLAVE_ENABLE        0
 
 #if MODBUS_SLAVE_ENABLE
 
