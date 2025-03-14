@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "stm32f10x.h": "c",
+        "devinit.h": "c",
+        "mycrc.h": "c",
+        "log.h": "c",
+        "delay.h": "c",
+        "mb.h": "c",
+        "agile_modbus.h": "c",
+        "user_db.h": "c"
+    }
+}

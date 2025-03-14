@@ -1,0 +1,11 @@
+.\objects\fal.o: Component\fal\src\fal.c
+.\objects\fal.o: .\Component\fal\inc\fal.h
+.\objects\fal.o: .\Component\fal\samples\porting\fal_cfg.h
+.\objects\fal.o: .\Component\fal\inc\fal_def.h
+.\objects\fal.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+.\objects\fal.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+.\objects\fal.o: .\RTT\log.h
+.\objects\fal.o: .\RTT\SEGGER_RTT.h
+.\objects\fal.o: .\RTT\SEGGER_RTT_Conf.h
+.\objects\fal.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+.\objects\fal.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h

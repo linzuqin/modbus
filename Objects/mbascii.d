@@ -1,0 +1,14 @@
+.\objects\mbascii.o: freemodbus\modbus\ascii\mbascii.c
+.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+.\objects\mbascii.o: .\freemodbus\port\port.h
+.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
+.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
+.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+.\objects\mbascii.o: .\freemodbus\modbus\include\mb.h
+.\objects\mbascii.o: .\freemodbus\modbus\include\mbport.h
+.\objects\mbascii.o: .\freemodbus\modbus\include\mbproto.h
+.\objects\mbascii.o: .\freemodbus\modbus\include\mbconfig.h
+.\objects\mbascii.o: freemodbus\modbus\ascii\mbascii.h
+.\objects\mbascii.o: .\freemodbus\modbus\include\mbframe.h
+.\objects\mbascii.o: .\freemodbus\modbus\rtu\mbcrc.h
