@@ -6,7 +6,7 @@
 
 #include <string.h>
 #include <fal.h>
-#include <stm32f1xx.h>
+#include <stm32f10x.h>
 
 #if defined(STM32F103xE)
 #define PAGE_SIZE     2048
@@ -76,9 +76,9 @@ static int write(long offset, const uint8_t *buf, size_t size)
     size_t   i;
     uint32_t addr = stm32_onchip_flash.addr + offset;
 
-    __ALIGN_BEGIN uint32_t write_data __ALIGN_END;
-    __ALIGN_BEGIN uint32_t read_data  __ALIGN_END;  
-
+//    __ALIGN_BEGIN uint32_t write_data __ALIGN_END;
+//    __ALIGN_BEGIN uint32_t read_data  __ALIGN_END;  
+    uint32_t read_data;
     if(addr%4 != 0)
         ef_err_port_cnt++;
 
@@ -87,22 +87,41 @@ static int write(long offset, const uint8_t *buf, size_t size)
         ef_err_port_cnt++;
 */
 
-    HAL_FLASH_Unlock();
-    for (i = 0; i < size; i += 4, buf+=4, addr += 4) {
-        memcpy(&write_data, buf, 4); //用以保证HAL_FLASH_Program的第三个参数是内存首地址对齐
-        HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, addr, write_data);
+//    HAL_FLASH_Unlock();
+//    for (i = 0; i < size; i += 4, buf+=4, addr += 4) {
+//        memcpy(&write_data, buf, 4); //用以保证HAL_FLASH_Program的第三个参数是内存首地址对齐
+//        HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, addr, write_data);
+//        read_data = *(uint32_t *)addr;
+//        /* You can add your code under here. */
+//        if (read_data != write_data) {
+//            HAL_FLASH_Lock(); 
+//            return -1;
+//        }
+//        else{
+//			//FLash操作可能非常耗时，如果有看门狗需要喂狗，以下代码由用户实现
+//           feed_dog();
+//        }
+//    }
+    
+    FLASH_Unlock();
+    FLASH_ClearFlag(FLASH_FLAG_BSY | FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);
+    for (i = 0; i < size; i += 4, buf++, addr += 4) {
+        /* write data */
+        FLASH_ProgramWord(addr, *buf);
         read_data = *(uint32_t *)addr;
-        /* You can add your code under here. */
-        if (read_data != write_data) {
-            HAL_FLASH_Lock(); 
+        /* check data */
+        if (read_data != *buf) {
+//            result = EF_WRITE_ERR;
+//            break;
+            FLASH_Lock();
             return -1;
         }
         else{
-			//FLash操作可能非常耗时，如果有看门狗需要喂狗，以下代码由用户实现
-           feed_dog();
+            feed_dog();
         }
     }
-    HAL_FLASH_Lock();
+    FLASH_Lock();
+//    HAL_FLASH_Lock();
 
     on_ic_write_cnt++;
     return size;
@@ -113,25 +132,52 @@ static int erase(long offset, size_t size)
 {
     uint32_t addr = stm32_onchip_flash.addr + offset;
 
-    HAL_StatusTypeDef flash_status;
-    size_t erase_pages, i;
-    uint32_t PAGEError = 0;
+//    HAL_StatusTypeDef flash_status;
+//    size_t erase_pages, i;
+//    uint32_t PAGEError = 0;
 
+//    erase_pages = size / PAGE_SIZE;
+//    if (size % PAGE_SIZE != 0) {
+//        erase_pages++;
+//    }
+
+//    FLASH_EraseInitTypeDef EraseInitStruct;
+//    EraseInitStruct.TypeErase   = FLASH_TYPEERASE_PAGES;
+//    EraseInitStruct.NbPages     = 1;  //一次擦出一个扇区, 以执行一次喂狗，防止超时
+//    HAL_FLASH_Unlock();
+//    
+//    for (i = 0; i < erase_pages; i++) {
+//        EraseInitStruct.PageAddress = addr + (FLASH_PAGE_SIZE * i);
+//        flash_status = HAL_FLASHEx_Erase(&EraseInitStruct, &PAGEError);
+//        if (flash_status != HAL_OK) {
+//            HAL_FLASH_Lock(); 
+//            return -1;
+//        }
+//        else{
+//			//FLash操作可能非常耗时，如果有看门狗需要喂狗，以下代码由用户实现
+//            feed_dog();
+//        }
+//    }
+//    HAL_FLASH_Lock(); 
+    
+    FLASH_Status flash_status;
+    size_t erase_pages, i;
+
+    /* make sure the start address is a multiple of EF_ERASE_MIN_SIZE */
+//    EF_ASSERT(addr % EF_ERASE_MIN_SIZE == 0);
     erase_pages = size / PAGE_SIZE;
     if (size % PAGE_SIZE != 0) {
         erase_pages++;
     }
+    /* You can add your code under here. */
 
-    FLASH_EraseInitTypeDef EraseInitStruct;
-    EraseInitStruct.TypeErase   = FLASH_TYPEERASE_PAGES;
-    EraseInitStruct.NbPages     = 1;  //一次擦出一个扇区, 以执行一次喂狗，防止超时
-    HAL_FLASH_Unlock();
-    
+    /* start erase */
+    FLASH_Unlock();
+    FLASH_ClearFlag(FLASH_FLAG_BSY | FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);
     for (i = 0; i < erase_pages; i++) {
-        EraseInitStruct.PageAddress = addr + (FLASH_PAGE_SIZE * i);
-        flash_status = HAL_FLASHEx_Erase(&EraseInitStruct, &PAGEError);
-        if (flash_status != HAL_OK) {
-            HAL_FLASH_Lock(); 
+        flash_status = FLASH_ErasePage(addr + (PAGE_SIZE * i));
+        if (flash_status != FLASH_COMPLETE) {
+            FLASH_Lock(); 
             return -1;
         }
         else{
@@ -139,7 +185,7 @@ static int erase(long offset, size_t size)
             feed_dog();
         }
     }
-    HAL_FLASH_Lock(); 
+    FLASH_Lock();
 
     return size;
 }

@@ -31,7 +31,7 @@
 #endif
 
 
-#define MODBUS_SLAVE_ENABLE        0
+#define MODBUS_SLAVE_ENABLE        1
 
 #if MODBUS_SLAVE_ENABLE
 
@@ -55,5 +55,12 @@
 
 
 #endif
+
+typedef struct
+{
+	uint8_t ota_flag;
+	USART_TypeDef* port;
+}ota_t;
+
 
 #endif

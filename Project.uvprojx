@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD,NDEBUG</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\fal\inc;.\Component\FlashDB\inc;.\Component\SFUD\sfud\inc;.\Component\fal\samples\porting;.\modbus\slave;.\modbus\modbus\ascii;.\modbus\modbus\functions;.\modbus\modbus\include;.\modbus\modbus\rtu;.\modbus\modbus\tcp;.\modbus\modbus;.\modbus\master\inc;.\modbus\master</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\fal\inc;.\Component\FlashDB\inc;.\Component\SFUD\sfud\inc;.\Component\fal\samples\porting;.\modbus\slave;.\modbus\modbus\ascii;.\modbus\modbus\functions;.\modbus\modbus\include;.\modbus\modbus\rtu;.\modbus\modbus\tcp;.\modbus\modbus;.\modbus\master\inc;.\modbus\master;.\Component\XMODEM;.\Component\ymodem</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -739,6 +739,16 @@
               <FileType>5</FileType>
               <FilePath>.\Hardware\W25Q64Flash.h</FilePath>
             </File>
+            <File>
+              <FileName>TIM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\TIM.c</FilePath>
+            </File>
+            <File>
+              <FileName>TIM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\TIM.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -807,7 +817,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Component</GroupName>
+          <GroupName>FlashDB</GroupName>
           <Files>
             <File>
               <FileName>fal.c</FileName>
@@ -878,6 +888,11 @@
               <FileName>sfud_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Component\SFUD\sfud\port\sfud_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_flash_stm32f1_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\port\fal\samples\porting\fal_flash_stm32f1_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -988,6 +1003,21 @@
               <FileName>master_mb_app.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\modbus\master\master_mb_app.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ymodem</GroupName>
+          <Files>
+            <File>
+              <FileName>ymodem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\ymodem\ymodem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ymodem_ota.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\ymodem\ymodem_ota.c</FilePath>
             </File>
           </Files>
         </Group>

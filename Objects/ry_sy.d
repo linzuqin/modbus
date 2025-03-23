@@ -1,0 +1,10 @@
+.\objects\ry_sy.o: Component\ota_downloader-v1.0.0\ymodem\ry_sy.c
+.\objects\ry_sy.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
+.\objects\ry_sy.o: .\RTE\RTOS\rtconfig.h
+.\objects\ry_sy.o: .\RTE\RTOS\finsh_config.h
+.\objects\ry_sy.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
+.\objects\ry_sy.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
+.\objects\ry_sy.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
+.\objects\ry_sy.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
+.\objects\ry_sy.o: .\Component\ota_downloader-v1.0.0\ymodem\ymodem.h
+.\objects\ry_sy.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h

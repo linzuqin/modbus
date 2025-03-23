@@ -18,7 +18,7 @@ void UART4_DMA_Init(void)
 	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	DMA_InitStructure.DMA_BufferSize = 4;
+	DMA_InitStructure.DMA_BufferSize = USART4_RXBUFF_SIZE;
 	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
 	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
 	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;

@@ -69,3 +69,4 @@
 .\objects\main.o: .\modbus\modbus\include\mbframe.h
 .\objects\main.o: .\modbus\modbus\include\mbutils.h
 .\objects\main.o: .\modbus\master\master_mb_app.h
+.\objects\main.o: .\Component\ymodem\ymodem.h
