@@ -1,5 +1,5 @@
 #include "stm32f10x.h"                  // Device header
-#include "Delay.h"
+#include "rtthread.h"
 #define W25Q64Flash_CLK(x) GPIO_WriteBit(GPIOB,GPIO_Pin_13,(BitAction)(x))
 #define W25Q64Flash_MOSI(x) GPIO_WriteBit(GPIOB,GPIO_Pin_15,(BitAction)(x))
 #define W25Q64Flash_MISO GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_14)
@@ -65,7 +65,7 @@ void W25Q64_WriteBusy(void)
 		{
 			break;
 		}
-		Delay_us(1);
+		rt_thread_mdelay(1);
 	}
 	W25Q64Flash_CS(1);
 }

@@ -1,11 +1,11 @@
-.\objects\mbfunccoils.o: modbus\slave\mbfunccoils.c
+.\objects\mbfunccoils.o: Component\modbus\slave\mbfunccoils.c
 .\objects\mbfunccoils.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
 .\objects\mbfunccoils.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-.\objects\mbfunccoils.o: modbus\slave\port.h
+.\objects\mbfunccoils.o: Component\modbus\slave\port.h
 .\objects\mbfunccoils.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
 .\objects\mbfunccoils.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
 .\objects\mbfunccoils.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-.\objects\mbfunccoils.o: modbus\slave\mb.h
+.\objects\mbfunccoils.o: Component\modbus\slave\mb.h
 .\objects\mbfunccoils.o: .\Start\stm32f10x.h
 .\objects\mbfunccoils.o: .\Start\core_cm3.h
 .\objects\mbfunccoils.o: .\Start\system_stm32f10x.h
@@ -41,7 +41,7 @@
 .\objects\mbfunccoils.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
 .\objects\mbfunccoils.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
 .\objects\mbfunccoils.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\mbfunccoils.o: .\modbus\modbus\include\mbport.h
-.\objects\mbfunccoils.o: .\modbus\modbus\include\mbproto.h
-.\objects\mbfunccoils.o: .\modbus\modbus\include\mbframe.h
-.\objects\mbfunccoils.o: .\modbus\modbus\include\mbconfig.h
+.\objects\mbfunccoils.o: .\Component\modbus\modbus\include\mbport.h
+.\objects\mbfunccoils.o: .\Component\modbus\modbus\include\mbproto.h
+.\objects\mbfunccoils.o: .\Component\modbus\modbus\include\mbframe.h
+.\objects\mbfunccoils.o: .\Component\modbus\modbus\include\mbconfig.h

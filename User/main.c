@@ -11,6 +11,7 @@ int main(void)
 
 	MyRTC_Init();
 	ymodem_init();
+	
 	/*User TASK Init*/
 	#if MODBUS_SLAVE_ENABLE
 		MODBUS_INIT();

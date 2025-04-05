@@ -56,6 +56,11 @@
 
 #endif
 
+
+
+/*计算公式*/
+#define USE_PID										 1
+
 typedef struct
 {
 	uint8_t ota_flag;

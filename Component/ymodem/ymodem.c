@@ -87,7 +87,7 @@ static rt_uint16_t CRC16(unsigned char *q, int len)
 
 // we could only use global varible because we could not use
 // rt_device_t->user_data(it is used by the serial driver)...
-static struct rym_ctx *_rym_the_ctx;
+//static struct rym_ctx *_rym_the_ctx;
 
 //static rt_err_t _rym_rx_ind(ymd_device_t dev, rt_size_t size)
 //{
@@ -205,9 +205,9 @@ static rt_err_t _rym_do_handshake(
     enum rym_code code;
     rt_size_t i;
     rt_uint16_t recv_crc, cal_crc;
-    rt_size_t data_sz,rev_len;
-    rt_tick_t tick;
-
+//    rt_size_t data_sz,rev_len;
+//    rt_tick_t tick;
+		rt_size_t data_sz;
     ctx->stage = RYM_STAGE_ESTABLISHING;
     /* send C every second, so the sender could know we are waiting for it. */
     for (i = 0; i < tm_sec; i++)
@@ -474,7 +474,7 @@ static rt_err_t _rym_do_fin(struct rym_ctx *ctx)
 {
     enum rym_code code;
     rt_uint16_t recv_crc;
-    rt_size_t i;
+//    rt_size_t i;
     rt_size_t data_sz;
 
     ctx->stage = RYM_STAGE_FINISHING;
@@ -684,12 +684,12 @@ rt_err_t rym_recv_on_device(
     int handshake_timeout)
 {
     rt_err_t res;
-    rt_err_t (*odev_rx_ind)(ymd_device_t dev, rt_size_t size);
-    rt_uint16_t odev_flag;
-    rt_base_t level;
+//    rt_err_t (*odev_rx_ind)(ymd_device_t dev, rt_size_t size);
+//    rt_uint16_t odev_flag;
+//    rt_base_t level;
 
-    RT_ASSERT(_rym_the_ctx == 0);
-    _rym_the_ctx = ctx;
+//    RT_ASSERT(_rym_the_ctx == 0);
+//    _rym_the_ctx = ctx;
 
     ctx->on_begin = on_begin;
     ctx->on_data  = on_data;

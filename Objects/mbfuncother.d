@@ -1,11 +1,11 @@
-.\objects\mbfuncother.o: modbus\modbus\functions\mbfuncother.c
+.\objects\mbfuncother.o: Component\modbus\modbus\functions\mbfuncother.c
 .\objects\mbfuncother.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
 .\objects\mbfuncother.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-.\objects\mbfuncother.o: .\modbus\slave\port.h
+.\objects\mbfuncother.o: .\Component\modbus\slave\port.h
 .\objects\mbfuncother.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
 .\objects\mbfuncother.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
 .\objects\mbfuncother.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-.\objects\mbfuncother.o: .\modbus\slave\mb.h
+.\objects\mbfuncother.o: .\Component\modbus\slave\mb.h
 .\objects\mbfuncother.o: .\Start\stm32f10x.h
 .\objects\mbfuncother.o: .\Start\core_cm3.h
 .\objects\mbfuncother.o: .\Start\system_stm32f10x.h
@@ -41,7 +41,7 @@
 .\objects\mbfuncother.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
 .\objects\mbfuncother.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
 .\objects\mbfuncother.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\mbfuncother.o: .\modbus\modbus\include\mbport.h
-.\objects\mbfuncother.o: .\modbus\modbus\include\mbproto.h
-.\objects\mbfuncother.o: .\modbus\modbus\include\mbframe.h
-.\objects\mbfuncother.o: .\modbus\modbus\include\mbconfig.h
+.\objects\mbfuncother.o: .\Component\modbus\modbus\include\mbport.h
+.\objects\mbfuncother.o: .\Component\modbus\modbus\include\mbproto.h
+.\objects\mbfuncother.o: .\Component\modbus\modbus\include\mbframe.h
+.\objects\mbfuncother.o: .\Component\modbus\modbus\include\mbconfig.h

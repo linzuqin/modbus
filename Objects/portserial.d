@@ -1,5 +1,5 @@
-.\objects\portserial.o: modbus\slave\portserial.c
-.\objects\portserial.o: modbus\slave\port.h
+.\objects\portserial.o: Component\modbus\slave\portserial.c
+.\objects\portserial.o: Component\modbus\slave\port.h
 .\objects\portserial.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
 .\objects\portserial.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
 .\objects\portserial.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
@@ -61,6 +61,6 @@
 .\objects\portserial.o: .\Component\fal\inc\fal_def.h
 .\objects\portserial.o: .\Component\FlashDB\inc\fdb_def.h
 .\objects\portserial.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-.\objects\portserial.o: modbus\slave\mb.h
-.\objects\portserial.o: .\modbus\modbus\include\mbport.h
-.\objects\portserial.o: .\modbus\modbus\include\mbproto.h
+.\objects\portserial.o: Component\modbus\slave\mb.h
+.\objects\portserial.o: .\Component\modbus\modbus\include\mbport.h
+.\objects\portserial.o: .\Component\modbus\modbus\include\mbproto.h

@@ -1,6 +1,6 @@
-.\objects\portevent.o: modbus\slave\portevent.c
-.\objects\portevent.o: modbus\slave\mb.h
-.\objects\portevent.o: modbus\slave\port.h
+.\objects\portevent.o: Component\modbus\slave\portevent.c
+.\objects\portevent.o: Component\modbus\slave\mb.h
+.\objects\portevent.o: Component\modbus\slave\port.h
 .\objects\portevent.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
 .\objects\portevent.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
 .\objects\portevent.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
@@ -39,5 +39,5 @@
 .\objects\portevent.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
 .\objects\portevent.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
 .\objects\portevent.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\portevent.o: .\modbus\modbus\include\mbport.h
-.\objects\portevent.o: .\modbus\modbus\include\mbproto.h
+.\objects\portevent.o: .\Component\modbus\modbus\include\mbport.h
+.\objects\portevent.o: .\Component\modbus\modbus\include\mbproto.h

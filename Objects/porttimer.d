@@ -1,5 +1,5 @@
-.\objects\porttimer.o: modbus\slave\porttimer.c
-.\objects\porttimer.o: modbus\slave\port.h
+.\objects\porttimer.o: Component\modbus\slave\porttimer.c
+.\objects\porttimer.o: Component\modbus\slave\port.h
 .\objects\porttimer.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
 .\objects\porttimer.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
 .\objects\porttimer.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
@@ -31,7 +31,7 @@
 .\objects\porttimer.o: .\Library\stm32f10x_usart.h
 .\objects\porttimer.o: .\Library\stm32f10x_wwdg.h
 .\objects\porttimer.o: .\Library\misc.h
-.\objects\porttimer.o: modbus\slave\mb.h
+.\objects\porttimer.o: Component\modbus\slave\mb.h
 .\objects\porttimer.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
 .\objects\porttimer.o: .\RTE\RTOS\rtconfig.h
 .\objects\porttimer.o: .\RTE\RTOS\finsh_config.h
@@ -39,5 +39,5 @@
 .\objects\porttimer.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
 .\objects\porttimer.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
 .\objects\porttimer.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\porttimer.o: .\modbus\modbus\include\mbport.h
-.\objects\porttimer.o: .\modbus\modbus\include\mbproto.h
+.\objects\porttimer.o: .\Component\modbus\modbus\include\mbport.h
+.\objects\porttimer.o: .\Component\modbus\modbus\include\mbproto.h

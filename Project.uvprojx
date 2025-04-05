@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD,NDEBUG</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\fal\inc;.\Component\FlashDB\inc;.\Component\SFUD\sfud\inc;.\Component\fal\samples\porting;.\modbus\slave;.\modbus\modbus\ascii;.\modbus\modbus\functions;.\modbus\modbus\include;.\modbus\modbus\rtu;.\modbus\modbus\tcp;.\modbus\modbus;.\modbus\master\inc;.\modbus\master;.\Component\XMODEM;.\Component\ymodem</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\fal\inc;.\Component\FlashDB\inc;.\Component\SFUD\sfud\inc;.\Component\fal\samples\porting;.\Component\XMODEM;.\Component\ymodem;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\ymodem;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -653,18 +653,6 @@
         </Group>
         <Group>
           <GroupName>System</GroupName>
-          <Files>
-            <File>
-              <FileName>Delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\System\Delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>Delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\System\Delay.h</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Hardware</GroupName>
@@ -902,17 +890,17 @@
             <File>
               <FileName>mbcrc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\modbus\rtu\mbcrc.c</FilePath>
+              <FilePath>.\Component\modbus\modbus\rtu\mbcrc.c</FilePath>
             </File>
             <File>
               <FileName>mbfuncother.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\modbus\functions\mbfuncother.c</FilePath>
+              <FilePath>.\Component\modbus\modbus\functions\mbfuncother.c</FilePath>
             </File>
             <File>
               <FileName>mbutils.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\modbus\functions\mbutils.c</FilePath>
+              <FilePath>.\Component\modbus\modbus\functions\mbutils.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -922,57 +910,62 @@
             <File>
               <FileName>mb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\mb.c</FilePath>
+              <FilePath>.\Component\modbus\slave\mb.c</FilePath>
             </File>
             <File>
               <FileName>mbfunccoils.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\mbfunccoils.c</FilePath>
+              <FilePath>.\Component\modbus\slave\mbfunccoils.c</FilePath>
             </File>
             <File>
               <FileName>mbfuncdisc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\mbfuncdisc.c</FilePath>
+              <FilePath>.\Component\modbus\slave\mbfuncdisc.c</FilePath>
             </File>
             <File>
               <FileName>mbfuncholding.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\mbfuncholding.c</FilePath>
+              <FilePath>.\Component\modbus\slave\mbfuncholding.c</FilePath>
             </File>
             <File>
               <FileName>mbfuncinput.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\mbfuncinput.c</FilePath>
+              <FilePath>.\Component\modbus\slave\mbfuncinput.c</FilePath>
             </File>
             <File>
               <FileName>mbrtu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\mbrtu.c</FilePath>
+              <FilePath>.\Component\modbus\slave\mbrtu.c</FilePath>
             </File>
             <File>
               <FileName>portevent.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\portevent.c</FilePath>
+              <FilePath>.\Component\modbus\slave\portevent.c</FilePath>
             </File>
             <File>
               <FileName>portserial.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\portserial.c</FilePath>
+              <FilePath>.\Component\modbus\slave\portserial.c</FilePath>
+            </File>
+            <File>
+              <FileName>mbascii.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\modbus\modbus\ascii\mbascii.c</FilePath>
             </File>
             <File>
               <FileName>porttimer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\porttimer.c</FilePath>
+              <FilePath>.\Component\modbus\slave\porttimer.c</FilePath>
             </File>
             <File>
               <FileName>slave_mb_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\slave\slave_mb_app.c</FilePath>
+              <FilePath>.\Component\modbus\slave\slave_mb_app.c</FilePath>
             </File>
             <File>
-              <FileName>mb.h</FileName>
+              <FileName>slave_mb_app.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\modbus\slave\mb.h</FilePath>
+              <FilePath>.\Component\modbus\slave\slave_mb_app.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -980,29 +973,44 @@
           <GroupName>freemodbus/master</GroupName>
           <Files>
             <File>
-              <FileName>agile_modbus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\modbus\master\src\agile_modbus.c</FilePath>
-            </File>
-            <File>
-              <FileName>agile_modbus_rtu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\modbus\master\src\agile_modbus_rtu.c</FilePath>
-            </File>
-            <File>
-              <FileName>agile_modbus_tcp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\modbus\master\src\agile_modbus_tcp.c</FilePath>
-            </File>
-            <File>
               <FileName>master_mb_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\modbus\master\master_mb_app.c</FilePath>
+              <FilePath>.\Component\modbus\master\master_mb_app.c</FilePath>
             </File>
             <File>
               <FileName>master_mb_app.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\modbus\master\master_mb_app.h</FilePath>
+              <FilePath>.\Component\modbus\master\master_mb_app.h</FilePath>
+            </File>
+            <File>
+              <FileName>agile_modbus.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\modbus\master\inc\agile_modbus.h</FilePath>
+            </File>
+            <File>
+              <FileName>agile_modbus_rtu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\modbus\master\inc\agile_modbus_rtu.h</FilePath>
+            </File>
+            <File>
+              <FileName>agile_modbus_tcp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\modbus\master\inc\agile_modbus_tcp.h</FilePath>
+            </File>
+            <File>
+              <FileName>agile_modbus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\modbus\master\src\agile_modbus.c</FilePath>
+            </File>
+            <File>
+              <FileName>agile_modbus_rtu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\modbus\master\src\agile_modbus_rtu.c</FilePath>
+            </File>
+            <File>
+              <FileName>agile_modbus_tcp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\modbus\master\src\agile_modbus_tcp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1018,6 +1026,16 @@
               <FileName>ymodem_ota.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Component\ymodem\ymodem_ota.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>PID</GroupName>
+          <Files>
+            <File>
+              <FileName>qpid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\PID\src\qpid.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,5 +1,5 @@
-.\objects\master_mb_app.o: modbus\master\master_mb_app.c
-.\objects\master_mb_app.o: modbus\master\master_mb_app.h
+.\objects\master_mb_app.o: Component\modbus\master\master_mb_app.c
+.\objects\master_mb_app.o: Component\modbus\master\master_mb_app.h
 .\objects\master_mb_app.o: .\RTT\log.h
 .\objects\master_mb_app.o: .\RTT\SEGGER_RTT.h
 .\objects\master_mb_app.o: .\RTT\SEGGER_RTT_Conf.h
@@ -12,9 +12,9 @@
 .\objects\master_mb_app.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
 .\objects\master_mb_app.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
 .\objects\master_mb_app.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\master_mb_app.o: .\modbus\master\inc\agile_modbus.h
-.\objects\master_mb_app.o: .\modbus\master\inc\agile_modbus_rtu.h
-.\objects\master_mb_app.o: .\modbus\master\inc\agile_modbus_tcp.h
+.\objects\master_mb_app.o: .\Component\modbus\master\inc\agile_modbus.h
+.\objects\master_mb_app.o: .\Component\modbus\master\inc\agile_modbus_rtu.h
+.\objects\master_mb_app.o: .\Component\modbus\master\inc\agile_modbus_tcp.h
 .\objects\master_mb_app.o: .\Start\stm32f10x.h
 .\objects\master_mb_app.o: .\Start\core_cm3.h
 .\objects\master_mb_app.o: .\Start\system_stm32f10x.h

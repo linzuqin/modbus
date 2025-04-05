@@ -28,4 +28,10 @@
 .\objects\w25q64flash.o: .\Library\stm32f10x_usart.h
 .\objects\w25q64flash.o: .\Library\stm32f10x_wwdg.h
 .\objects\w25q64flash.o: .\Library\misc.h
-.\objects\w25q64flash.o: .\System\Delay.h
+.\objects\w25q64flash.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
+.\objects\w25q64flash.o: .\RTE\RTOS\rtconfig.h
+.\objects\w25q64flash.o: .\RTE\RTOS\finsh_config.h
+.\objects\w25q64flash.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
+.\objects\w25q64flash.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
+.\objects\w25q64flash.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
+.\objects\w25q64flash.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
