@@ -9,7 +9,7 @@ uint8_t USART1_RxData[USART1_RXBUFF_SIZE];
 uint8_t UART1_Count = 0;
 uint8_t UART1_RxFlag = 0;
 extern struct rt_messagequeue  modbus_rx_mq;								
-extern struct rt_messagequeue ymodem_mq;/* 消息队列控制块 */
+//extern struct rt_messagequeue ymodem_mq;/* 消息队列控制块 */
 extern ota_t ota;
 
 struct rt_thread	u1_tx;
@@ -135,16 +135,16 @@ void USART1_IRQHandler(void)
 		UART1_RxFlag = 1;
 		USART1_RxData[0] = 1;
 		USART1_RxData[1] = USART1_RXBUFF_SIZE - DMA_GetCurrDataCounter(DMA1_Channel5);
-		if(ota.ota_flag == 1)
-		{
-					rt_mq_send(&ymodem_mq , USART1_RxData ,USART1_RxData[1] + 2);
-		}
-		else
-		{
-			#if MODBUS_SLAVE_UART1
-			rt_mq_send(&modbus_rx_mq , USART1_RxData ,USART1_RxData[1] + 2);
-			#endif
-		}
+//		if(ota.ota_flag == 1)
+//		{
+//					rt_mq_send(&ymodem_mq , USART1_RxData ,USART1_RxData[1] + 2);
+//		}
+//		else
+//		{
+//			#if MODBUS_SLAVE_UART1
+//			rt_mq_send(&modbus_rx_mq , USART1_RxData ,USART1_RxData[1] + 2);
+//			#endif
+//		}
 
 		DMA_Cmd(DMA1_Channel5,DISABLE);
 		DMA_SetCurrDataCounter(DMA1_Channel5, USART1_RXBUFF_SIZE);

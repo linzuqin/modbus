@@ -10,8 +10,9 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARM_Compiler_5.06u7</pCCUsed>
-      <uAC6>0</uAC6>
+      <pArmCC>6220000::V6.22::ARMCLANG</pArmCC>
+      <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103RE</Device>
@@ -314,7 +315,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>6</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -323,14 +324,14 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>3</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
-            <v6LangP>1</v6LangP>
+            <v6Lang>3</v6Lang>
+            <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -338,9 +339,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD,NDEBUG</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\fal\inc;.\Component\FlashDB\inc;.\Component\SFUD\sfud\inc;.\Component\fal\samples\porting;.\Component\XMODEM;.\Component\ymodem;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\ymodem;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\fal\inc;.\Component\FlashDB\inc;.\Component\SFUD\sfud\inc;.\Component\fal\samples\porting;.\Component\XMODEM;.\Component\ymodem;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\ymodem;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc;.\Component\AT;.\Component\cJSON-v1.7.17</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -384,11 +385,6 @@
         <Group>
           <GroupName>Start</GroupName>
           <Files>
-            <File>
-              <FileName>core_cm3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Start\core_cm3.c</FilePath>
-            </File>
             <File>
               <FileName>core_cm3.h</FileName>
               <FileType>5</FileType>
@@ -1015,27 +1011,62 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>ymodem</GroupName>
-          <Files>
-            <File>
-              <FileName>ymodem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\ymodem\ymodem.c</FilePath>
-            </File>
-            <File>
-              <FileName>ymodem_ota.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\ymodem\ymodem_ota.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>PID</GroupName>
           <Files>
             <File>
               <FileName>qpid.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Component\PID\src\qpid.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>AT</GroupName>
+          <Files>
+            <File>
+              <FileName>AT_Device.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\AT\AT_Device.c</FilePath>
+            </File>
+            <File>
+              <FileName>AT_Device.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\AT\AT_Device.h</FilePath>
+            </File>
+            <File>
+              <FileName>cJSON.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\cJSON-v1.7.17\cJSON.c</FilePath>
+            </File>
+            <File>
+              <FileName>cJSON.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\cJSON-v1.7.17\cJSON.h</FilePath>
+            </File>
+            <File>
+              <FileName>cJSON_util.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\cJSON-v1.7.17\cJSON_util.h</FilePath>
+            </File>
+            <File>
+              <FileName>cJSON_Utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\cJSON-v1.7.17\cJSON_Utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>cJSON_Utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\cJSON-v1.7.17\cJSON_Utils.h</FilePath>
+            </File>
+            <File>
+              <FileName>user_cjson.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\cJSON-v1.7.17\user_cjson.c</FilePath>
+            </File>
+            <File>
+              <FileName>user_cjson.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\cJSON-v1.7.17\user_cjson.h</FilePath>
             </File>
           </Files>
         </Group>

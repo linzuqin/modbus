@@ -1,18 +1,6 @@
-.\objects\fdb_file.o: Component\FlashDB\src\fdb_file.c
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-.\objects\fdb_file.o: .\Component\FlashDB\inc\flashdb.h
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stddef.h
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\time.h
-.\objects\fdb_file.o: .\Component\FlashDB\inc\fdb_cfg.h
-.\objects\fdb_file.o: .\Component\fal\inc\fal.h
-.\objects\fdb_file.o: .\Component\fal\samples\porting\fal_cfg.h
-.\objects\fdb_file.o: .\Component\fal\inc\fal_def.h
-.\objects\fdb_file.o: .\Component\FlashDB\inc\fdb_def.h
-.\objects\fdb_file.o: .\RTT\SEGGER_RTT.h
-.\objects\fdb_file.o: .\RTT\SEGGER_RTT_Conf.h
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-.\objects\fdb_file.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
-.\objects\fdb_file.o: .\Component\FlashDB\inc\fdb_low_lvl.h
+./objects/fdb_file.o: Component\FlashDB\src\fdb_file.c \
+  Component\FlashDB\inc\flashdb.h Component\FlashDB\inc\fdb_cfg.h \
+  Component\fal\inc\fal.h Component\fal\samples\porting\fal_cfg.h \
+  Component\fal\inc\fal_def.h Component\FlashDB\inc\fdb_def.h \
+  RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h \
+  Component\FlashDB\inc\fdb_low_lvl.h

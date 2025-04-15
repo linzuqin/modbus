@@ -58,7 +58,7 @@ eMBErrorCode eMBRegInputCB(UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNReg
     usRegInStart = usSRegInStart;
 
     /* it already plus one in modbus function method. */
-    usAddress--;
+    //usAddress--;
 
     if ((usAddress >= REG_INPUT_START)
             && (usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS))
@@ -106,7 +106,7 @@ eMBErrorCode eMBRegHoldingCB(UCHAR * pucRegBuffer, USHORT usAddress,
     usRegHoldStart = usSRegHoldStart;
 
     /* it already plus one in modbus function method. */
-    usAddress--;
+    //usAddress--;
 
     if ((usAddress >= REG_HOLDING_START)
             && (usAddress + usNRegs <= REG_HOLDING_START + REG_HOLDING_NREGS))
@@ -171,7 +171,7 @@ eMBErrorCode eMBRegCoilsCB(UCHAR * pucRegBuffer, USHORT usAddress,
     usCoilStart = usSCoilStart;
 
     /* it already plus one in modbus function method. */
-    usAddress--;
+    //usAddress--;
 
     if( ( usAddress >= COIL_START ) &&
         ( usAddress + usNCoils <= COIL_START + COIL_NCOILS ) )
@@ -247,7 +247,7 @@ eMBErrorCode eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT us
     usDiscreteInputStart = usSDiscInStart;
 
     /* it already plus one in modbus function method. */
-    usAddress--;
+    //usAddress--;
 
     if ((usAddress >= DISCRETE_INPUT_START)
             && (usAddress + usNDiscrete    <= DISCRETE_INPUT_START + DISCRETE_INPUT_NDISCRETES))

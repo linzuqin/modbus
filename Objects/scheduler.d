@@ -1,9 +1,8 @@
-.\objects\scheduler.o: D:/KEIL/PACK/RealThread/RT-Thread/3.1.5/src/scheduler.c
-.\objects\scheduler.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
-.\objects\scheduler.o: .\RTE\RTOS\rtconfig.h
-.\objects\scheduler.o: .\RTE\RTOS\finsh_config.h
-.\objects\scheduler.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
-.\objects\scheduler.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
-.\objects\scheduler.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
-.\objects\scheduler.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\scheduler.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rthw.h
+./objects/scheduler.o: \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\src\scheduler.c \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
+  RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rthw.h

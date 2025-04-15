@@ -1,48 +1,24 @@
-.\objects\mbrtu.o: Component\modbus\slave\mbrtu.c
-.\objects\mbrtu.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-.\objects\mbrtu.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-.\objects\mbrtu.o: Component\modbus\slave\port.h
-.\objects\mbrtu.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
-.\objects\mbrtu.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
-.\objects\mbrtu.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-.\objects\mbrtu.o: Component\modbus\slave\mb.h
-.\objects\mbrtu.o: .\Start\stm32f10x.h
-.\objects\mbrtu.o: .\Start\core_cm3.h
-.\objects\mbrtu.o: .\Start\system_stm32f10x.h
-.\objects\mbrtu.o: .\User\stm32f10x_conf.h
-.\objects\mbrtu.o: .\Library\stm32f10x_adc.h
-.\objects\mbrtu.o: .\Start\stm32f10x.h
-.\objects\mbrtu.o: .\Library\stm32f10x_bkp.h
-.\objects\mbrtu.o: .\Library\stm32f10x_can.h
-.\objects\mbrtu.o: .\Library\stm32f10x_cec.h
-.\objects\mbrtu.o: .\Library\stm32f10x_crc.h
-.\objects\mbrtu.o: .\Library\stm32f10x_dac.h
-.\objects\mbrtu.o: .\Library\stm32f10x_dbgmcu.h
-.\objects\mbrtu.o: .\Library\stm32f10x_dma.h
-.\objects\mbrtu.o: .\Library\stm32f10x_exti.h
-.\objects\mbrtu.o: .\Library\stm32f10x_flash.h
-.\objects\mbrtu.o: .\Library\stm32f10x_fsmc.h
-.\objects\mbrtu.o: .\Library\stm32f10x_gpio.h
-.\objects\mbrtu.o: .\Library\stm32f10x_i2c.h
-.\objects\mbrtu.o: .\Library\stm32f10x_iwdg.h
-.\objects\mbrtu.o: .\Library\stm32f10x_pwr.h
-.\objects\mbrtu.o: .\Library\stm32f10x_rcc.h
-.\objects\mbrtu.o: .\Library\stm32f10x_rtc.h
-.\objects\mbrtu.o: .\Library\stm32f10x_sdio.h
-.\objects\mbrtu.o: .\Library\stm32f10x_spi.h
-.\objects\mbrtu.o: .\Library\stm32f10x_tim.h
-.\objects\mbrtu.o: .\Library\stm32f10x_usart.h
-.\objects\mbrtu.o: .\Library\stm32f10x_wwdg.h
-.\objects\mbrtu.o: .\Library\misc.h
-.\objects\mbrtu.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
-.\objects\mbrtu.o: .\RTE\RTOS\rtconfig.h
-.\objects\mbrtu.o: .\RTE\RTOS\finsh_config.h
-.\objects\mbrtu.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
-.\objects\mbrtu.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
-.\objects\mbrtu.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
-.\objects\mbrtu.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\mbrtu.o: .\Component\modbus\modbus\include\mbport.h
-.\objects\mbrtu.o: .\Component\modbus\modbus\include\mbproto.h
-.\objects\mbrtu.o: Component\modbus\slave\mbrtu.h
-.\objects\mbrtu.o: .\Component\modbus\modbus\include\mbframe.h
-.\objects\mbrtu.o: .\Component\modbus\modbus\rtu\mbcrc.h
+./objects/mbrtu.o: Component\modbus\slave\mbrtu.c \
+  Component\modbus\slave\port.h Component\modbus\slave\mb.h \
+  Start\stm32f10x.h Start\core_cm3.h Start\system_stm32f10x.h \
+  User\stm32f10x_conf.h Library\stm32f10x_adc.h Library\stm32f10x_bkp.h \
+  Library\stm32f10x_can.h Library\stm32f10x_cec.h \
+  Library\stm32f10x_crc.h Library\stm32f10x_dac.h \
+  Library\stm32f10x_dbgmcu.h Library\stm32f10x_dma.h \
+  Library\stm32f10x_exti.h Library\stm32f10x_flash.h \
+  Library\stm32f10x_fsmc.h Library\stm32f10x_gpio.h \
+  Library\stm32f10x_i2c.h Library\stm32f10x_iwdg.h \
+  Library\stm32f10x_pwr.h Library\stm32f10x_rcc.h \
+  Library\stm32f10x_rtc.h Library\stm32f10x_sdio.h \
+  Library\stm32f10x_spi.h Library\stm32f10x_tim.h \
+  Library\stm32f10x_usart.h Library\stm32f10x_wwdg.h Library\misc.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
+  RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
+  Component\modbus\modbus\include\mbport.h \
+  Component\modbus\modbus\include\mbproto.h \
+  Component\modbus\slave\mbrtu.h \
+  Component\modbus\modbus\include\mbframe.h \
+  Component\modbus\modbus\rtu\mbcrc.h

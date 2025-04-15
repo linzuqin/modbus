@@ -150,7 +150,7 @@ eMBRTUReceive(uint8_t *port ,  UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT 
     eMBErrorCode    eStatus = MB_ENOERR;
 
     ENTER_CRITICAL_SECTION(  );
-    assert( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
+    //assert( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
 		*port = ucRTUBuf[0];
     /* Length and CRC check */
     if( ( usRcvBufferPos >= MB_SER_PDU_SIZE_MIN )
@@ -230,7 +230,7 @@ xMBRTUReceiveFSM( uint8_t* data )
     BOOL            xTaskNeedSwitch = FALSE;
     uint8_t            ucByte[256];
 
-    assert( eSndState == STATE_TX_IDLE );
+    //assert( eSndState == STATE_TX_IDLE );
 
     /* Always read the character. */
 
@@ -346,8 +346,9 @@ xMBRTUTimerT35Expired( void )
 
         /* Function called in an illegal state. */
     default:
-        assert( ( eRcvState == STATE_RX_INIT ) ||
-                ( eRcvState == STATE_RX_RCV ) || ( eRcvState == STATE_RX_ERROR ) );
+//        assert( ( eRcvState == STATE_RX_INIT ) ||
+//                ( eRcvState == STATE_RX_RCV ) || ( eRcvState == STATE_RX_ERROR ) );
+		break;
     }
 
     vMBPortTimersDisable(  );

@@ -302,13 +302,13 @@ ARM Macro Assembler    Page 5
               E000ED20 
               FFFF0000 
               E000ED08 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=.\objects\context_rvds.d -o.\objects\context_rvds.o -I.\RTE\RTOS -
-I.\RTE\_Target_1 -ID:\KEIL\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include -ID:\KE
-IL\PACK\RealThread\RT-Thread\3.1.5\include --predefine="__MICROLIB SETA 1" --pr
-edefine="__UVISION_VERSION SETA 541" --predefine="STM32F10X_HD SETA 1" --predef
-ine="_RTE_ SETA 1" --list=.\listings\context_rvds.lst D:/KEIL/PACK/RealThread/R
-T-Thread/3.1.5/libcpu/arm/cortex-m3/context_rvds.S
+Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M3 --depe
+nd=.\objects\context_rvds.d -o.\objects\context_rvds.o -I.\RTE\RTOS -I.\RTE\_Ta
+rget_1 -ID:\KEIL\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include -ID:\KEIL\PACK\Re
+alThread\RT-Thread\3.1.5\include --predefine="__MICROLIB SETA 1" --predefine="_
+_UVISION_VERSION SETA 541" --predefine="STM32F10X_HD SETA 1" --predefine="_RTE_
+ SETA 1" --list=.\listings\context_rvds.lst D:/KEIL/PACK/RealThread/RT-Thread/3
+.1.5/libcpu/arm/cortex-m3/context_rvds.S
 
 
 

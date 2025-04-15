@@ -1,0 +1,223 @@
+project:
+  packs:
+    - pack: RealThread::RT-Thread@^3.1.5
+    - pack: Keil::STM32F1xx_DFP@^2.4.1
+  setups:
+    - setup: Options for Target_1
+      add-path:
+        - Start
+        - Library
+        - User
+        - System
+        - Hardware
+        - RTT
+        - Component/fal/inc
+        - Component/FlashDB/inc
+        - Component/SFUD/sfud/inc
+        - Component/fal/samples/porting
+        - Component/XMODEM
+        - Component/ymodem
+        - Component/modbus/modbus/ascii
+        - Component/modbus/modbus/functions
+        - Component/modbus/modbus/include
+        - Component/modbus/modbus/rtu
+        - Component/modbus/slave
+        - Component/modbus/modbus
+        - Component/modbus/master/inc
+        - Component/modbus/master
+        - Component/modbus/modbus/tcp
+        - Component/PID/inc
+      debug: "on"
+      define:
+        - USE_STDPERIPH_DRIVER
+        - STM32F10X_HD
+        - __MICROLIB
+      define-asm:
+        - __MICROLIB
+      misc:
+        - C:
+            - -std=c99
+          C-CPP:
+            - -fno-rtti
+            - -funsigned-char
+            - -fshort-enums
+            - -fshort-wchar
+            - -ffunction-sections
+            - -Wno-packed
+            - -Wno-missing-variable-declarations
+            - -Wno-missing-prototypes
+            - -Wno-missing-noreturn
+            - -Wno-sign-conversion
+            - -Wno-nonportable-include-path
+            - -Wno-reserved-id-macro
+            - -Wno-unused-macros
+            - -Wno-documentation-unknown-command
+            - -Wno-documentation
+            - -Wno-license-management
+            - -Wno-parentheses-equality
+          CPP:
+            - -xc++
+            - -std=c++11
+            - -fno-exceptions
+          ASM:
+            - -masm=auto
+          Link:
+            - --library_type=microlib
+            - --map
+            - --load_addr_map_info
+            - --xref
+            - --callgraph
+            - --symbols
+            - --info sizes
+            - --info totals
+            - --info unused
+            - --info veneers
+            - --strict
+            - --summary_stderr
+            - --info summarysizes
+  linker:
+    - script: Project_Target_1.sct
+  groups:
+    - group: Start
+      files:
+        - file: Start/core_cm3.h
+        - file: Start/stm32f10x.h
+        - file: Start/system_stm32f10x.c
+        - file: Start/system_stm32f10x.h
+        - file: Start/startup_stm32f10x_hd.s
+          misc:
+            - ASM:
+                - -masm=auto
+                - -x assembler
+    - group: Library
+      files:
+        - file: Library/misc.c
+        - file: Library/misc.h
+        - file: Library/stm32f10x_adc.c
+        - file: Library/stm32f10x_adc.h
+        - file: Library/stm32f10x_bkp.c
+        - file: Library/stm32f10x_bkp.h
+        - file: Library/stm32f10x_can.c
+        - file: Library/stm32f10x_can.h
+        - file: Library/stm32f10x_cec.c
+        - file: Library/stm32f10x_cec.h
+        - file: Library/stm32f10x_crc.c
+        - file: Library/stm32f10x_crc.h
+        - file: Library/stm32f10x_dac.c
+        - file: Library/stm32f10x_dac.h
+        - file: Library/stm32f10x_dbgmcu.c
+        - file: Library/stm32f10x_dbgmcu.h
+        - file: Library/stm32f10x_dma.c
+        - file: Library/stm32f10x_dma.h
+        - file: Library/stm32f10x_exti.c
+        - file: Library/stm32f10x_exti.h
+        - file: Library/stm32f10x_flash.c
+        - file: Library/stm32f10x_flash.h
+        - file: Library/stm32f10x_fsmc.c
+        - file: Library/stm32f10x_fsmc.h
+        - file: Library/stm32f10x_gpio.c
+        - file: Library/stm32f10x_gpio.h
+        - file: Library/stm32f10x_i2c.c
+        - file: Library/stm32f10x_i2c.h
+        - file: Library/stm32f10x_iwdg.c
+        - file: Library/stm32f10x_iwdg.h
+        - file: Library/stm32f10x_pwr.c
+        - file: Library/stm32f10x_pwr.h
+        - file: Library/stm32f10x_rcc.c
+        - file: Library/stm32f10x_rcc.h
+        - file: Library/stm32f10x_rtc.c
+        - file: Library/stm32f10x_rtc.h
+        - file: Library/stm32f10x_sdio.c
+        - file: Library/stm32f10x_sdio.h
+        - file: Library/stm32f10x_spi.c
+        - file: Library/stm32f10x_spi.h
+        - file: Library/stm32f10x_tim.c
+        - file: Library/stm32f10x_tim.h
+        - file: Library/stm32f10x_usart.c
+        - file: Library/stm32f10x_usart.h
+        - file: Library/stm32f10x_wwdg.c
+        - file: Library/stm32f10x_wwdg.h
+    - group: Hardware
+      files:
+        - file: Hardware/uart1.c
+        - file: Hardware/uart1.h
+        - file: Hardware/uart2.c
+        - file: Hardware/uart2.h
+        - file: Hardware/uart3.c
+        - file: Hardware/uart3.h
+        - file: Hardware/MyRTC.c
+        - file: Hardware/MyRTC.h
+        - file: Hardware/uart4.c
+        - file: Hardware/uart4.h
+        - file: Hardware/uart5.c
+        - file: Hardware/uart5.h
+        - file: Hardware/W25Q64Flash.c
+        - file: Hardware/W25Q64Flash.h
+        - file: Hardware/TIM.c
+        - file: Hardware/TIM.h
+    - group: User
+      files:
+        - file: User/main.c
+        - file: User/stm32f10x_conf.h
+        - file: User/stm32f10x_it.c
+        - file: User/stm32f10x_it.h
+        - file: User/user_DB.c
+        - file: User/user_DB.h
+        - file: User/main.h
+    - group: RTT
+      files:
+        - file: RTT/SEGGER_RTT.c
+        - file: RTT/SEGGER_RTT_printf.c
+        - file: RTT/log.h
+        - file: RTT/SEGGER_RTT.h
+    - group: FlashDB
+      files:
+        - file: Component/fal/src/fal.c
+        - file: Component/fal/src/fal_flash.c
+        - file: Component/fal/src/fal_partition.c
+        - file: Component/fal/src/fal_rtt.c
+        - file: Component/fal/samples/porting/fal_cfg.h
+        - file: Component/fal/samples/porting/fal_flash_sfud_port.c
+        - file: Component/FlashDB/src/fdb.c
+        - file: Component/FlashDB/src/fdb_file.c
+        - file: Component/FlashDB/src/fdb_kvdb.c
+        - file: Component/FlashDB/src/fdb_tsdb.c
+        - file: Component/FlashDB/src/fdb_utils.c
+        - file: Component/SFUD/sfud/src/sfud.c
+        - file: Component/SFUD/sfud/src/sfud_sfdp.c
+        - file: Component/SFUD/sfud/port/sfud_port.c
+        - file: Component/FlashDB/port/fal/samples/porting/fal_flash_stm32f1_port.c
+    - group: freemodbus/modbus
+      files:
+        - file: Component/modbus/modbus/rtu/mbcrc.c
+        - file: Component/modbus/modbus/functions/mbfuncother.c
+        - file: Component/modbus/modbus/functions/mbutils.c
+    - group: freemodbus/slave
+      files:
+        - file: Component/modbus/slave/mb.c
+        - file: Component/modbus/slave/mbfunccoils.c
+        - file: Component/modbus/slave/mbfuncdisc.c
+        - file: Component/modbus/slave/mbfuncholding.c
+        - file: Component/modbus/slave/mbfuncinput.c
+        - file: Component/modbus/slave/mbrtu.c
+        - file: Component/modbus/slave/portevent.c
+        - file: Component/modbus/slave/portserial.c
+        - file: Component/modbus/modbus/ascii/mbascii.c
+        - file: Component/modbus/slave/porttimer.c
+        - file: Component/modbus/slave/slave_mb_app.c
+        - file: Component/modbus/slave/slave_mb_app.h
+    - group: freemodbus/master
+      files:
+        - file: Component/modbus/master/master_mb_app.c
+        - file: Component/modbus/master/master_mb_app.h
+        - file: Component/modbus/master/inc/agile_modbus.h
+        - file: Component/modbus/master/inc/agile_modbus_rtu.h
+        - file: Component/modbus/master/inc/agile_modbus_tcp.h
+        - file: Component/modbus/master/src/agile_modbus.c
+        - file: Component/modbus/master/src/agile_modbus_rtu.c
+        - file: Component/modbus/master/src/agile_modbus_tcp.c
+    - group: PID
+      files:
+        - file: Component/PID/src/qpid.c
+  components:
+    - component: RealThread::RTOS&RT-Thread:kernel

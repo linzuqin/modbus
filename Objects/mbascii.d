@@ -1,49 +1,25 @@
-.\objects\mbascii.o: Component\modbus\modbus\ascii\mbascii.c
-.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-.\objects\mbascii.o: .\Component\modbus\slave\port.h
-.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\assert.h
-.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\inttypes.h
-.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-.\objects\mbascii.o: .\Component\modbus\slave\mb.h
-.\objects\mbascii.o: .\Start\stm32f10x.h
-.\objects\mbascii.o: .\Start\core_cm3.h
-.\objects\mbascii.o: .\Start\system_stm32f10x.h
-.\objects\mbascii.o: .\User\stm32f10x_conf.h
-.\objects\mbascii.o: .\Library\stm32f10x_adc.h
-.\objects\mbascii.o: .\Start\stm32f10x.h
-.\objects\mbascii.o: .\Library\stm32f10x_bkp.h
-.\objects\mbascii.o: .\Library\stm32f10x_can.h
-.\objects\mbascii.o: .\Library\stm32f10x_cec.h
-.\objects\mbascii.o: .\Library\stm32f10x_crc.h
-.\objects\mbascii.o: .\Library\stm32f10x_dac.h
-.\objects\mbascii.o: .\Library\stm32f10x_dbgmcu.h
-.\objects\mbascii.o: .\Library\stm32f10x_dma.h
-.\objects\mbascii.o: .\Library\stm32f10x_exti.h
-.\objects\mbascii.o: .\Library\stm32f10x_flash.h
-.\objects\mbascii.o: .\Library\stm32f10x_fsmc.h
-.\objects\mbascii.o: .\Library\stm32f10x_gpio.h
-.\objects\mbascii.o: .\Library\stm32f10x_i2c.h
-.\objects\mbascii.o: .\Library\stm32f10x_iwdg.h
-.\objects\mbascii.o: .\Library\stm32f10x_pwr.h
-.\objects\mbascii.o: .\Library\stm32f10x_rcc.h
-.\objects\mbascii.o: .\Library\stm32f10x_rtc.h
-.\objects\mbascii.o: .\Library\stm32f10x_sdio.h
-.\objects\mbascii.o: .\Library\stm32f10x_spi.h
-.\objects\mbascii.o: .\Library\stm32f10x_tim.h
-.\objects\mbascii.o: .\Library\stm32f10x_usart.h
-.\objects\mbascii.o: .\Library\stm32f10x_wwdg.h
-.\objects\mbascii.o: .\Library\misc.h
-.\objects\mbascii.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
-.\objects\mbascii.o: .\RTE\RTOS\rtconfig.h
-.\objects\mbascii.o: .\RTE\RTOS\finsh_config.h
-.\objects\mbascii.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
-.\objects\mbascii.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
-.\objects\mbascii.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
-.\objects\mbascii.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\mbascii.o: .\Component\modbus\modbus\include\mbport.h
-.\objects\mbascii.o: .\Component\modbus\modbus\include\mbproto.h
-.\objects\mbascii.o: .\Component\modbus\modbus\include\mbconfig.h
-.\objects\mbascii.o: Component\modbus\modbus\ascii\mbascii.h
-.\objects\mbascii.o: .\Component\modbus\modbus\include\mbframe.h
-.\objects\mbascii.o: .\Component\modbus\modbus\rtu\mbcrc.h
+./objects/mbascii.o: Component\modbus\modbus\ascii\mbascii.c \
+  Component\modbus\slave\port.h Component\modbus\slave\mb.h \
+  Start\stm32f10x.h Start\core_cm3.h Start\system_stm32f10x.h \
+  User\stm32f10x_conf.h Library\stm32f10x_adc.h Library\stm32f10x_bkp.h \
+  Library\stm32f10x_can.h Library\stm32f10x_cec.h \
+  Library\stm32f10x_crc.h Library\stm32f10x_dac.h \
+  Library\stm32f10x_dbgmcu.h Library\stm32f10x_dma.h \
+  Library\stm32f10x_exti.h Library\stm32f10x_flash.h \
+  Library\stm32f10x_fsmc.h Library\stm32f10x_gpio.h \
+  Library\stm32f10x_i2c.h Library\stm32f10x_iwdg.h \
+  Library\stm32f10x_pwr.h Library\stm32f10x_rcc.h \
+  Library\stm32f10x_rtc.h Library\stm32f10x_sdio.h \
+  Library\stm32f10x_spi.h Library\stm32f10x_tim.h \
+  Library\stm32f10x_usart.h Library\stm32f10x_wwdg.h Library\misc.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
+  RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
+  Component\modbus\modbus\include\mbport.h \
+  Component\modbus\modbus\include\mbproto.h \
+  Component\modbus\modbus\include\mbconfig.h \
+  Component\modbus\modbus\ascii\mbascii.h \
+  Component\modbus\modbus\include\mbframe.h \
+  Component\modbus\modbus\rtu\mbcrc.h

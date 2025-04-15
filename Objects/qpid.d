@@ -1,61 +1,25 @@
-.\objects\qpid.o: Component\PID\src\qpid.c
-.\objects\qpid.o: .\Component\PID\inc\qpid.h
-.\objects\qpid.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
-.\objects\qpid.o: .\RTE\RTOS\rtconfig.h
-.\objects\qpid.o: .\RTE\RTOS\finsh_config.h
-.\objects\qpid.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
-.\objects\qpid.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
-.\objects\qpid.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-.\objects\qpid.o: .\User\main.h
-.\objects\qpid.o: .\Start\stm32f10x.h
-.\objects\qpid.o: .\Start\core_cm3.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-.\objects\qpid.o: .\Start\system_stm32f10x.h
-.\objects\qpid.o: .\User\stm32f10x_conf.h
-.\objects\qpid.o: .\Library\stm32f10x_adc.h
-.\objects\qpid.o: .\Start\stm32f10x.h
-.\objects\qpid.o: .\Library\stm32f10x_bkp.h
-.\objects\qpid.o: .\Library\stm32f10x_can.h
-.\objects\qpid.o: .\Library\stm32f10x_cec.h
-.\objects\qpid.o: .\Library\stm32f10x_crc.h
-.\objects\qpid.o: .\Library\stm32f10x_dac.h
-.\objects\qpid.o: .\Library\stm32f10x_dbgmcu.h
-.\objects\qpid.o: .\Library\stm32f10x_dma.h
-.\objects\qpid.o: .\Library\stm32f10x_exti.h
-.\objects\qpid.o: .\Library\stm32f10x_flash.h
-.\objects\qpid.o: .\Library\stm32f10x_fsmc.h
-.\objects\qpid.o: .\Library\stm32f10x_gpio.h
-.\objects\qpid.o: .\Library\stm32f10x_i2c.h
-.\objects\qpid.o: .\Library\stm32f10x_iwdg.h
-.\objects\qpid.o: .\Library\stm32f10x_pwr.h
-.\objects\qpid.o: .\Library\stm32f10x_rcc.h
-.\objects\qpid.o: .\Library\stm32f10x_rtc.h
-.\objects\qpid.o: .\Library\stm32f10x_sdio.h
-.\objects\qpid.o: .\Library\stm32f10x_spi.h
-.\objects\qpid.o: .\Library\stm32f10x_tim.h
-.\objects\qpid.o: .\Library\stm32f10x_usart.h
-.\objects\qpid.o: .\Library\stm32f10x_wwdg.h
-.\objects\qpid.o: .\Library\misc.h
-.\objects\qpid.o: .\Hardware\uart1.h
-.\objects\qpid.o: .\Hardware\uart2.h
-.\objects\qpid.o: .\Hardware\uart3.h
-.\objects\qpid.o: .\Hardware\uart4.h
-.\objects\qpid.o: .\Hardware\uart5.h
-.\objects\qpid.o: .\RTT\log.h
-.\objects\qpid.o: .\RTT\SEGGER_RTT.h
-.\objects\qpid.o: .\RTT\SEGGER_RTT_Conf.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-.\objects\qpid.o: .\Hardware\MyRTC.h
-.\objects\qpid.o: .\User\user_DB.h
-.\objects\qpid.o: .\Component\FlashDB\inc\flashdb.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stddef.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-.\objects\qpid.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\time.h
-.\objects\qpid.o: .\Component\FlashDB\inc\fdb_cfg.h
-.\objects\qpid.o: .\Component\fal\inc\fal.h
-.\objects\qpid.o: .\Component\fal\samples\porting\fal_cfg.h
-.\objects\qpid.o: .\Component\fal\inc\fal_def.h
-.\objects\qpid.o: .\Component\FlashDB\inc\fdb_def.h
+./objects/qpid.o: Component\PID\src\qpid.c Component\PID\inc\qpid.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
+  RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
+  User\main.h Start\stm32f10x.h Start\core_cm3.h \
+  Start\system_stm32f10x.h User\stm32f10x_conf.h Library\stm32f10x_adc.h \
+  Library\stm32f10x_bkp.h Library\stm32f10x_can.h \
+  Library\stm32f10x_cec.h Library\stm32f10x_crc.h \
+  Library\stm32f10x_dac.h Library\stm32f10x_dbgmcu.h \
+  Library\stm32f10x_dma.h Library\stm32f10x_exti.h \
+  Library\stm32f10x_flash.h Library\stm32f10x_fsmc.h \
+  Library\stm32f10x_gpio.h Library\stm32f10x_i2c.h \
+  Library\stm32f10x_iwdg.h Library\stm32f10x_pwr.h \
+  Library\stm32f10x_rcc.h Library\stm32f10x_rtc.h \
+  Library\stm32f10x_sdio.h Library\stm32f10x_spi.h \
+  Library\stm32f10x_tim.h Library\stm32f10x_usart.h \
+  Library\stm32f10x_wwdg.h Library\misc.h Hardware\uart1.h \
+  Hardware\uart2.h Hardware\uart3.h Hardware\uart4.h Hardware\uart5.h \
+  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h Hardware\MyRTC.h \
+  User\user_DB.h Component\FlashDB\inc\flashdb.h \
+  Component\FlashDB\inc\fdb_cfg.h Component\fal\inc\fal.h \
+  Component\fal\samples\porting\fal_cfg.h Component\fal\inc\fal_def.h \
+  Component\FlashDB\inc\fdb_def.h

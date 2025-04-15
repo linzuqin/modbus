@@ -9,5 +9,24 @@
         "mb.h": "c",
         "agile_modbus.h": "c",
         "user_db.h": "c"
-    }
+    },
+    "cmsis-csolution.actions": [
+        {
+            "path": "Project.csolution.yml",
+            "target": "Target_1",
+            "projects": [
+                {
+                    "path": "Project.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                }
+            ],
+            "config": {
+                "run": "Flash Device",
+                "debug": "Arm Debugger"
+            }
+        }
+    ]
 }

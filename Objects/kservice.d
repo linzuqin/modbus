@@ -1,9 +1,8 @@
-.\objects\kservice.o: D:/KEIL/PACK/RealThread/RT-Thread/3.1.5/src/kservice.c
-.\objects\kservice.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h
-.\objects\kservice.o: .\RTE\RTOS\rtconfig.h
-.\objects\kservice.o: .\RTE\RTOS\finsh_config.h
-.\objects\kservice.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h
-.\objects\kservice.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h
-.\objects\kservice.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
-.\objects\kservice.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h
-.\objects\kservice.o: D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rthw.h
+./objects/kservice.o: \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\src\kservice.c \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
+  RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rthw.h

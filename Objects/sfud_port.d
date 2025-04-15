@@ -1,40 +1,17 @@
-.\objects\sfud_port.o: Component\SFUD\sfud\port\sfud_port.c
-.\objects\sfud_port.o: .\Component\SFUD\sfud\inc\sfud.h
-.\objects\sfud_port.o: .\Component\SFUD\sfud\inc\sfud_def.h
-.\objects\sfud_port.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-.\objects\sfud_port.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-.\objects\sfud_port.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-.\objects\sfud_port.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-.\objects\sfud_port.o: .\Component\SFUD\sfud\inc\sfud_cfg.h
-.\objects\sfud_port.o: .\Component\SFUD\sfud\inc\sfud_flash_def.h
-.\objects\sfud_port.o: D:\KEIL\CORE\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdarg.h
-.\objects\sfud_port.o: .\Start\stm32f10x.h
-.\objects\sfud_port.o: .\Start\core_cm3.h
-.\objects\sfud_port.o: .\Start\system_stm32f10x.h
-.\objects\sfud_port.o: .\User\stm32f10x_conf.h
-.\objects\sfud_port.o: .\Library\stm32f10x_adc.h
-.\objects\sfud_port.o: .\Start\stm32f10x.h
-.\objects\sfud_port.o: .\Library\stm32f10x_bkp.h
-.\objects\sfud_port.o: .\Library\stm32f10x_can.h
-.\objects\sfud_port.o: .\Library\stm32f10x_cec.h
-.\objects\sfud_port.o: .\Library\stm32f10x_crc.h
-.\objects\sfud_port.o: .\Library\stm32f10x_dac.h
-.\objects\sfud_port.o: .\Library\stm32f10x_dbgmcu.h
-.\objects\sfud_port.o: .\Library\stm32f10x_dma.h
-.\objects\sfud_port.o: .\Library\stm32f10x_exti.h
-.\objects\sfud_port.o: .\Library\stm32f10x_flash.h
-.\objects\sfud_port.o: .\Library\stm32f10x_fsmc.h
-.\objects\sfud_port.o: .\Library\stm32f10x_gpio.h
-.\objects\sfud_port.o: .\Library\stm32f10x_i2c.h
-.\objects\sfud_port.o: .\Library\stm32f10x_iwdg.h
-.\objects\sfud_port.o: .\Library\stm32f10x_pwr.h
-.\objects\sfud_port.o: .\Library\stm32f10x_rcc.h
-.\objects\sfud_port.o: .\Library\stm32f10x_rtc.h
-.\objects\sfud_port.o: .\Library\stm32f10x_sdio.h
-.\objects\sfud_port.o: .\Library\stm32f10x_spi.h
-.\objects\sfud_port.o: .\Library\stm32f10x_tim.h
-.\objects\sfud_port.o: .\Library\stm32f10x_usart.h
-.\objects\sfud_port.o: .\Library\stm32f10x_wwdg.h
-.\objects\sfud_port.o: .\Library\misc.h
-.\objects\sfud_port.o: .\RTT\SEGGER_RTT.h
-.\objects\sfud_port.o: .\RTT\SEGGER_RTT_Conf.h
+./objects/sfud_port.o: Component\SFUD\sfud\port\sfud_port.c \
+  Component\SFUD\sfud\inc\sfud.h Component\SFUD\sfud\inc\sfud_def.h \
+  Component\SFUD\sfud\inc\sfud_cfg.h \
+  Component\SFUD\sfud\inc\sfud_flash_def.h Start\stm32f10x.h \
+  Start\core_cm3.h Start\system_stm32f10x.h User\stm32f10x_conf.h \
+  Library\stm32f10x_adc.h Library\stm32f10x_bkp.h \
+  Library\stm32f10x_can.h Library\stm32f10x_cec.h \
+  Library\stm32f10x_crc.h Library\stm32f10x_dac.h \
+  Library\stm32f10x_dbgmcu.h Library\stm32f10x_dma.h \
+  Library\stm32f10x_exti.h Library\stm32f10x_flash.h \
+  Library\stm32f10x_fsmc.h Library\stm32f10x_gpio.h \
+  Library\stm32f10x_i2c.h Library\stm32f10x_iwdg.h \
+  Library\stm32f10x_pwr.h Library\stm32f10x_rcc.h \
+  Library\stm32f10x_rtc.h Library\stm32f10x_sdio.h \
+  Library\stm32f10x_spi.h Library\stm32f10x_tim.h \
+  Library\stm32f10x_usart.h Library\stm32f10x_wwdg.h Library\misc.h \
+  RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h
