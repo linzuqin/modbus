@@ -1,14 +1,16 @@
+#include "stm32f10x.h"                  // Device header
 #include "main.h"
 #include "mb.h"
 #include "slave_mb_app.h"
 #include "master_mb_app.h"
-#include "stm32f10x.h"                  // Device header
+#include "AT_Device.h"
 
 ota_t ota;
 int main(void)
 {
 	/*Hardware Init*/
-
+	LOG_I("System Init...");
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	MyRTC_Init();
 	
 	/*User TASK Init*/
@@ -20,8 +22,11 @@ int main(void)
 		User_master_start();
 	#endif
 
+	AT_START();
 	while (1)
 	{	
-		rt_thread_mdelay(10);
+		LOG_I("System run...");
+
+		rt_thread_mdelay(1000);
 	}
 }

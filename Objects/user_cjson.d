@@ -1,6 +1,7 @@
 ./objects/user_cjson.o: Component\cJSON-v1.7.17\user_cjson.c \
-  Start\stm32f10x.h Start\core_cm3.h Start\system_stm32f10x.h \
-  User\stm32f10x_conf.h Library\stm32f10x_adc.h Library\stm32f10x_bkp.h \
+  Component\cJSON-v1.7.17\user_cjson.h Start\stm32f10x.h \
+  Start\core_cm3.h Start\system_stm32f10x.h User\stm32f10x_conf.h \
+  Library\stm32f10x_adc.h Library\stm32f10x_bkp.h \
   Library\stm32f10x_can.h Library\stm32f10x_cec.h \
   Library\stm32f10x_crc.h Library\stm32f10x_dac.h \
   Library\stm32f10x_dbgmcu.h Library\stm32f10x_dma.h \
@@ -11,4 +12,5 @@
   Library\stm32f10x_rtc.h Library\stm32f10x_sdio.h \
   Library\stm32f10x_spi.h Library\stm32f10x_tim.h \
   Library\stm32f10x_usart.h Library\stm32f10x_wwdg.h Library\misc.h \
-  Component\cJSON-v1.7.17\user_cjson.h Component\cJSON-v1.7.17\cJSON.h
+  Component\cJSON-v1.7.17\cJSON.h RTT\log.h RTT\SEGGER_RTT.h \
+  RTT\SEGGER_RTT_Conf.h

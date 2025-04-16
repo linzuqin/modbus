@@ -9,6 +9,8 @@
 #define AT_IDEL         2
 #define AT_SEND         3
 
+#define AT_RST_PORT     GPIOC
+#define AT_RST_PIN      GPIO_Pin_5
 
 typedef struct
 {
@@ -26,6 +28,7 @@ typedef struct
 typedef struct{
     uint8_t status;
 }AT_Device_t;
+void AT_START(void);
 
 
 #endif

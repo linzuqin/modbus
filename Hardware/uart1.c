@@ -4,12 +4,11 @@
 #include "string.h"
 #include "main.h"
 
-#define USART1_RXBUFF_SIZE 256
 uint8_t USART1_RxData[USART1_RXBUFF_SIZE];
 uint8_t UART1_Count = 0;
 uint8_t UART1_RxFlag = 0;
 extern struct rt_messagequeue  modbus_rx_mq;								
-//extern struct rt_messagequeue ymodem_mq;/* 消息队列控制块 */
+//extern struct rt_messagequeue ymodem_mq;
 extern ota_t ota;
 
 struct rt_thread	u1_tx;

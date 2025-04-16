@@ -2,11 +2,13 @@
 #include "rtthread.h"
 #include "string.h"
 #include <stdint.h>
+#include "log.h"
+#include "uart1.h"
 
 #define AT_PORT  USART1
 #define AT_BAUD  115200
 #define AT_SIZE  256
-static uint8_t AT_RxData[AT_SIZE];
+static uint8_t *AT_RxData = USART1_RxData;
 
 #define AT_THREAD_STACK_SIZE 512
 static struct rt_thread AT_Thread;
@@ -22,6 +24,23 @@ static struct rt_mailbox mb;
 static uint8_t mb_buffer[32];
 
 AT_Device_t AT_Device;
+
+void AT_RST(void)
+{
+    // Enable GPIOC clock
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+
+    // Configure PC5 as output push-pull
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(AT_RST_PORT, &GPIO_InitStructure);
+
+    // Set PC5 high
+    GPIO_SetBits(AT_RST_PORT, AT_RST_PIN);
+}
+
 
 static AT_Command_t AT_Command[] = {
     {"AT", "OK", 1000},
@@ -52,19 +71,19 @@ uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
 {
 	uint8_t i;
     uint8_t timeout_count = 5;
+    strcat(cmd , "\r\n");
+    rt_memset(AT_RxData, 0, AT_SIZE);
+
 	for (i = 0; cmd[i] != '\0'; i ++)
 	{
 		USART_SendData(AT_PORT, cmd[i]);
 	    while (USART_GetFlagStatus(AT_PORT, USART_FLAG_TXE) == RESET);
 	}
-
-    USART_SendData(AT_PORT, '\r');
-    USART_SendData(AT_PORT, '\n');
-
-    while (USART_GetFlagStatus(AT_PORT, USART_FLAG_TXE) == RESET);
+    LOG_I("->: %s", cmd);
 
     if(response != NULL)
     {
+        AT_RxData[AT_SIZE - 1] = '\0'; // Ensure null-termination
         while(strstr((char *)AT_RxData, response) == NULL)
         {
             if (timeout_count-- == 0)
@@ -73,6 +92,7 @@ uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
             }
             rt_thread_mdelay(timeout);
         }
+        LOG_I("<-: %s", response);
     }
     return 1;
 }
@@ -120,20 +140,20 @@ void AT_URC(void *params)
 {
     while(1)
     {
-        if(AT_Device.status == AT_CONNECT)
-        {
-            for(uint8_t i = 0; i < sizeof(AT_URC_Msg)/sizeof(AT_URC_t); i++)
-            {
-                if(strstr((char *)AT_RxData, AT_URC_Msg[i].urc_msg) != NULL)
-                {
-                    if(AT_URC_Msg[i].response != NULL)
-                    {
-                        AT_URC_Msg[i].response();
-                    }
-                    rt_memset(AT_RxData, 0, sizeof(AT_RxData));
-                }
-            }
-        }
+       if(AT_Device.status == AT_CONNECT)
+       {
+           for(uint8_t i = 0; i < sizeof(AT_URC_Msg)/sizeof(AT_URC_t); i++)
+           {
+               if(strstr((char *)AT_RxData, AT_URC_Msg[i].urc_msg) != NULL)
+               {
+                   if(AT_URC_Msg[i].response != NULL)
+                   {
+                       AT_URC_Msg[i].response();
+                   }
+                   rt_memset(AT_RxData, 0, sizeof(AT_RxData));
+               }
+           }
+       }
         
         rt_thread_mdelay(10);
     }
@@ -145,31 +165,31 @@ void AT_Init(void *params)
     AT_Device.status = AT_DISCONNECT;
     while(1)
     {
-        if (AT_SendCmd(AT_Init_Cmd[step].cmd, AT_Init_Cmd[step].response, AT_Init_Cmd[step].timeout) == 0)
-        {
-            step = 0;
-        }
-        else
-        {
-            step++;
-            if (step >= sizeof(AT_Init_Cmd)/sizeof(AT_Command_t))
-            {
-                if(rt_thread_suspend(&AT_Init_Thread) == RT_EOK)
-                {
-                    step = 0;
-                    AT_Device.status = AT_CONNECT;
-                    rt_schedule();
-                    rt_thread_startup(&AT_Thread);
-                }
-                else
-                {
-                    rt_kprintf("AT_Init_Thread suspend failed\n");
-                }
+       if (AT_SendCmd(AT_Init_Cmd[step].cmd, AT_Init_Cmd[step].response, AT_Init_Cmd[step].timeout) == 0)
+       {
+           step = 0;
+       }
+       else
+       {
+           step++;
+           if (step >= sizeof(AT_Init_Cmd)/sizeof(AT_Command_t))
+           {
+               if(rt_thread_suspend(&AT_Init_Thread) == RT_EOK)
+               {
+                   step = 0;
+                   AT_Device.status = AT_CONNECT;
+                   rt_schedule();
+                   rt_thread_startup(&AT_Thread);
+               }
+               else
+               {
+                   rt_kprintf("AT_Init_Thread suspend failed\n");
+               }
 
 
-                break;
-            }
-        }
+               break;
+           }
+       }
         rt_thread_mdelay(1000);
     }
 }
@@ -178,6 +198,8 @@ void AT_Init(void *params)
 void AT_START(void)
 {
     rt_err_t result;
+    UART1_Init(AT_BAUD);
+    AT_RST();
     result = rt_thread_init(&AT_Init_Thread, "AT_Init", AT_Init, RT_NULL, &AT_Init_ThreadStack[0], AT_THREAD_STACK_SIZE, 10, 10);
     if (result != RT_EOK)
     {
