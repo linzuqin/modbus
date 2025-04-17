@@ -15,10 +15,12 @@
   RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
-  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h RTT\log.h \
-  RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h User\main.h Hardware\uart2.h \
-  Hardware\uart3.h Hardware\uart4.h Hardware\uart5.h Hardware\MyRTC.h \
-  User\user_DB.h Component\FlashDB\inc\flashdb.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
+  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h User\main.h \
+  Hardware\uart2.h Hardware\uart3.h Hardware\uart4.h Hardware\uart5.h \
+  Hardware\MyRTC.h User\user_DB.h Component\FlashDB\inc\flashdb.h \
   Component\FlashDB\inc\fdb_cfg.h Component\fal\inc\fal.h \
   Component\fal\samples\porting\fal_cfg.h Component\fal\inc\fal_def.h \
   Component\FlashDB\inc\fdb_def.h

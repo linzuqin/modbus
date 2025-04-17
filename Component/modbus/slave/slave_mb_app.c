@@ -314,7 +314,7 @@ void MODBUS_INIT(void)
 		return;
 	}
 
-	result = rt_thread_init(&MODBUS_RX_PANNEL , "MODBUS_TASK" , MODBUS_RX_TASK , RT_NULL , &MODBUS_RX_PANNEL_STACK[0] , sizeof(MODBUS_RX_PANNEL_STACK) , 22 , 100);
+	result = rt_thread_init(&MODBUS_RX_PANNEL , "mb_rx" , MODBUS_RX_TASK , RT_NULL , &MODBUS_RX_PANNEL_STACK[0] , sizeof(MODBUS_RX_PANNEL_STACK) , 22 , 100);
 	if(result == RT_EOK)
 	{
 		rt_thread_startup(&MODBUS_RX_PANNEL);
@@ -325,7 +325,7 @@ void MODBUS_INIT(void)
 		//LOG_E("MODBUS TASK START FAIL\r\n");
 	}  
 	
-	result = rt_thread_init(&MODBUS_PANNEL , "MODBUS_TASK" , MODBUS_TASK , RT_NULL , &MODBUS_PANNEL_STACK[0] , sizeof(MODBUS_PANNEL_STACK) , 22 , 100);
+	result = rt_thread_init(&MODBUS_PANNEL , "mb_poll" , MODBUS_TASK , RT_NULL , &MODBUS_PANNEL_STACK[0] , sizeof(MODBUS_PANNEL_STACK) , 22 , 100);
 	if(result == RT_EOK)
 	{
 		rt_thread_startup(&MODBUS_PANNEL);

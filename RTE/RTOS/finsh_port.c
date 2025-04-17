@@ -9,6 +9,7 @@
 
 #include <rthw.h>
 #include <rtconfig.h>
+#include "SEGGER_RTT.h"
 
 #ifndef RT_USING_FINSH
 

@@ -5,6 +5,8 @@
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
   Start\stm32f10x.h Start\core_cm3.h Start\system_stm32f10x.h \
   User\stm32f10x_conf.h Library\stm32f10x_adc.h Library\stm32f10x_bkp.h \
   Library\stm32f10x_can.h Library\stm32f10x_cec.h \

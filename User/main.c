@@ -4,6 +4,7 @@
 #include "slave_mb_app.h"
 #include "master_mb_app.h"
 #include "AT_Device.h"
+#include "iwdog.h"
 
 ota_t ota;
 int main(void)
@@ -22,10 +23,15 @@ int main(void)
 		User_master_start();
 	#endif
 
-	AT_START();
+	#if USE_AT_DEVICE
+		AT_START();
+	#endif
+
+	IWDG_Init(IWDG_Prescaler_64, 0x0FFF);
 	while (1)
 	{	
-		LOG_I("System run...");
+		
+		IWDG_Feed();
 
 		rt_thread_mdelay(1000);
 	}

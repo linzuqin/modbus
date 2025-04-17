@@ -305,10 +305,11 @@ ARM Macro Assembler    Page 5
 Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M3 --depe
 nd=.\objects\context_rvds.d -o.\objects\context_rvds.o -I.\RTE\RTOS -I.\RTE\_Ta
 rget_1 -ID:\KEIL\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include -ID:\KEIL\PACK\Re
-alThread\RT-Thread\3.1.5\include --predefine="__MICROLIB SETA 1" --predefine="_
-_UVISION_VERSION SETA 541" --predefine="STM32F10X_HD SETA 1" --predefine="_RTE_
- SETA 1" --list=.\listings\context_rvds.lst D:/KEIL/PACK/RealThread/RT-Thread/3
-.1.5/libcpu/arm/cortex-m3/context_rvds.S
+alThread\RT-Thread\3.1.5\components\finsh -ID:\KEIL\PACK\RealThread\RT-Thread\3
+.1.5\include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SET
+A 541" --predefine="STM32F10X_HD SETA 1" --predefine="_RTE_ SETA 1" --list=.\li
+stings\context_rvds.lst D:/KEIL/PACK/RealThread/RT-Thread/3.1.5/libcpu/arm/cort
+ex-m3/context_rvds.S
 
 
 

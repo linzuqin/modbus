@@ -53,6 +53,8 @@
 	#define MODBUS_SLAVE_UART5					1
 	
 
+/*Device*/
+#define USE_AT_DEVICE									1
 
 #endif
 

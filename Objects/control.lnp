@@ -32,6 +32,7 @@
 ".\objects\uart5.o"
 ".\objects\w25q64flash.o"
 ".\objects\tim.o"
+".\objects\iwdog.o"
 ".\objects\main.o"
 ".\objects\stm32f10x_it.o"
 ".\objects\user_db.o"
@@ -74,6 +75,9 @@
 ".\objects\cjson.o"
 ".\objects\cjson_utils.o"
 ".\objects\user_cjson.o"
+".\objects\cmd.o"
+".\objects\msh.o"
+".\objects\shell.o"
 ".\objects\context_rvds.o"
 ".\objects\cpuport.o"
 ".\objects\clock.o"
@@ -89,6 +93,7 @@
 ".\objects\thread.o"
 ".\objects\timer.o"
 ".\objects\board.o"
+".\objects\finsh_port.o"
 --library_type=microlib --strict --scatter ".\Objects\control.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
