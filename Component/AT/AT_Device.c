@@ -9,7 +9,7 @@
 #define AT_PORT  USART1
 #define AT_BAUD  115200
 #define AT_SIZE  256
-static uint8_t *AT_RxData = USART1_RxData;
+uint8_t *AT_RxData = USART1_RxData;
 
 #define AT_THREAD_STACK_SIZE 1024
 static struct rt_thread AT_Thread;
@@ -25,8 +25,53 @@ static struct rt_mailbox mb;
 static uint8_t mb_buffer[32];
 
 AT_Device_t AT_Device;
+/*ESP DEVICE CMD*/
+AT_Command_t ESP_Command[] = {
+    {"AT\r\n", "OK", 100 , NULL , NULL},
+    {"AT+GMR\r\n", "OK", 100 , NULL , NULL},
+    {"AT+RST\r\n", "OK", 200 , NULL , NULL},
+    {"AT+CWMODE?\r\n", "OK", 100 , NULL , NULL},
+    {"AT+CWJAP?\r\n", "OK", 200 , NULL , NULL},
+    {"AT+CIPSTART\r\n", "OK", 500 , NULL , NULL},
+    {"AT+CIPSEND\r\n", ">", 500 , NULL , NULL},
+    {"AT+CIPCLOSE\r\n", "OK", 200 , NULL , NULL},
+    {"AT+CWQAP\r\n`", "OK", 200 , NULL , NULL}
+};
 
-void AT_RST(void)
+AT_Command_t AT_Init_Cmd[] ={
+    {"AT\r\n", "OK", 1000 , NULL , NULL}
+    //{"AT+RST\r\n", "OK", 2000 , NULL , NULL}
+};
+
+
+AT_Command_t CAT_Command[] = {
+    {"AT\r\n", "OK", 100 , NULL , NULL},
+    {"AT+GMR\r\n", "OK", 100 , NULL , NULL},
+    {"AT+RST\r\n", "OK", 200 , NULL , NULL},
+    {"AT+CWMODE?\r\n", "OK", 100 , NULL , NULL},
+    {"AT+CWJAP?\r\n", "OK", 200 , NULL , NULL},
+    {"AT+CIPSTART\r\n", "OK", 500 , NULL , NULL},
+    {"AT+CIPSEND\r\n", ">", 500 , NULL , NULL},
+    {"AT+CIPCLOSE\r\n", "OK", 200 , NULL , NULL},
+    {"AT+CWQAP\r\n`", "OK", 200 , NULL , NULL}
+};
+AT_Command_t CAT_Init_Cmd[] ={
+    {"AT\r\n", "OK", 1000 , NULL , Device_RST_Hard},
+    {"AT+CGSN\r\n", "OK", 1000 , Get_IMEI , Device_RST_Soft},
+    {"AT+CCID\r\n", "OK", 1000 , Get_CCID , Device_RST_Soft}
+
+};
+
+AT_URC_t AT_URC_Msg[] = {
+    {"WIFI GOT IP", NULL},
+    {"WIFI DISCONNECT", NULL},
+    {"CLOSED", Device_RST_Soft},
+    {"SEND OK", NULL},
+    {"ERROR", ERROR_CallBack},
+    {"NO Service",Device_RST_Soft}
+};
+
+void AT_RST_GPIO_Init(void)
 {
     // Enable GPIOC clock
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
@@ -41,32 +86,6 @@ void AT_RST(void)
     // Set PC5 high
     GPIO_SetBits(AT_RST_PORT, AT_RST_PIN);
 }
-
-
-static AT_Command_t AT_Command[] = {
-    {"AT\r\n", "OK", 100},
-    {"AT+GMR\r\n", "OK", 100},
-    {"AT+RST\r\n", "OK", 200},
-    {"AT+CWMODE?\r\n", "OK", 100},
-    {"AT+CWJAP?\r\n", "OK", 200},
-    {"AT+CIPSTART\r\n", "OK", 500},
-    {"AT+CIPSEND\r\n", ">", 500},
-    {"AT+CIPCLOSE\r\n", "OK", 200},
-    {"AT+CWQAP\r\n`", "OK", 200}
-};
-
-static  AT_Command_t AT_Init_Cmd[] ={
-    {"AT\r\n", "OK", 1000}
-    //{"AT+RST\r\n", "OK", 2000}
-};
-
-static AT_URC_t AT_URC_Msg[] = {
-    {"WIFI GOT IP", NULL},
-    {"WIFI DISCONNECT", NULL},
-    {"CLOSED", NULL},
-    {"SEND OK", NULL},
-    {"ERROR", NULL}
-};
 
 uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
 {
@@ -104,28 +123,36 @@ uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
 
 void AT_Init(void *params)
 {
-    uint8_t step = 0;
+    uint8_t *step = &AT_Device.init_step;
     AT_Device.status = AT_DISCONNECT;
     while(1)
     {
-       if (AT_SendCmd(AT_Init_Cmd[step].cmd, AT_Init_Cmd[step].response, AT_Init_Cmd[step].timeout) != 0)
+       if (AT_SendCmd(AT_Init_Cmd[*step].cmd, AT_Init_Cmd[*step].response, AT_Init_Cmd[*step].timeout) != 0)
        {
-           step = 0;
+            if(AT_Init_Cmd[*step].ack_err_response != NULL)
+            {
+                AT_Init_Cmd[*step].ack_err_response();
+            }
        }
        else
        {
-           step++;
-           if (step >= sizeof(AT_Init_Cmd)/sizeof(AT_Command_t))
-           {
+            if(AT_Init_Cmd[*step].ack_right_response != NULL)
+            {
+                AT_Init_Cmd[*step].ack_right_response();
+            }
+            (*step) ++;
+
+            if (*step >= sizeof(AT_Init_Cmd)/sizeof(AT_Command_t))
+            {
                 if(AT_Thread.stat != RT_THREAD_RUNNING)
                 {
-                rt_thread_startup(&AT_Thread);
+                    rt_thread_startup(&AT_Thread);
                 }
                 AT_Device.status = AT_CONNECT;
                 LOG_I("AT_Init finish\n");
 
-               break;
-           }
+                break;
+            }
        }
         rt_thread_mdelay(1000);
     }
@@ -149,8 +176,8 @@ void AT_TASK(void *params)
                 result = rt_thread_startup(&AT_Init_Thread);
                 if (result != RT_EOK)
                 {
-                        rt_kprintf("AT_Init thread startup failed\n");
-                        return;
+                    rt_kprintf("AT_Init thread startup failed\n");
+                    return;
                 }
             }
         }
@@ -164,7 +191,7 @@ void AT_TASK(void *params)
                 }
                 break;
                 case AT_SEND:
-                    if(AT_SendCmd(AT_Command[0].cmd, AT_Command[0].response, AT_Command[0].timeout) == 0)
+                    if(AT_SendCmd(ESP_Command[0].cmd, ESP_Command[0].response, ESP_Command[0].timeout) == 0)
                     {
                         rt_kprintf("AT_SendCmd success\n");
                     }
@@ -207,7 +234,7 @@ void AT_START(void)
 {
     rt_err_t result;
     UART1_Init(AT_BAUD);
-    AT_RST();
+    AT_RST_GPIO_Init();
     result = rt_thread_init(&AT_Init_Thread, "AT_Init", AT_Init, RT_NULL, &AT_Init_ThreadStack[0], AT_THREAD_STACK_SIZE, 10, 10);
     if (result != RT_EOK)
     {

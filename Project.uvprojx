@@ -1078,6 +1078,16 @@
               <FileType>5</FileType>
               <FilePath>.\Component\cJSON-v1.7.17\user_cjson.h</FilePath>
             </File>
+            <File>
+              <FileName>AT_Cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\AT\AT_Cmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>AT_Cmd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\AT\AT_Cmd.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

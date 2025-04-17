@@ -31,4 +31,4 @@
   Component\modbus\modbus\include\mbframe.h \
   Component\modbus\modbus\include\mbutils.h \
   Component\modbus\master\master_mb_app.h Component\AT\AT_Device.h \
-  Hardware\iwdog.h
+  Component\AT\AT_Cmd.h Hardware\iwdog.h

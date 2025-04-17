@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\control.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\control.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Thu Apr 17 14:12:54 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Thu Apr 17 23:52:30 2025
 <BR><P>
 <H3>Maximum Stack Usage =        624 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -555,7 +555,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[53]"></a>AT_Init</STRONG> (Thumb, 206 bytes, Stack size 24 bytes, at_device.o(.text.AT_Init))
+<P><STRONG><a name="[53]"></a>AT_Init</STRONG> (Thumb, 300 bytes, Stack size 24 bytes, at_device.o(.text.AT_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 536<LI>Call Chain = AT_Init &rArr; AT_SendCmd &rArr; SEGGER_RTT_printf &rArr; SEGGER_RTT_vprintf &rArr; _PrintInt &rArr; _PrintUnsigned &rArr; _StoreChar &rArr; SEGGER_RTT_Write &rArr; SEGGER_RTT_WriteNoLock &rArr; _WriteBlocking
 </UL>
 <BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_thread_startup
@@ -566,8 +566,8 @@ Global Symbols
 <BR>[Address Reference Count : 2]<UL><LI> at_device.o(.text.AT_TASK)
 <LI> at_device.o(.text.AT_START)
 </UL>
-<P><STRONG><a name="[83]"></a>AT_RST</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, at_device.o(.text.AT_RST))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = AT_RST &rArr; GPIO_Init
+<P><STRONG><a name="[83]"></a>AT_RST_GPIO_Init</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, at_device.o(.text.AT_RST_GPIO_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = AT_RST_GPIO_Init &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
@@ -583,7 +583,7 @@ Global Symbols
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_thread_init
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART1_Init
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_kprintf
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST_GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;$Super$$main
 </UL>
@@ -684,7 +684,7 @@ Global Symbols
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART4_Init
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART3_Init
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART1_Init
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST_GPIO_Init
 </UL>
 
 <P><STRONG><a name="[e3]"></a>GPIO_PinRemapConfig</STRONG> (Thumb, 250 bytes, Stack size 24 bytes, stm32f10x_gpio.o(.text.GPIO_PinRemapConfig))
@@ -696,7 +696,7 @@ Global Symbols
 <P><STRONG><a name="[86]"></a>GPIO_SetBits</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, stm32f10x_gpio.o(.text.GPIO_SetBits))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = GPIO_SetBits
 </UL>
-<BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST
+<BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST_GPIO_Init
 </UL>
 
 <P><STRONG><a name="[97]"></a>IWDG_Enable</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_iwdg.o(.text.IWDG_Enable))
@@ -864,7 +864,7 @@ Global Symbols
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART4_Init
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART3_Init
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART1_Init
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AT_RST_GPIO_Init
 </UL>
 
 <P><STRONG><a name="[cc]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, stm32f10x_rcc.o(.text.RCC_APB2PeriphResetCmd))

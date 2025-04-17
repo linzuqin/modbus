@@ -1,4 +1,4 @@
-./objects/at_device.o: Component\AT\AT_Device.c Component\AT\AT_Device.h \
+./objects/at_cmd.o: Component\AT\AT_Cmd.c Component\AT\AT_Cmd.h \
   Start\stm32f10x.h Start\core_cm3.h Start\system_stm32f10x.h \
   User\stm32f10x_conf.h Library\stm32f10x_adc.h Library\stm32f10x_bkp.h \
   Library\stm32f10x_can.h Library\stm32f10x_cec.h \
@@ -11,12 +11,12 @@
   Library\stm32f10x_rtc.h Library\stm32f10x_sdio.h \
   Library\stm32f10x_spi.h Library\stm32f10x_tim.h \
   Library\stm32f10x_usart.h Library\stm32f10x_wwdg.h Library\misc.h \
-  Component\AT\AT_Cmd.h \
+  Component\AT\AT_Device.h RTT\log.h RTT\SEGGER_RTT.h \
+  RTT\SEGGER_RTT_Conf.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
   RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
-  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
-  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h Hardware\uart1.h
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h
