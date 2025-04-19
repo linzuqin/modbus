@@ -22,6 +22,7 @@
 #include "port.h"
 #include "stm32f10x.h"
 #include "main.h"
+#include "uart.h"
 
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
@@ -37,25 +38,7 @@ extern uint8_t UART4_Count;
 BOOL
 xMBPortSerialInit(uint32_t bound)//适配串口初始化
 {
-	#if MODBUS_SLAVE_UART1
-		UART1_Init(bound);
-	#endif
-	
-	#if MODBUS_SLAVE_UART2
-		UART2_Init(bound);
-	#endif     
-
-	#if MODBUS_SLAVE_UART3
-		UART3_Init(bound);
-	#endif
-	
-	#if MODBUS_SLAVE_UART4
-		UART4_Init(bound);
-	#endif
-	
-	#if MODBUS_SLAVE_UART5
-		UART5_Init(bound);
-	#endif
+	UART_Init(MODBUS_PORT , bound);
 	return TRUE;
 }
 
@@ -75,12 +58,7 @@ xMBPortSerialPutByte(uint8_t port , UCHAR *ucByte , uint16_t len)//适配串口�
 			case 5:USARTx = UART5;break;
 			default:return 0;
 		}
-		uint16_t i;
-		for (i = 0; i < len; i ++)
-		{
-			USART_SendData(USARTx, ucByte[i]);
-			while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET);
-		}
+		UART_SendData(USARTx , ucByte , len);
 		return TRUE;
 }
 

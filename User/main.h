@@ -35,6 +35,7 @@
 
 #if MODBUS_SLAVE_ENABLE
 
+#define MODBUS_PORT							USART1
 #define MODBUS_SLAVE_BOUND					115200
 	#define MODBUS_SLAVE_ADDR						1  //device addr
 

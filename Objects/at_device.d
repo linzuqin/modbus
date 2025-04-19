@@ -19,4 +19,4 @@
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
-  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h Hardware\uart1.h
+  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h

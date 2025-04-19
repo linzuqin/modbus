@@ -654,36 +654,6 @@
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
-              <FileName>uart1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\uart1.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart1.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\uart1.h</FilePath>
-            </File>
-            <File>
-              <FileName>uart2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\uart2.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\uart2.h</FilePath>
-            </File>
-            <File>
-              <FileName>uart3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\uart3.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart3.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\uart3.h</FilePath>
-            </File>
-            <File>
               <FileName>MyRTC.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\MyRTC.c</FilePath>
@@ -692,26 +662,6 @@
               <FileName>MyRTC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\MyRTC.h</FilePath>
-            </File>
-            <File>
-              <FileName>uart4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\uart4.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart4.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\uart4.h</FilePath>
-            </File>
-            <File>
-              <FileName>uart5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\uart5.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart5.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\uart5.h</FilePath>
             </File>
             <File>
               <FileName>W25Q64Flash.c</FileName>
@@ -742,6 +692,16 @@
               <FileName>iwdog.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\iwdog.h</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\uart.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -3,13 +3,12 @@
 #include "string.h"
 #include <stdint.h>
 #include "log.h"
-#include "uart1.h"
 #include <stdio.h>
 
 #define AT_PORT  USART1
 #define AT_BAUD  115200
 #define AT_SIZE  256
-uint8_t *AT_RxData = USART1_RxData;
+uint8_t *AT_RxData;
 
 #define AT_THREAD_STACK_SIZE 1024
 static struct rt_thread AT_Thread;
@@ -233,7 +232,7 @@ void AT_URC(void *params)
 void AT_START(void)
 {
     rt_err_t result;
-    UART1_Init(AT_BAUD);
+    //UART1_Init(AT_BAUD);
     AT_RST_GPIO_Init();
     result = rt_thread_init(&AT_Init_Thread, "AT_Init", AT_Init, RT_NULL, &AT_Init_ThreadStack[0], AT_THREAD_STACK_SIZE, 10, 10);
     if (result != RT_EOK)
