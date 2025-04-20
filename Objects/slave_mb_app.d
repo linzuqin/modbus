@@ -24,10 +24,11 @@
   Component\modbus\modbus\include\mbproto.h \
   Component\modbus\modbus\include\mbconfig.h \
   Component\modbus\modbus\include\mbframe.h \
-  Component\modbus\modbus\include\mbutils.h User\main.h Hardware\uart1.h \
-  Hardware\uart2.h Hardware\uart3.h Hardware\uart4.h Hardware\uart5.h \
-  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h Hardware\MyRTC.h \
-  User\user_DB.h Component\FlashDB\inc\flashdb.h \
-  Component\FlashDB\inc\fdb_cfg.h Component\fal\inc\fal.h \
-  Component\fal\samples\porting\fal_cfg.h Component\fal\inc\fal_def.h \
-  Component\FlashDB\inc\fdb_def.h
+  Component\modbus\modbus\include\mbutils.h User\main.h Hardware\uart.h \
+  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h Hardware\GPIO.h \
+  Hardware\MyRTC.h Hardware\TIM.h Hardware\iwdog.h User\user_DB.h \
+  Component\FlashDB\inc\flashdb.h Component\FlashDB\inc\fdb_cfg.h \
+  Component\fal\inc\fal.h Component\fal\samples\porting\fal_cfg.h \
+  Component\fal\inc\fal_def.h Component\FlashDB\inc\fdb_def.h \
+  Component\AT\AT_Device.h Component\AT\AT_Cmd.h \
+  Component\modbus\master\master_mb_app.h

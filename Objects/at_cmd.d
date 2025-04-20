@@ -11,12 +11,12 @@
   Library\stm32f10x_rtc.h Library\stm32f10x_sdio.h \
   Library\stm32f10x_spi.h Library\stm32f10x_tim.h \
   Library\stm32f10x_usart.h Library\stm32f10x_wwdg.h Library\misc.h \
-  Component\AT\AT_Device.h RTT\log.h RTT\SEGGER_RTT.h \
-  RTT\SEGGER_RTT_Conf.h \
+  Component\AT\AT_Device.h Hardware\uart.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
   RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdef.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
-  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h
+  D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
+  RTT\log.h RTT\SEGGER_RTT.h RTT\SEGGER_RTT_Conf.h Hardware\GPIO.h

@@ -38,7 +38,9 @@ extern uint8_t UART4_Count;
 BOOL
 xMBPortSerialInit(uint32_t bound)//适配串口初始化
 {
-	UART_Init(MODBUS_PORT , bound);
+	#if MODBUS_SLAVE_ENABLE
+	My_UART_Init(MODBUS_PORT , bound);
+	#endif
 	return TRUE;
 }
 

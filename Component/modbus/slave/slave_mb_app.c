@@ -26,7 +26,7 @@
 static struct rt_thread MODBUS_RX_PANNEL;
 uint8_t MODBUS_RX_PANNEL_STACK[MODBUS_RX_PANNEL_STACK_SIZE];
 
-#define MODBUS_PANNEL_STACK_SIZE    1024
+#define MODBUS_PANNEL_STACK_SIZE    512
 static struct rt_thread MODBUS_PANNEL;
 uint8_t MODBUS_PANNEL_STACK[MODBUS_PANNEL_STACK_SIZE];
 
@@ -290,7 +290,6 @@ void MODBUS_RX_TASK(void *params)
 			prvvUARTRxISR(buf);
 			rt_memset(buf,0,MODBUS_RX_LEN);
 		}
-
 	}
 }
 
@@ -304,6 +303,7 @@ void  MODBUS_TASK(void *params)
 		rt_thread_mdelay(10);
 	}
 }
+
 void MODBUS_INIT(void)
 {
 	rt_err_t result = 0;

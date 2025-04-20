@@ -11,8 +11,7 @@
 static struct rt_thread MASTER_MB_PANNEL;                           //modbus master task
 static char MASTER_MB_PANNEL_STACK[MASTER_MB_PANNEL_STACK_SIZE];    //modbus master task stack
 
-static uint8_t *rx_buf = UART4_RxData;                         //serial rx buffer
-static uint8_t *rx_flag = &UART4_RxFlag;                        //serial rx flag
+static uart_device_t *mb_master_device;
 
 void serial_send(USART_TypeDef* USARTx ,uint8_t *data , int send_len)
 {
@@ -32,13 +31,13 @@ int mater_mb_coil_read(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t start
     int send_len = agile_modbus_serialize_read_bits(ctx, start_addr, num);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
     uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
 		if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
 
-    *rx_flag = 0;
+    mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -78,12 +77,12 @@ int mater_mb_coil_write(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t star
     int send_len = agile_modbus_serialize_write_bit(ctx, start_addr, status);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
     uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
         if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
-    *rx_flag = 0;
+		mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -120,12 +119,12 @@ int mater_mb_coil_writes(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t sta
     int send_len = agile_modbus_serialize_write_bits(ctx, start_addr, num , data_buf);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
     uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
         if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
-    *rx_flag = 0;
+    mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -162,12 +161,12 @@ int mater_mb_disc_read(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t start
     int send_len = agile_modbus_serialize_read_input_bits(ctx, start_addr, num);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
 		uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
         if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
-    *rx_flag = 0;
+    mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -207,12 +206,12 @@ int mater_mb_hold_read(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t start
     int send_len = agile_modbus_serialize_read_registers(ctx, start_addr, num);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
 		uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
 			if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
-    *rx_flag = 0;
+    mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -251,12 +250,12 @@ int mater_mb_hold_write(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t star
     int send_len = agile_modbus_serialize_write_register(ctx, start_addr, Value);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
     uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
         if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
-    *rx_flag = 0;
+    mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -293,12 +292,12 @@ int mater_mb_hold_writes(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t sta
     int send_len = agile_modbus_serialize_write_registers(ctx, start_addr, num , databuf);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
     uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
         if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
-    *rx_flag = 0;
+    mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -334,12 +333,12 @@ int mater_mb_input_read(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t star
     int send_len = agile_modbus_serialize_read_input_registers(ctx, start_addr, num);
     serial_send(MODBUS_MASTER_SERIAL , ctx->send_buf , send_len);
 		uint8_t timeout;
-    while(*rx_flag == 0)
+    while(mb_master_device->rx_flag == 0)
     {
         if(timeout ++ > 5)return -1;
         rt_thread_mdelay(100);
     }
-    *rx_flag = 0;
+    mb_master_device->rx_flag = 0;
     int read_len = rx_buf[1];
     rt_memcpy(ctx->read_buf , &rx_buf[2] , read_len);
 		rt_memset(rx_buf , 0 , read_len + 2);
@@ -383,23 +382,46 @@ void User_master_task(void *params)
     uint8_t i = 0;
     while (1) 
     {
-        mater_mb_coil_read(ctx , 1 , 0 , coil_reg , 10 , rx_buf);
-        mater_mb_disc_read(ctx , 1 , 0 , disc_reg , 10 , rx_buf);
-        mater_mb_hold_read(ctx , 1 , 0 , hold_reg , 10 , rx_buf);
-        mater_mb_input_read(ctx , 1 , 0 , input_reg , 10 , rx_buf);
+        mater_mb_coil_read(ctx , 1 , 0 , coil_reg , 10 , mb_master_device->rx_buffer);
+        mater_mb_disc_read(ctx , 1 , 0 , disc_reg , 10 , mb_master_device->rx_buffer);
+        mater_mb_hold_read(ctx , 1 , 0 , hold_reg , 10 , mb_master_device->rx_buffer);
+        mater_mb_input_read(ctx , 1 , 0 , input_reg , 10 , mb_master_device->rx_buffer);
         
 
         LOG_I("coil_reg [%d]: 0x%04X", 0, coil_reg[0]);
         LOG_I("disc_reg [%d]: 0x%04X", 0, disc_reg[0]);
         LOG_I("hold_reg [%d]: 0x%04X", 0, hold_reg[0]);
         LOG_I("input_reg [%d]: 0x%04X", 0, input_reg[0]);
-        mater_mb_hold_write(ctx , 1 , 0 , i++ , rx_buf);
+        mater_mb_hold_write(ctx , 1 , 0 , i++ , mb_master_device->rx_buffer);
         rt_thread_mdelay(1000);
     }
 }
 
+static void mb_master_register(USART_TypeDef *USARTx , uint32_t bound)
+{
+    if (USARTx == USART1)
+    {
+        mb_master_device = &uart1_device;
+    }
+    else if (USARTx == USART2)
+    {
+        mb_master_device = &uart2_device;
+    }
+    else if (USARTx == USART3)
+    {
+        mb_master_device = &uart3_device;
+    }
+    else if (USARTx == UART4)
+    {
+        mb_master_device = &uart4_device;
+    }
+
+    My_UART_Init(USARTx , bound);
+}
+
 void User_master_start(void)
 {
+	
     rt_err_t result;
     result = rt_thread_init(&MASTER_MB_PANNEL, "MASTER_MB_TASK", User_master_task, RT_NULL, &MASTER_MB_PANNEL_STACK[0], sizeof(MASTER_MB_PANNEL_STACK), 22, 100);
     if (result == RT_EOK)
@@ -413,21 +435,9 @@ void User_master_start(void)
     }
 		
 		
-		if(MODBUS_MASTER_SERIAL == USART1)
-		{
-			UART1_Init(MODBUS_MASTER_BOUND);
-		}else if(MODBUS_MASTER_SERIAL == USART2){
-			UART2_Init(MODBUS_MASTER_BOUND);
-
-		}else if(MODBUS_MASTER_SERIAL == USART3){
-			UART3_Init(MODBUS_MASTER_BOUND);
-
-		}else if(MODBUS_MASTER_SERIAL == UART4){
-			UART4_Init(MODBUS_MASTER_BOUND);
-
-		}else if(MODBUS_MASTER_SERIAL == UART5){
-			UART5_Init(MODBUS_MASTER_BOUND);
-		}
+		#if MODBUS_MASTER_ENABLE
+		mb_master_register(MODBUS_MASTER_SERIAL , MODBUS_MASTER_BOUND);
+		#endif
 }
 
 #endif

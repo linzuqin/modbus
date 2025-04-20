@@ -6,7 +6,6 @@
 #include "rtthread.h"
 
 extern AT_Device_t AT_Device;
-extern uint8_t *AT_RxData;
 
 void Device_RST_Soft(void)
 {
@@ -48,12 +47,12 @@ void ERROR_CallBack(void)
 
 void Get_IMEI(void)
 {
-    memcpy(AT_Device.IMEI, &AT_RxData[0], 15);
+    memcpy(AT_Device.IMEI, &AT_Device.at_uart_device->rx_buffer[AT_DATA_START_BIT], 15);
     LOG_I("IMEI: %s\n", AT_Device.IMEI);
 }
 
 void Get_CCID(void)
 {
-    memcpy(AT_Device.ICCID, &AT_RxData[0], 20);
+    memcpy(AT_Device.ICCID, &AT_Device.at_uart_device->rx_buffer[AT_DATA_START_BIT], 20);
     LOG_I("IMEI: %s\n", AT_Device.IMEI);
 }

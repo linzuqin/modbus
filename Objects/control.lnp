@@ -29,6 +29,8 @@
 ".\objects\tim.o"
 ".\objects\iwdog.o"
 ".\objects\uart.o"
+".\objects\spi.o"
+".\objects\gpio.o"
 ".\objects\main.o"
 ".\objects\stm32f10x_it.o"
 ".\objects\user_db.o"

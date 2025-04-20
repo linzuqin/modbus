@@ -1,16 +1,11 @@
-#include "stm32f10x.h"                  // Device header
 #include "main.h"
-#include "mb.h"
-#include "slave_mb_app.h"
-#include "master_mb_app.h"
-#include "AT_Device.h"
-#include "iwdog.h"
+
 
 ota_t ota;
 int main(void)
 {
 	/*Hardware Init*/
-	LOG_I("System Init...");
+	LOG_I("version:%s  System Init..." , Version);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	MyRTC_Init();
 	
@@ -29,10 +24,8 @@ int main(void)
 
 	IWDG_Init(IWDG_Prescaler_64, 0x0FFF);
 	while (1)
-	{	
-		
+	{
 		IWDG_Feed();
-
 		rt_thread_mdelay(1000);
 	}
 }

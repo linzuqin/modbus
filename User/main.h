@@ -3,31 +3,43 @@
 #include "stm32f10x.h"                  // Device header
 
 /*外设驱动*/
-#include "uart1.h"
-#include "uart2.h"
-#include "uart3.h"
-#include "uart4.h"
-#include "uart5.h"
+#include "uart.h"
+#include "MyRTC.h"
+#include "GPIO.h"
+#include "TIM.h"
+#include "iwdog.h"
+
 
 /*操作系统*/
 #include "log.h"
 #include "rtthread.h"
-#include "MyRTC.h"
 
 /*应用驱动*/
 #include "user_DB.h"
+#include "AT_Device.h"
+#include "mb.h"
+#include "slave_mb_app.h"
+#include "master_mb_app.h"
 
 /*c库*/
 #include "string.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "math.h"
 
+
+/*project version*/
+#define Version											"1.4.2"
 
 /*协议*/
 /*modbus master*/
-#define MODBUS_MASTER_ENABLE        0
+#define MODBUS_MASTER_ENABLE        1
 
 #if MODBUS_MASTER_ENABLE
-#define MODBUS_MASTER_BOUND					115200
+
 #define MODBUS_MASTER_SERIAL				USART3  //serial port
+#define MODBUS_MASTER_BOUND					115200
+
 #endif
 
 
@@ -37,29 +49,13 @@
 
 #define MODBUS_PORT							USART1
 #define MODBUS_SLAVE_BOUND					115200
-	#define MODBUS_SLAVE_ADDR						1  //device addr
-
-	#define MODBUS_SLAVE_UART1					0
-
-	
-	#define MODBUS_SLAVE_UART2					0
-   
-
-	#define MODBUS_SLAVE_UART3					1
-
-	
-	#define MODBUS_SLAVE_UART4					1
-
-	
-	#define MODBUS_SLAVE_UART5					1
-	
-
-/*Device*/
-#define USE_AT_DEVICE									1
+#define MODBUS_SLAVE_ADDR						1  //device addr
 
 #endif
 
 
+/*Device*/
+#define USE_AT_DEVICE									1
 
 /*计算公式*/
 #define USE_PID										 1

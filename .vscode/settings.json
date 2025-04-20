@@ -4,6 +4,20 @@
         "at_device.h": "c",
         "stdbool.h": "c",
         "string.h": "c",
-        "at_cmd.h": "c"
+        "at_cmd.h": "c",
+        "uart.h": "c",
+        "stdio.h": "c",
+        "main.h": "c",
+        "stdint.h": "c",
+        "mb.h": "c",
+        "mbport.h": "c",
+        "myrtc.h": "c",
+        "gpio.h": "c",
+        "tim.h": "c",
+        "slave_mb_app.h": "c",
+        "iwdog.h": "c",
+        "user_db.h": "c",
+        "master_mb_app.h": "c",
+        "log.h": "c"
     }
 }

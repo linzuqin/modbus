@@ -1,29 +1,23 @@
 #include "AT_Device.h"
-#include "rtthread.h"
-#include "string.h"
-#include <stdint.h>
-#include "log.h"
-#include <stdio.h>
-
-#define AT_PORT  USART1
-#define AT_BAUD  115200
-#define AT_SIZE  256
-uint8_t *AT_RxData;
 
 #define AT_THREAD_STACK_SIZE 1024
+#define AT_URC_THREAD_STACK_SIZE	256
+#define AT_INIT_THREAD_STACK_SIZE 256
+
 static struct rt_thread AT_Thread;
 static uint8_t AT_ThreadStack[AT_THREAD_STACK_SIZE];
 
 static struct rt_thread AT_Init_Thread;
-static uint8_t AT_Init_ThreadStack[AT_THREAD_STACK_SIZE];
+static uint8_t AT_Init_ThreadStack[AT_INIT_THREAD_STACK_SIZE];
 
 static struct rt_thread AT_URC_Thread;
-static uint8_t AT_URC_ThreadStack[AT_THREAD_STACK_SIZE];
+static uint8_t AT_URC_ThreadStack[AT_URC_THREAD_STACK_SIZE];
 
 static struct rt_mailbox mb;
 static uint8_t mb_buffer[32];
 
 AT_Device_t AT_Device;
+
 /*ESP DEVICE CMD*/
 AT_Command_t ESP_Command[] = {
     {"AT\r\n", "OK", 100 , NULL , NULL},
@@ -42,7 +36,6 @@ AT_Command_t AT_Init_Cmd[] ={
     //{"AT+RST\r\n", "OK", 2000 , NULL , NULL}
 };
 
-
 AT_Command_t CAT_Command[] = {
     {"AT\r\n", "OK", 100 , NULL , NULL},
     {"AT+GMR\r\n", "OK", 100 , NULL , NULL},
@@ -54,6 +47,7 @@ AT_Command_t CAT_Command[] = {
     {"AT+CIPCLOSE\r\n", "OK", 200 , NULL , NULL},
     {"AT+CWQAP\r\n`", "OK", 200 , NULL , NULL}
 };
+
 AT_Command_t CAT_Init_Cmd[] ={
     {"AT\r\n", "OK", 1000 , NULL , Device_RST_Hard},
     {"AT+CGSN\r\n", "OK", 1000 , Get_IMEI , Device_RST_Soft},
@@ -70,7 +64,7 @@ AT_URC_t AT_URC_Msg[] = {
     {"NO Service",Device_RST_Soft}
 };
 
-void AT_RST_GPIO_Init(void)
+static void AT_RST_GPIO_Init(void)
 {
     // Enable GPIOC clock
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
@@ -86,7 +80,7 @@ void AT_RST_GPIO_Init(void)
     GPIO_SetBits(AT_RST_PORT, AT_RST_PIN);
 }
 
-uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
+static uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
 {
     if (cmd == NULL)
     {
@@ -95,27 +89,38 @@ uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
 
     uint8_t i;
     uint8_t timeout_count = 5;
-    rt_memset(&AT_RxData[2], 0, AT_SIZE - 2);
 
 	for (i = 0; cmd[i] != '\0'; i ++)
 	{
 		USART_SendData(AT_PORT, cmd[i]);
 		while (USART_GetFlagStatus(AT_PORT, USART_FLAG_TC) == RESET);
 	}
+    
 	LOG_I("->: %s", cmd);
 
 	if(response != NULL)
 	{
-        AT_RxData[AT_SIZE - 1] = '\0'; // Ensure null-termination
-        while(strstr((char *)AT_RxData, response) == NULL)
-        {
-            if (timeout_count-- == 0)
-            {
-                    return 2;
-            }
-            rt_thread_mdelay(timeout);
-        }
-        LOG_I("<-: %s", response);
+		while(AT_Device.at_uart_device->rx_flag == 0)
+		{
+				if(timeout_count++ > 5)
+				{
+						return 2;
+				}
+				rt_thread_mdelay(100);
+		}
+
+		AT_Device.at_uart_device->rx_flag = 0;
+		LOG_I("AT_Device.rx_buf: %s AT_RX_SIZE:%d", AT_Device.at_uart_device->rx_buffer , AT_Device.at_uart_device->rx_size);
+
+		while(strstr((char *)&AT_Device.at_uart_device->rx_buffer[AT_DATA_START_BIT], response) == NULL)
+		{
+				if (timeout_count-- == 0)
+				{
+								return 2;
+				}
+				rt_thread_mdelay(timeout);
+		}
+		LOG_I("<-: %s", response);
 	}
 	return 0;
 }
@@ -208,32 +213,49 @@ void AT_TASK(void *params)
 
 void AT_URC(void *params)
 {
-    while(1)
+	while(1)
+	{
+		 for(uint8_t i = 0; i < sizeof(AT_URC_Msg)/sizeof(AT_URC_t); i++)
+		 {
+				 if(strstr((char *)&AT_Device.at_uart_device->rx_buffer[AT_DATA_START_BIT], AT_URC_Msg[i].urc_msg) != NULL)
+				 {
+						 if(AT_URC_Msg[i].response != NULL)
+						 {
+								 AT_URC_Msg[i].response();
+						 }
+				 }
+		 }        
+		rt_thread_mdelay(10);
+	}
+}
+
+static void at_device_register(USART_TypeDef *USARTx , uint32_t bound)
+{
+    if (USARTx == USART1)
     {
-       if(AT_Device.status == AT_CONNECT)
-       {
-           for(uint8_t i = 0; i < sizeof(AT_URC_Msg)/sizeof(AT_URC_t); i++)
-           {
-               if(strstr((char *)AT_RxData, AT_URC_Msg[i].urc_msg) != NULL)
-               {
-                   if(AT_URC_Msg[i].response != NULL)
-                   {
-                       AT_URC_Msg[i].response();
-                   }
-                   rt_memset(AT_RxData, 0, sizeof(AT_RxData));
-               }
-           }
-       }
-        
-        rt_thread_mdelay(10);
+        AT_Device.at_uart_device = &uart1_device;
     }
+    else if (USARTx == USART2)
+    {
+        AT_Device.at_uart_device = &uart2_device;
+    }
+    else if (USARTx == USART3)
+    {
+        AT_Device.at_uart_device = &uart3_device;
+    }
+    else if (USARTx == UART4)
+    {
+        AT_Device.at_uart_device = &uart4_device;
+    }
+
+    AT_RST_GPIO_Init();
+    My_UART_Init(USARTx , bound);
 }
 
 void AT_START(void)
 {
     rt_err_t result;
-    //UART1_Init(AT_BAUD);
-    AT_RST_GPIO_Init();
+    at_device_register(AT_PORT , AT_BAUD);
     result = rt_thread_init(&AT_Init_Thread, "AT_Init", AT_Init, RT_NULL, &AT_Init_ThreadStack[0], AT_THREAD_STACK_SIZE, 10, 10);
     if (result != RT_EOK)
     {

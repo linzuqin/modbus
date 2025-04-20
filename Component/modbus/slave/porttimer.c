@@ -21,41 +21,22 @@
 
 /* ----------------------- Platform includes --------------------------------*/
 #include "port.h"
-#include "stm32f10x.h"
+#include "TIM.h"
 
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
 #include "mbport.h"
 
 /* ----------------------- static functions ---------------------------------*/
-static void prvvTIMERExpiredISR(void);
+void prvvTIMERExpiredISR(void);
 
 /* ----------------------- Start implementation -----------------------------*/
 BOOL
-xMBPortTimersInit(USHORT usTim1Timerout50us)  //适配定时器初始化
+xMBPortTimersInit(USHORT usTim1Timerout50us)
 {
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-	
-	TIM_InternalClockConfig(TIM2);
-  TIM_DeInit(TIM2);
-	TIM_TimeBaseStructure.TIM_Period = usTim1Timerout50us;
-  TIM_TimeBaseStructure.TIM_Prescaler = 3600-1;	//分频为20khz，一拍50us
-	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-	TIM_Cmd(TIM2, ENABLE);
-	
-	NVIC_InitTypeDef NVIC_InitStructure;
-	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;	
-	NVIC_Init(&NVIC_InitStructure);		
-	
+	TIMx_Init(TIM2 , usTim1Timerout50us , 3600 - 1 , 0 , 0 , 0);
 	return TRUE;
 }
-
 
 void
 vMBPortTimersEnable()
@@ -81,17 +62,9 @@ vMBPortTimersDisable()
  * must then call pxMBPortCBTimerExpired( ) to notify the protocol stack that
  * the timer has expired.
  */
-static void prvvTIMERExpiredISR(void)
+void prvvTIMERExpiredISR(void)
 {
     (void)pxMBPortCBTimerExpired();
 }
 
-void TIM2_IRQHandler(void)//适配定时器中断服务函数
-{
-    if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
-    {
-        prvvTIMERExpiredISR();
-        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-    }
-}
 
