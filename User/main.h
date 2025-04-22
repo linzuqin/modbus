@@ -20,13 +20,14 @@
 #include "mb.h"
 #include "slave_mb_app.h"
 #include "master_mb_app.h"
-
+#include "AT_Cmd.h"
 /*c库*/
 #include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "math.h"
-
+#include <stdint.h>
+#include <stdbool.h>
 
 /*project version*/
 #define Version											"1.4.2"
@@ -55,16 +56,21 @@
 
 
 /*Device*/
-#define USE_AT_DEVICE									1
-
+#define AT_PORT  USART1
+#define AT_BAUD  115200
+#define AT_SIZE  uart_rx_size
+#define USE_AT_DEVICE									0
 /*计算公式*/
 #define USE_PID										 1
 
-typedef struct
-{
-	uint8_t ota_flag;
-	USART_TypeDef* port;
-}ota_t;
+#define uart1_rx_size    64 // Size of the UART receive buffer
 
+#define uart2_rx_size    64 // Size of the UART receive buffer
+
+#define uart3_rx_size    64 // Size of the UART receive buffer
+
+#define uart4_rx_size    64 // Size of the UART receive buffer
+
+#define uart5_rx_size    64 // Size of the UART receive buffer
 
 #endif

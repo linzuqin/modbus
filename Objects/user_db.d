@@ -18,7 +18,7 @@
   Library\stm32f10x_rtc.h Library\stm32f10x_sdio.h \
   Library\stm32f10x_spi.h Library\stm32f10x_tim.h \
   Library\stm32f10x_usart.h Library\stm32f10x_wwdg.h Library\misc.h \
-  Hardware\uart.h \
+  Hardware\uart.h Hardware\GPIO.h RTT\log.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
   RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtdebug.h \
@@ -26,8 +26,7 @@
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
-  RTT\log.h Hardware\GPIO.h Hardware\TIM.h Hardware\iwdog.h \
-  Component\AT\AT_Device.h Component\AT\AT_Cmd.h \
+  Hardware\TIM.h Hardware\iwdog.h Component\AT\AT_Device.h \
   Component\modbus\slave\mb.h Component\modbus\slave\port.h \
   Component\modbus\modbus\include\mbport.h \
   Component\modbus\modbus\include\mbproto.h \
@@ -35,4 +34,4 @@
   Component\modbus\modbus\include\mbconfig.h \
   Component\modbus\modbus\include\mbframe.h \
   Component\modbus\modbus\include\mbutils.h \
-  Component\modbus\master\master_mb_app.h
+  Component\modbus\master\master_mb_app.h Component\AT\AT_Cmd.h

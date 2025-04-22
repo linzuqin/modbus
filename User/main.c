@@ -1,7 +1,5 @@
 #include "main.h"
 
-
-ota_t ota;
 int main(void)
 {
 	/*Hardware Init*/

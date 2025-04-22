@@ -1,4 +1,4 @@
-#include "uart.h"
+#include "main.h"
 
 uart_device_t uart1_device;
 uart_device_t uart2_device;

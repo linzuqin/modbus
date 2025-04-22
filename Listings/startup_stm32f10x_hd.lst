@@ -556,7 +556,7 @@ nd=.\objects\startup_stm32f10x_hd.d -o.\objects\startup_stm32f10x_hd.o -I.\RTE\
 RTOS -I.\RTE\_Target_1 -ID:\KEIL\PACK\Keil\STM32F1xx_DFP\2.4.1\Device\Include -
 ID:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh -ID:\KEIL\PACK\RealTh
 read\RT-Thread\3.1.5\include --predefine="__MICROLIB SETA 1" --predefine="__UVI
-SION_VERSION SETA 541" --predefine="STM32F10X_HD SETA 1" --predefine="_RTE_ SET
+SION_VERSION SETA 542" --predefine="STM32F10X_HD SETA 1" --predefine="_RTE_ SET
 A 1" --list=.\listings\startup_stm32f10x_hd.lst Start\startup_stm32f10x_hd.s
 
 

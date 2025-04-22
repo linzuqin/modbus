@@ -1,19 +1,7 @@
 #ifndef __UART_H
 #define __UART_H
-#include "stm32f10x.h" // Replace with the appropriate header file for your STM32 series
-#include "rtthread.h"
-#include "log.h"
-#include "GPIO.h" 
+#include "main.h"
 
-#define uart1_rx_size    64 // Size of the UART receive buffer
-
-#define uart2_rx_size    64 // Size of the UART receive buffer
-
-#define uart3_rx_size    64 // Size of the UART receive buffer
-
-#define uart4_rx_size    64 // Size of the UART receive buffer
-
-#define uart5_rx_size    64 // Size of the UART receive buffer
 typedef struct uart
 {
 	uint8_t rx_flag; 		// Flag to indicate if data has been received

@@ -1,15 +1,6 @@
 #ifndef _AT_DEVICE_H_
 #define _AT_DEVICE_H_
-#include "stm32f10x.h"                  // Device header
-#include <stdint.h>
-#include <stdbool.h>
-#include "AT_Cmd.h"
-#include "uart.h"
-#include "log.h"
-#include "rtthread.h"
-#include "string.h"
-#include <stdio.h>
-#include <stdint.h>
+#include "main.h"
 
 #define AT_CONNECT      0
 #define AT_DISCONNECT   1
@@ -19,9 +10,6 @@
 #define AT_RST_PORT     GPIOC
 #define AT_RST_PIN      GPIO_Pin_5
 
-#define AT_PORT  USART1
-#define AT_BAUD  115200
-#define AT_SIZE  uart_rx_size
 
 #define AT_DATA_START_BIT		2
 typedef struct

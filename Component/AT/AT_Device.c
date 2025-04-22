@@ -20,15 +20,15 @@ AT_Device_t AT_Device;
 
 /*ESP DEVICE CMD*/
 AT_Command_t ESP_Command[] = {
-    {"AT\r\n", "OK", 100 , NULL , NULL},
-    {"AT+GMR\r\n", "OK", 100 , NULL , NULL},
-    {"AT+RST\r\n", "OK", 200 , NULL , NULL},
-    {"AT+CWMODE?\r\n", "OK", 100 , NULL , NULL},
-    {"AT+CWJAP?\r\n", "OK", 200 , NULL , NULL},
-    {"AT+CIPSTART\r\n", "OK", 500 , NULL , NULL},
-    {"AT+CIPSEND\r\n", ">", 500 , NULL , NULL},
-    {"AT+CIPCLOSE\r\n", "OK", 200 , NULL , NULL},
-    {"AT+CWQAP\r\n`", "OK", 200 , NULL , NULL}
+    {"AT\r\n",          "OK",   100 , NULL , NULL},
+    {"AT+GMR\r\n",      "OK",   100 , NULL , NULL},
+    {"AT+RST\r\n",      "OK",   200 , NULL , NULL},
+    {"AT+CWMODE?\r\n",  "OK",   100 , NULL , NULL},
+    {"AT+CWJAP?\r\n",   "OK",   200 , NULL , NULL},
+    {"AT+CIPSTART\r\n", "OK",   500 , NULL , NULL},
+    {"AT+CIPSEND\r\n",  ">",    500 , NULL , NULL},
+    {"AT+CIPCLOSE\r\n", "OK",   200 , NULL , NULL},
+    {"AT+CWQAP\r\n`",   "OK",   200 , NULL , NULL}
 };
 
 AT_Command_t AT_Init_Cmd[] ={
@@ -37,31 +37,31 @@ AT_Command_t AT_Init_Cmd[] ={
 };
 
 AT_Command_t CAT_Command[] = {
-    {"AT\r\n", "OK", 100 , NULL , NULL},
-    {"AT+GMR\r\n", "OK", 100 , NULL , NULL},
-    {"AT+RST\r\n", "OK", 200 , NULL , NULL},
-    {"AT+CWMODE?\r\n", "OK", 100 , NULL , NULL},
-    {"AT+CWJAP?\r\n", "OK", 200 , NULL , NULL},
-    {"AT+CIPSTART\r\n", "OK", 500 , NULL , NULL},
-    {"AT+CIPSEND\r\n", ">", 500 , NULL , NULL},
-    {"AT+CIPCLOSE\r\n", "OK", 200 , NULL , NULL},
-    {"AT+CWQAP\r\n`", "OK", 200 , NULL , NULL}
+    {"AT\r\n",          "OK",   100 , NULL , NULL},
+    {"AT+GMR\r\n",      "OK",   100 , NULL , NULL},
+    {"AT+RST\r\n",      "OK",   200 , NULL , NULL},
+    {"AT+CWMODE?\r\n",  "OK",   100 , NULL , NULL},
+    {"AT+CWJAP?\r\n",   "OK",   200 , NULL , NULL},
+    {"AT+CIPSTART\r\n", "OK",   500 , NULL , NULL},
+    {"AT+CIPSEND\r\n",  ">",    500 , NULL , NULL},
+    {"AT+CIPCLOSE\r\n", "OK",   200 , NULL , NULL},
+    {"AT+CWQAP\r\n`",   "OK",   200 , NULL , NULL}
 };
 
 AT_Command_t CAT_Init_Cmd[] ={
-    {"AT\r\n", "OK", 1000 , NULL , Device_RST_Hard},
+    {"AT\r\n",      "OK", 1000 , NULL ,     Device_RST_Hard},
     {"AT+CGSN\r\n", "OK", 1000 , Get_IMEI , Device_RST_Soft},
     {"AT+CCID\r\n", "OK", 1000 , Get_CCID , Device_RST_Soft}
 
 };
 
 AT_URC_t AT_URC_Msg[] = {
-    {"WIFI GOT IP", NULL},
-    {"WIFI DISCONNECT", NULL},
-    {"CLOSED", Device_RST_Soft},
-    {"SEND OK", NULL},
-    {"ERROR", ERROR_CallBack},
-    {"NO Service",Device_RST_Soft}
+    {"WIFI GOT IP",             NULL},
+    {"WIFI DISCONNECT",         NULL},
+    {"CLOSED",                  Device_RST_Soft},
+    {"SEND OK",                 NULL},
+    {"ERROR",                   ERROR_CallBack},
+    {"NO Service",              Device_RST_Soft}
 };
 
 static void AT_RST_GPIO_Init(void)
@@ -127,26 +127,28 @@ static uint8_t AT_SendCmd(char *cmd , char *response, uint16_t timeout)
 
 void AT_Init(void *params)
 {
-    uint8_t *step = &AT_Device.init_step;
+    static uint8_t *step = &AT_Device.init_step;
     AT_Device.status = AT_DISCONNECT;
+    uint16_t cmd_size = sizeof(AT_Init_Cmd)/sizeof(AT_Command_t);
+    static AT_Command_t *AT_cmd = AT_Init_Cmd;
     while(1)
     {
-       if (AT_SendCmd(AT_Init_Cmd[*step].cmd, AT_Init_Cmd[*step].response, AT_Init_Cmd[*step].timeout) != 0)
+       if (AT_SendCmd(AT_cmd[*step].cmd, AT_cmd[*step].response, AT_cmd[*step].timeout) != 0)
        {
-            if(AT_Init_Cmd[*step].ack_err_response != NULL)
+            if(AT_cmd[*step].ack_err_response != NULL)
             {
-                AT_Init_Cmd[*step].ack_err_response();
+                AT_cmd[*step].ack_err_response();
             }
        }
        else
        {
-            if(AT_Init_Cmd[*step].ack_right_response != NULL)
+            if(AT_cmd[*step].ack_right_response != NULL)
             {
-                AT_Init_Cmd[*step].ack_right_response();
+                AT_cmd[*step].ack_right_response();
             }
             (*step) ++;
 
-            if (*step >= sizeof(AT_Init_Cmd)/sizeof(AT_Command_t))
+            if (*step >= cmd_size)
             {
                 if(AT_Thread.stat != RT_THREAD_RUNNING)
                 {
