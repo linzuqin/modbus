@@ -15,6 +15,8 @@
  */
 #define CMSIS_device_header "stm32f10x.h"
 
+/* MDK-Packs::Data Exchange:JSON:cJSON@1.7.7 */
+#define RTE_DataExchange_JSON_cJSON     /* cJSON */
 
 
 #endif /* RTE_COMPONENTS_H */

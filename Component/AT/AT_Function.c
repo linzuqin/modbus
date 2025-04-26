@@ -1,10 +1,11 @@
 #include "AT_Function.h"
 
 
-extern AT_Device_t AT_Device;
+extern AT_URC_t AT_URC_Msg[AT_COMMAND_ARRAY_SIZE];
+extern AT_Command_t AT_Init_Cmd[AT_COMMAND_ARRAY_SIZE];
+extern AT_Command_t AT_Cmd[AT_COMMAND_ARRAY_SIZE];
 
-
-uint8_t AT_SendCmd(const char *cmd , const char *response, uint16_t timeout)
+uint8_t AT_SendCmd( AT_Device_t *at_device , const char *cmd , const char *response, uint16_t timeout)
 {
     if (cmd == NULL)
     {
@@ -24,19 +25,9 @@ uint8_t AT_SendCmd(const char *cmd , const char *response, uint16_t timeout)
 
 	if(response != NULL)
 	{
-		while(AT_Device.at_uart_device->rx_flag == 0)
-		{
-				if(timeout_count++ > 5)
-				{
-						return 2;
-				}
-				rt_thread_mdelay(100);
-		}
-
-		AT_Device.at_uart_device->rx_flag = 0;
 		//LOG_I("AT_Device.rx_buf: %s AT_RX_SIZE:%d", AT_Device.at_uart_device->rx_buffer , AT_Device.at_uart_device->rx_size);
 
-		while(strstr((char *)&AT_Device.at_uart_device->rx_buffer[AT_DATA_START_BIT], response) == NULL)
+		while(strstr((char *)&(at_device->rx_buf[AT_DATA_START_BIT]), response) == NULL)
 		{
 				if (timeout_count-- == 0)
 				{
@@ -88,14 +79,14 @@ uint8_t AT_Cmd_Regsiter(AT_Command_t *cmd_array , const char *response, uint16_t
         if (cmd_array[index].cmd == NULL)
         {
             cmd_array[index] = AT_Command;
-            strcpy(cmd_array[index].cmd, cmd_buf); // Copy the command string into the allocated memory
+            strcpy((char *)cmd_array[index].cmd, cmd_buf); // Copy the command string into the allocated memory
             next_available_slot = (index + 1) % AT_COMMAND_ARRAY_SIZE;
             LOG_I("AT Cmd Add success: %s\n", cmd_array[index].cmd);
             return 1;
         }
     }
     LOG_I("AT Cmd Add fail: No available slots in AT_Command_array\n");
-    free(AT_Command.cmd); // Free allocated memory if adding fails
+    free((char *)AT_Command.cmd); // Free allocated memory if adding fails
 
     return 0;
 }
@@ -116,34 +107,18 @@ static void AT_RST_GPIO_Init(void)
     GPIO_SetBits(AT_RST_PORT, AT_RST_PIN);
 }
 
-void at_device_register(USART_TypeDef *USARTx , uint32_t bound)
+void at_device_register(USART_TypeDef *USARTx , uint32_t bound , AT_Device_t *at_device , uint8_t *rx_buffer)
 {
-    if (USARTx == USART1)
-    {
-        AT_Device.at_uart_device = &uart1_device;
-    }
-    else if (USARTx == USART2)
-    {
-        AT_Device.at_uart_device = &uart2_device;
-    }
-    else if (USARTx == USART3)
-    {
-        AT_Device.at_uart_device = &uart3_device;
-    }
-    else if (USARTx == UART4)
-    {
-        AT_Device.at_uart_device = &uart4_device;
-    }
-
+		at_device->rx_buf = rx_buffer;
     AT_RST_GPIO_Init();
     My_UART_Init(USARTx , bound);
 }
 
 
-void Device_RST_Soft(void)
+void Device_RST_Soft(AT_Device_t *at_device)
 {
-    AT_Device.status = AT_DISCONNECT;
-    AT_Device.init_step = 0;
+    at_device->status = AT_DISCONNECT;
+    at_device->init_step = 0;
     LOG_I("Device soft reset initiated\n");
 }
 
@@ -154,38 +129,36 @@ void Device_RST_Hard(void)
     GPIO_SetBits(AT_RST_PORT, AT_RST_PIN);
 }
 
-void ERROR_CallBack(void)
+
+void at_list(void)
 {
-    static uint8_t error_count = 0;
-    error_count ++;
-    if(error_count > 5)
-    {
-        error_count = 0;
-        if(AT_Device.status == AT_DISCONNECT)
-        {
-            Device_RST_Soft();
-            LOG_I("Device soft reset initiated\n");
-        }
-        else
-        {
-            Device_RST_Hard();
-            LOG_I("Device hard reset initiated\n");
-        }
-    }
-    else
-    {
-        LOG_I("ack error :%d\n",error_count);
-    }
+	uint8_t i = 0;
+	rt_kprintf("********************AT CMD LIST********************\n");
+	for(i = 0; i < AT_COMMAND_ARRAY_SIZE; i++)
+	{
+			if(AT_Cmd[i].cmd != NULL)
+			{
+					rt_kprintf("cmd[%d]: %s\n", i, AT_Cmd[i].cmd);
+			}
+	}
+
+	rt_kprintf("********************AT INIT LIST********************\n");
+	for(i = 0; i < AT_COMMAND_ARRAY_SIZE; i++)
+	{
+			if(AT_Init_Cmd[i].cmd != NULL)
+			{
+					rt_kprintf("AT_INIT_CMD[%d]: %s\n", i, AT_Init_Cmd[i].cmd);
+			}
+	}
+
+	rt_kprintf("********************AT URC LIST********************\n");
+	for(i = 0; i < AT_COMMAND_ARRAY_SIZE; i++)
+	{
+			if(AT_URC_Msg[i].urc_msg != NULL)
+			{
+					rt_kprintf("AT_URC[%d]: %s\n", i, AT_URC_Msg[i].urc_msg);
+			}
+	}
 }
 
-void Get_IMEI(void)
-{
-    memcpy(AT_Device.IMEI, &AT_Device.at_uart_device->rx_buffer[AT_DATA_START_BIT], 15);
-    LOG_I("IMEI: %s\n", AT_Device.IMEI);
-}
-
-void Get_CCID(void)
-{
-    memcpy(AT_Device.ICCID, &AT_Device.at_uart_device->rx_buffer[AT_DATA_START_BIT], 20);
-    LOG_I("IMEI: %s\n", AT_Device.IMEI);
-}
+MSH_CMD_EXPORT(at_list, list at cmd);

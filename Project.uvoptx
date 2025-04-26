@@ -1869,54 +1869,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\cJSON-v1.7.17\cJSON.c</PathWithFileName>
-      <FilenameWithoutPath>cJSON.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>119</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\cJSON-v1.7.17\cJSON.h</PathWithFileName>
-      <FilenameWithoutPath>cJSON.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>120</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\cJSON-v1.7.17\cJSON_Utils.c</PathWithFileName>
-      <FilenameWithoutPath>cJSON_Utils.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>121</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\cJSON-v1.7.17\cJSON_Utils.h</PathWithFileName>
-      <FilenameWithoutPath>cJSON_Utils.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>122</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>.\Component\cJSON-v1.7.17\user_cjson.c</PathWithFileName>
       <FilenameWithoutPath>user_cjson.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1924,7 +1876,7 @@
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
-      <FileNumber>123</FileNumber>
+      <FileNumber>119</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1936,7 +1888,7 @@
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
-      <FileNumber>124</FileNumber>
+      <FileNumber>120</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1948,7 +1900,7 @@
     </File>
     <File>
       <GroupNumber>12</GroupNumber>
-      <FileNumber>125</FileNumber>
+      <FileNumber>121</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1958,6 +1910,14 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+  </Group>
+
+  <Group>
+    <GroupName>::Data Exchange</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>1</RteFlg>
   </Group>
 
   <Group>

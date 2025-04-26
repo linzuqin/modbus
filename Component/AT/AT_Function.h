@@ -21,28 +21,30 @@ typedef struct
 
 } AT_Command_t;
 
-typedef struct
-{
-    char *urc_msg;              // AT command string
-    void (*response)(void);     // Expected response string
-} AT_URC_t;
-
 typedef struct{
     uint8_t status;
     uint8_t init_step;
     char IMEI[15];
     char ICCID[20];
-    uart_device_t *at_uart_device;
+    uint8_t *rx_buf;
+		uint8_t *tx_buf;
+		uint8_t * rx_flag;
 }AT_Device_t;
 
-void Device_RST_Soft(void);
+
+typedef struct
+{
+    char *urc_msg;              // AT command string
+    void (*response)(AT_Device_t *at_device);     // Expected response string
+} AT_URC_t;
+
+
+void Device_RST_Soft(AT_Device_t *at_device);
 void Device_RST_Hard(void);
 
-void Get_IMEI(void);
-void Get_CCID(void);
 void ERROR_CallBack(void);
-uint8_t AT_SendCmd(const char *cmd , const char *response, uint16_t timeout);
-void at_device_register(USART_TypeDef *USARTx , uint32_t bound);
+uint8_t AT_SendCmd( AT_Device_t *at_device , const char *cmd , const char *response, uint16_t timeout);
+void at_device_register(USART_TypeDef *USARTx , uint32_t bound , AT_Device_t *at_device , uint8_t *rx_buffer );
 uint8_t AT_Cmd_Regsiter(AT_Command_t *AT_Command_array , const char *response, uint16_t timeout, void (*ack_right_response)(void), void (*ack_err_response)(void) , const char *cmd, ...);
 
 

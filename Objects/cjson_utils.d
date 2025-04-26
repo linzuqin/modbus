@@ -1,2 +1,3 @@
-./objects/cjson_utils.o: Component\cJSON-v1.7.17\cJSON_Utils.c \
-  Component\cJSON-v1.7.17\cJSON_Utils.h Component\cJSON-v1.7.17\cJSON.h
+./objects/cjson_utils.o: D:\KEIL\PACK\MDK-Packs\cJSON\1.0.0\cJSON_Utils.c \
+  D:\KEIL\PACK\MDK-Packs\cJSON\1.0.0\cJSON_Utils.h \
+  D:\KEIL\PACK\MDK-Packs\cJSON\1.0.0\cJSON.h
