@@ -28,10 +28,11 @@
   Component\FlashDB\inc\flashdb.h Component\FlashDB\inc\fdb_cfg.h \
   Component\fal\inc\fal.h Component\fal\samples\porting\fal_cfg.h \
   Component\fal\inc\fal_def.h Component\FlashDB\inc\fdb_def.h \
-  Component\AT\AT_Device.h Component\modbus\slave\mb.h \
-  Component\modbus\slave\port.h Component\modbus\modbus\include\mbport.h \
+  Component\AT\AT_Device.h Component\AT\AT_Function.h \
+  Component\modbus\slave\mb.h Component\modbus\slave\port.h \
+  Component\modbus\modbus\include\mbport.h \
   Component\modbus\modbus\include\mbproto.h \
   Component\modbus\slave\slave_mb_app.h \
   Component\modbus\modbus\include\mbconfig.h \
   Component\modbus\modbus\include\mbframe.h \
-  Component\modbus\modbus\include\mbutils.h Component\AT\AT_Cmd.h
+  Component\modbus\modbus\include\mbutils.h

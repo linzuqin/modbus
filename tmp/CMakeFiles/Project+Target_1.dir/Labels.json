@@ -1,0 +1,52 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/CMakeFiles/Project+Target_1"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/CMakeFiles/Project+Target_1.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/CMakeFiles/Project+Target_1-complete.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-build.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-configure.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-database.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-download.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-executes.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-install.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-mkdir.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-patch.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-test.rule"
+		},
+		{
+			"file" : "D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Project+Target_1"
+		],
+		"name" : "Project+Target_1"
+	}
+}

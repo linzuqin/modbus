@@ -20,7 +20,7 @@
 #include "mb.h"
 #include "slave_mb_app.h"
 #include "master_mb_app.h"
-#include "AT_Cmd.h"
+#include "AT_Function.h"
 /*c库*/
 #include "string.h"
 #include "stdio.h"
@@ -34,24 +34,20 @@
 
 /*协议*/
 /*modbus master*/
-#define MODBUS_MASTER_ENABLE        1
+#define MODBUS_MASTER_ENABLE        0
 
 #if MODBUS_MASTER_ENABLE
-
 #define MODBUS_MASTER_SERIAL				USART3  //serial port
 #define MODBUS_MASTER_BOUND					115200
-
 #endif
 
 
-#define MODBUS_SLAVE_ENABLE        1
+#define MODBUS_SLAVE_ENABLE        0
 
 #if MODBUS_SLAVE_ENABLE
-
 #define MODBUS_PORT							USART1
 #define MODBUS_SLAVE_BOUND					115200
 #define MODBUS_SLAVE_ADDR						1  //device addr
-
 #endif
 
 
@@ -60,6 +56,7 @@
 #define AT_BAUD  115200
 #define AT_SIZE  uart_rx_size
 #define USE_AT_DEVICE									0
+
 /*计算公式*/
 #define USE_PID										 1
 

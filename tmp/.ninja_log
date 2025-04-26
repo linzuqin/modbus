@@ -1,0 +1,13 @@
+# ninja log v6
+14	89	7670809649318140	Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-mkdir	e85f9a5826762500
+14	89	7670809649318140	D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-mkdir	e85f9a5826762500
+90	141	7670809649848508	Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-download	175e5f0301768950
+90	141	7670809649848508	D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-download	175e5f0301768950
+141	193	7670809650360084	Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-update	eff1635511f4008b
+141	193	7670809650360084	D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-update	eff1635511f4008b
+193	245	7670809650879416	Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-patch	611246c5d82eeb36
+193	245	7670809650879416	D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-patch	611246c5d82eeb36
+245	3418	7670809682604581	Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-configure	2487324d5653be24
+245	3418	7670809682604581	D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-configure	2487324d5653be24
+3418	3559	7670809682663555	Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-database	6eb62dee5d7caa4f
+3418	3559	7670809682663555	D:/project/my_modbus ac6/tmp/Project+Target_1/src/Project+Target_1-stamp/Project+Target_1-database	6eb62dee5d7caa4f

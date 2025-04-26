@@ -73,7 +73,7 @@
 ".\objects\cjson.o"
 ".\objects\cjson_utils.o"
 ".\objects\user_cjson.o"
-".\objects\at_cmd.o"
+".\objects\at_function.o"
 ".\objects\cmd.o"
 ".\objects\msh.o"
 ".\objects\shell.o"

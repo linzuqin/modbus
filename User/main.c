@@ -5,7 +5,6 @@ int main(void)
 	/*Hardware Init*/
 	LOG_I("version:%s  System Init..." , Version);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-	MyRTC_Init();
 	
 	/*User TASK Init*/
 	#if MODBUS_SLAVE_ENABLE

@@ -1,7 +1,8 @@
 {
+    "cmake.sourceDirectory": "D:/project/my_modbus ac6/tmp",
     "files.associations": {
-        "main.h": "c",
-        "stm32f10x.h": "c",
-        "uart.h": "c"
+        "uart.h": "c",
+        "at_device.h": "c",
+        "stm32f10x.h": "c"
     }
 }

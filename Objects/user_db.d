@@ -27,11 +27,11 @@
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
   Hardware\TIM.h Hardware\iwdog.h Component\AT\AT_Device.h \
-  Component\modbus\slave\mb.h Component\modbus\slave\port.h \
-  Component\modbus\modbus\include\mbport.h \
+  Component\AT\AT_Function.h Component\modbus\slave\mb.h \
+  Component\modbus\slave\port.h Component\modbus\modbus\include\mbport.h \
   Component\modbus\modbus\include\mbproto.h \
   Component\modbus\slave\slave_mb_app.h \
   Component\modbus\modbus\include\mbconfig.h \
   Component\modbus\modbus\include\mbframe.h \
   Component\modbus\modbus\include\mbutils.h \
-  Component\modbus\master\master_mb_app.h Component\AT\AT_Cmd.h
+  Component\modbus\master\master_mb_app.h

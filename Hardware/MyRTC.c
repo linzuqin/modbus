@@ -1,5 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 #include <time.h>
+#include "main.h"
+
 uint16_t MyRTC_Time[] = {2025, 3, 11, 18, 22, 30};
 uint32_t Unix_Time=1717077100;
 
@@ -10,7 +12,7 @@ void MyRTC_SetTime(void);
 //可将初始化函数替换为下述代码，使用LSI当作RTCCLK
 //LSI无法由备用电源供电，故主电源掉电时，RTC走时会暂停
  
-void MyRTC_Init(void)
+int MyRTC_Init(void)
 {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_BKP, ENABLE);
@@ -48,6 +50,7 @@ void MyRTC_Init(void)
 		RTC_WaitForSynchro();
 		RTC_WaitForLastTask();
 	}
+	return 1;
 }
 
 void MyRTC_SetTime(void)
@@ -87,3 +90,14 @@ void MyRTC_ReadTime(void)
 	time_cnt=mktime(&time_date);
 	Unix_Time=time_cnt;
 }
+
+void sys_time(void)
+{
+	MyRTC_ReadTime();
+	rt_kprintf("system version:%s\n", Version);
+	rt_kprintf("system_time:%d-%02d-%02d %02d:%02d:%02d\n", MyRTC_Time[0], MyRTC_Time[1], MyRTC_Time[2], MyRTC_Time[3], MyRTC_Time[4], MyRTC_Time[5]);
+	rt_kprintf("Unix_Time:%d\n", Unix_Time);
+}
+
+MSH_CMD_EXPORT(sys_time, system time);
+INIT_APP_EXPORT(MyRTC_Init);

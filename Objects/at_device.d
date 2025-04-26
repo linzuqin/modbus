@@ -1,5 +1,5 @@
 ./objects/at_device.o: Component\AT\AT_Device.c Component\AT\AT_Device.h \
-  User\main.h Start\stm32f10x.h Start\core_cm3.h \
+  Component\AT\AT_Function.h Start\stm32f10x.h Start\core_cm3.h \
   Start\system_stm32f10x.h User\stm32f10x_conf.h Library\stm32f10x_adc.h \
   Library\stm32f10x_bkp.h Library\stm32f10x_can.h \
   Library\stm32f10x_cec.h Library\stm32f10x_crc.h \
@@ -11,8 +11,7 @@
   Library\stm32f10x_rcc.h Library\stm32f10x_rtc.h \
   Library\stm32f10x_sdio.h Library\stm32f10x_spi.h \
   Library\stm32f10x_tim.h Library\stm32f10x_usart.h \
-  Library\stm32f10x_wwdg.h Library\misc.h Hardware\uart.h \
-  Hardware\MyRTC.h Hardware\GPIO.h RTT\log.h RTT\SEGGER_RTT.h \
+  Library\stm32f10x_wwdg.h Library\misc.h RTT\log.h RTT\SEGGER_RTT.h \
   RTT\SEGGER_RTT_Conf.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtthread.h \
   RTE\RTOS\rtconfig.h RTE\RTOS\finsh_config.h \
@@ -21,6 +20,7 @@
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\include\rtservice.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_api.h \
   D:\KEIL\PACK\RealThread\RT-Thread\3.1.5\components\finsh\finsh_config.h \
+  Hardware\uart.h User\main.h Hardware\MyRTC.h Hardware\GPIO.h \
   Hardware\TIM.h Hardware\iwdog.h User\user_DB.h \
   Component\FlashDB\inc\flashdb.h Component\FlashDB\inc\fdb_cfg.h \
   Component\fal\inc\fal.h Component\fal\samples\porting\fal_cfg.h \
@@ -32,4 +32,4 @@
   Component\modbus\modbus\include\mbconfig.h \
   Component\modbus\modbus\include\mbframe.h \
   Component\modbus\modbus\include\mbutils.h \
-  Component\modbus\master\master_mb_app.h Component\AT\AT_Cmd.h
+  Component\modbus\master\master_mb_app.h
