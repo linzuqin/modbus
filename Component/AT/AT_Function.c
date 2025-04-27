@@ -1,9 +1,12 @@
 #include "AT_Function.h"
+#include "list_status.h"
 
 
 extern AT_URC_t AT_URC_Msg[AT_COMMAND_ARRAY_SIZE];
 extern AT_Command_t AT_Init_Cmd[AT_COMMAND_ARRAY_SIZE];
 extern AT_Command_t AT_Cmd[AT_COMMAND_ARRAY_SIZE];
+extern AT_Device_t AT_Device;
+static struct rt_timer timer1;
 
 uint8_t AT_SendCmd( AT_Device_t *at_device , const char *cmd , const char *response, uint16_t timeout)
 {
@@ -39,9 +42,6 @@ uint8_t AT_SendCmd( AT_Device_t *at_device , const char *cmd , const char *respo
 	}
     return 1;
 }
-
-
-
 
 uint8_t AT_Cmd_Regsiter(AT_Command_t *cmd_array , const char *response, uint16_t timeout, void (*ack_right_response)(void), void (*ack_err_response)(void) , const char *cmd, ...)
 {
@@ -114,7 +114,6 @@ void at_device_register(USART_TypeDef *USARTx , uint32_t bound , AT_Device_t *at
     My_UART_Init(USARTx , bound);
 }
 
-
 void Device_RST_Soft(AT_Device_t *at_device)
 {
     at_device->status = AT_DISCONNECT;
@@ -129,8 +128,56 @@ void Device_RST_Hard(void)
     GPIO_SetBits(AT_RST_PORT, AT_RST_PIN);
 }
 
+list_status_t* at_current = NULL;
+list_status_t* at_status1 = NULL;
+list_status_t* at_status2 = NULL;
+list_status_t* at_status3 = NULL;
 
-void at_list(void)
+
+void AT_IDLE_Handle(void)
+{
+	LOG_I("Running AT_IDLE state\n");
+}
+
+void AT_UP_Handle(void)
+{
+	LOG_I("Running AT UP state\n");
+	
+}
+
+void AT_UP_Exit(void)
+{
+	LOG_I("Exiting AT_UP state\n");
+	list_status_remove(at_status2);
+}
+
+void timeout1(void*params)
+{
+	if(at_status1->next != at_status2)
+	{
+		list_status_add(&at_status1 , at_status2);
+	}
+}
+
+void at_list_init(void)
+{
+    at_status1 = list_status_create("AT_IDLE" , NULL , NULL , AT_IDLE_Handle);
+    at_status2 = list_status_create("AT_UP" , NULL , AT_UP_Exit , AT_UP_Handle);
+    //at_status3 = list_status_create("AT_IDLE2" , AT_IDLE_Enter , AT_IDLE_Exit , AT_IDLE_Handle);
+    rt_timer_init(&timer1, "timer1",  /* ��ʱ�������� timer1 */
+        timeout1, /* ��ʱʱ�ص��Ĵ������� */
+        RT_NULL, /* ��ʱ��������ڲ��� */
+        5000, /* ��ʱ���ȣ��� OS Tick Ϊ��λ���� 10 �� OS Tick */
+        RT_TIMER_FLAG_PERIODIC); /* �����Զ�ʱ�� */
+   rt_timer_start(&timer1);
+}
+
+void at_list_poll(void)
+{
+   list_poll(at_status1 , &at_current);
+}
+
+void at_cmd_list(void)
 {
 	uint8_t i = 0;
 	rt_kprintf("********************AT CMD LIST********************\n");
@@ -160,5 +207,16 @@ void at_list(void)
 			}
 	}
 }
+MSH_CMD_EXPORT(at_cmd_list, list at cmd);
 
-MSH_CMD_EXPORT(at_list, list at cmd);
+
+void list_printf(void)
+{
+    list_status_t *current = at_status1;
+    while (current != NULL)
+    {
+        rt_kprintf("Status: %s\n", current->name);
+        current = current->next;
+    }
+}
+MSH_CMD_EXPORT(list_printf, list at status);

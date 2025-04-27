@@ -1,4 +1,5 @@
 #include "AT_Device.h"
+#include "list_status.h"
 
 #define AT_THREAD_STACK_SIZE 1024
 #define AT_URC_THREAD_STACK_SIZE	1024
@@ -14,6 +15,8 @@ static struct rt_thread AT_URC_Thread;
 static uint8_t AT_URC_ThreadStack[AT_URC_THREAD_STACK_SIZE];
 
 AT_Device_t AT_Device;
+
+
 
 /*AT DEVICE CMD*/
 AT_Command_t AT_Cmd[AT_COMMAND_ARRAY_SIZE] = {
@@ -80,41 +83,36 @@ void AT_Init(void *params)
 
 void AT_TASK(void *params)
 {
+    // while(1)
+    // {
+    //     if(AT_Device.status == AT_DISCONNECT)
+    //     {
+    //         if(AT_Init_Thread.stat == RT_THREAD_CLOSE)
+    //         {
+
+    //         }
+    //     }
+    //     else {
+    //         switch(AT_Device.status)
+    //         {
+    //             case AT_CONNECT:AT_Device.status = AT_SEND;break;
+    //             case AT_IDEL:
+    //             {
+
+    //             }
+    //             break;
+    //             case AT_SEND:
+
+    //             break;
+    //         }
+    //     }
+    //     rt_thread_mdelay(1000);
+    // }
+		at_list_init();
+
     while(1)
     {
-        if(AT_Device.status == AT_DISCONNECT)
-        {
-            if(AT_Init_Thread.stat == RT_THREAD_CLOSE)
-            {
-//                rt_err_t result;
-//                result = rt_thread_init(&AT_Init_Thread, "AT_Init", AT_Init, RT_NULL, &AT_Init_ThreadStack[0],AT_THREAD_STACK_SIZE, 10, 10);
-//                if (result != RT_EOK)
-//                {
-//                        rt_kprintf("AT_Init thread create failed\n");
-//                        return;
-//                }
-//                result = rt_thread_startup(&AT_Init_Thread);
-//                if (result != RT_EOK)
-//                {
-//                    rt_kprintf("AT_Init thread startup failed\n");
-//                    return;
-//                }
-            }
-        }
-        else {
-            switch(AT_Device.status)
-            {
-                case AT_CONNECT:AT_Device.status = AT_SEND;break;
-                case AT_IDEL:
-                {
-
-                }
-                break;
-                case AT_SEND:
-
-                break;
-            }
-        }
+        at_list_poll();
         rt_thread_mdelay(1000);
     }
 }
@@ -136,6 +134,7 @@ void AT_URC(void *params)
 		rt_thread_mdelay(10);
 	}
 }
+
 
 
 void AT_START(void)
@@ -176,5 +175,6 @@ void AT_START(void)
         return;
     }
 		rt_thread_startup(&AT_Thread);
+
 
 }

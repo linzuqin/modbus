@@ -19,10 +19,10 @@ int main(void)
 		AT_START();
 	#endif
 
-	IWDG_Init(IWDG_Prescaler_64, 0x0FFF);
+	//IWDG_Init(IWDG_Prescaler_64, 0x0FFF);
 	while (1)
 	{
-		IWDG_Feed();
+		//IWDG_Feed();
 		rt_thread_mdelay(1000);
 	}
 }

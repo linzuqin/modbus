@@ -55,7 +55,7 @@
 #define AT_PORT  USART1
 #define AT_BAUD  115200
 #define AT_SIZE  uart_rx_size
-#define USE_AT_DEVICE									0
+#define USE_AT_DEVICE									1
 
 /*计算公式*/
 #define USE_PID										 1

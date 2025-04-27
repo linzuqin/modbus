@@ -1046,6 +1046,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>list_status</GroupName>
+          <Files>
+            <File>
+              <FileName>list_status.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\list_status.c</FilePath>
+            </File>
+            <File>
+              <FileName>list_status.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\list_status.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::Data Exchange</GroupName>
         </Group>
         <Group>

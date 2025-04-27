@@ -72,6 +72,7 @@
 ".\objects\at_device.o"
 ".\objects\user_cjson.o"
 ".\objects\at_function.o"
+".\objects\list_status.o"
 ".\objects\cjson.o"
 ".\objects\cjson_utils.o"
 ".\objects\cmd.o"
