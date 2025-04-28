@@ -1014,26 +1014,6 @@
           <GroupName>AT</GroupName>
           <Files>
             <File>
-              <FileName>AT_Device.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\AT\AT_Device.c</FilePath>
-            </File>
-            <File>
-              <FileName>AT_Device.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Component\AT\AT_Device.h</FilePath>
-            </File>
-            <File>
-              <FileName>user_cjson.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\cJSON-v1.7.17\user_cjson.c</FilePath>
-            </File>
-            <File>
-              <FileName>user_cjson.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Component\cJSON-v1.7.17\user_cjson.h</FilePath>
-            </File>
-            <File>
               <FileName>AT_Function.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Component\AT\AT_Function.c</FilePath>
@@ -1042,6 +1022,16 @@
               <FileName>AT_Function.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Component\AT\AT_Function.h</FilePath>
+            </File>
+            <File>
+              <FileName>AT_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\AT\AT_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>AT_sample.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\AT\AT_sample.h</FilePath>
             </File>
           </Files>
         </Group>

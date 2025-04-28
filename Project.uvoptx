@@ -1022,7 +1022,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1865,8 +1865,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\AT\AT_Device.c</PathWithFileName>
-      <FilenameWithoutPath>AT_Device.c</FilenameWithoutPath>
+      <PathWithFileName>.\Component\AT\AT_Function.c</PathWithFileName>
+      <FilenameWithoutPath>AT_Function.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1877,8 +1877,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\AT\AT_Device.h</PathWithFileName>
-      <FilenameWithoutPath>AT_Device.h</FilenameWithoutPath>
+      <PathWithFileName>.\Component\AT\AT_Function.h</PathWithFileName>
+      <FilenameWithoutPath>AT_Function.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1889,8 +1889,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\cJSON-v1.7.17\user_cjson.c</PathWithFileName>
-      <FilenameWithoutPath>user_cjson.c</FilenameWithoutPath>
+      <PathWithFileName>.\Component\AT\AT_sample.c</PathWithFileName>
+      <FilenameWithoutPath>AT_sample.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1901,32 +1901,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\cJSON-v1.7.17\user_cjson.h</PathWithFileName>
-      <FilenameWithoutPath>user_cjson.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>120</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\AT\AT_Function.c</PathWithFileName>
-      <FilenameWithoutPath>AT_Function.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>12</GroupNumber>
-      <FileNumber>121</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\Component\AT\AT_Function.h</PathWithFileName>
-      <FilenameWithoutPath>AT_Function.h</FilenameWithoutPath>
+      <PathWithFileName>.\Component\AT\AT_sample.h</PathWithFileName>
+      <FilenameWithoutPath>AT_sample.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1940,7 +1916,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>122</FileNumber>
+      <FileNumber>120</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1952,7 +1928,7 @@
     </File>
     <File>
       <GroupNumber>13</GroupNumber>
-      <FileNumber>123</FileNumber>
+      <FileNumber>121</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1966,7 +1942,7 @@
 
   <Group>
     <GroupName>::Data Exchange</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>1</RteFlg>

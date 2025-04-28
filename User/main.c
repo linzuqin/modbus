@@ -16,7 +16,7 @@ int main(void)
 	#endif
 
 	#if USE_AT_DEVICE
-		AT_START();
+		//AT_START();
 	#endif
 
 	//IWDG_Init(IWDG_Prescaler_64, 0x0FFF);

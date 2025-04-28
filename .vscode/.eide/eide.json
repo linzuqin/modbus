@@ -1,0 +1,741 @@
+{
+  "name": "Project",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Start",
+        "files": [
+          {
+            "path": "../Start/core_cm3.h"
+          },
+          {
+            "path": "../Start/stm32f10x.h"
+          },
+          {
+            "path": "../Start/system_stm32f10x.c"
+          },
+          {
+            "path": "../Start/system_stm32f10x.h"
+          },
+          {
+            "path": "../Start/startup_stm32f10x_hd.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Library",
+        "files": [
+          {
+            "path": "../Library/misc.c"
+          },
+          {
+            "path": "../Library/misc.h"
+          },
+          {
+            "path": "../Library/stm32f10x_adc.c"
+          },
+          {
+            "path": "../Library/stm32f10x_adc.h"
+          },
+          {
+            "path": "../Library/stm32f10x_bkp.c"
+          },
+          {
+            "path": "../Library/stm32f10x_bkp.h"
+          },
+          {
+            "path": "../Library/stm32f10x_can.c"
+          },
+          {
+            "path": "../Library/stm32f10x_can.h"
+          },
+          {
+            "path": "../Library/stm32f10x_cec.c"
+          },
+          {
+            "path": "../Library/stm32f10x_cec.h"
+          },
+          {
+            "path": "../Library/stm32f10x_crc.c"
+          },
+          {
+            "path": "../Library/stm32f10x_crc.h"
+          },
+          {
+            "path": "../Library/stm32f10x_dac.c"
+          },
+          {
+            "path": "../Library/stm32f10x_dac.h"
+          },
+          {
+            "path": "../Library/stm32f10x_dbgmcu.c"
+          },
+          {
+            "path": "../Library/stm32f10x_dbgmcu.h"
+          },
+          {
+            "path": "../Library/stm32f10x_dma.c"
+          },
+          {
+            "path": "../Library/stm32f10x_dma.h"
+          },
+          {
+            "path": "../Library/stm32f10x_exti.c"
+          },
+          {
+            "path": "../Library/stm32f10x_exti.h"
+          },
+          {
+            "path": "../Library/stm32f10x_flash.c"
+          },
+          {
+            "path": "../Library/stm32f10x_flash.h"
+          },
+          {
+            "path": "../Library/stm32f10x_fsmc.c"
+          },
+          {
+            "path": "../Library/stm32f10x_fsmc.h"
+          },
+          {
+            "path": "../Library/stm32f10x_gpio.c"
+          },
+          {
+            "path": "../Library/stm32f10x_gpio.h"
+          },
+          {
+            "path": "../Library/stm32f10x_i2c.c"
+          },
+          {
+            "path": "../Library/stm32f10x_i2c.h"
+          },
+          {
+            "path": "../Library/stm32f10x_iwdg.c"
+          },
+          {
+            "path": "../Library/stm32f10x_iwdg.h"
+          },
+          {
+            "path": "../Library/stm32f10x_pwr.c"
+          },
+          {
+            "path": "../Library/stm32f10x_pwr.h"
+          },
+          {
+            "path": "../Library/stm32f10x_rcc.c"
+          },
+          {
+            "path": "../Library/stm32f10x_rcc.h"
+          },
+          {
+            "path": "../Library/stm32f10x_rtc.c"
+          },
+          {
+            "path": "../Library/stm32f10x_rtc.h"
+          },
+          {
+            "path": "../Library/stm32f10x_sdio.c"
+          },
+          {
+            "path": "../Library/stm32f10x_sdio.h"
+          },
+          {
+            "path": "../Library/stm32f10x_spi.c"
+          },
+          {
+            "path": "../Library/stm32f10x_spi.h"
+          },
+          {
+            "path": "../Library/stm32f10x_tim.c"
+          },
+          {
+            "path": "../Library/stm32f10x_tim.h"
+          },
+          {
+            "path": "../Library/stm32f10x_usart.c"
+          },
+          {
+            "path": "../Library/stm32f10x_usart.h"
+          },
+          {
+            "path": "../Library/stm32f10x_wwdg.c"
+          },
+          {
+            "path": "../Library/stm32f10x_wwdg.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "System",
+        "files": [],
+        "folders": []
+      },
+      {
+        "name": "Hardware",
+        "files": [
+          {
+            "path": "../Hardware/MyRTC.c"
+          },
+          {
+            "path": "../Hardware/MyRTC.h"
+          },
+          {
+            "path": "../Hardware/W25Q64Flash.c"
+          },
+          {
+            "path": "../Hardware/W25Q64Flash.h"
+          },
+          {
+            "path": "../Hardware/TIM.c"
+          },
+          {
+            "path": "../Hardware/TIM.h"
+          },
+          {
+            "path": "../Hardware/iwdog.c"
+          },
+          {
+            "path": "../Hardware/iwdog.h"
+          },
+          {
+            "path": "../Hardware/uart.c"
+          },
+          {
+            "path": "../Hardware/uart.h"
+          },
+          {
+            "path": "../Hardware/spi.c"
+          },
+          {
+            "path": "../Hardware/spi.h"
+          },
+          {
+            "path": "../Hardware/GPIO.c"
+          },
+          {
+            "path": "../Hardware/GPIO.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "User",
+        "files": [
+          {
+            "path": "../User/main.c"
+          },
+          {
+            "path": "../User/main.h"
+          },
+          {
+            "path": "../User/stm32f10x_it.c"
+          },
+          {
+            "path": "../User/stm32f10x_it.h"
+          },
+          {
+            "path": "../User/user_DB.c"
+          },
+          {
+            "path": "../User/stm32f10x_conf.h"
+          },
+          {
+            "path": "../User/user_DB.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "RTT",
+        "files": [
+          {
+            "path": "../RTT/SEGGER_RTT.c"
+          },
+          {
+            "path": "../RTT/SEGGER_RTT_printf.c"
+          },
+          {
+            "path": "../RTT/log.h"
+          },
+          {
+            "path": "../RTT/SEGGER_RTT.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "FlashDB",
+        "files": [
+          {
+            "path": "../Component/fal/src/fal.c"
+          },
+          {
+            "path": "../Component/fal/src/fal_flash.c"
+          },
+          {
+            "path": "../Component/fal/src/fal_partition.c"
+          },
+          {
+            "path": "../Component/fal/src/fal_rtt.c"
+          },
+          {
+            "path": "../Component/fal/samples/porting/fal_cfg.h"
+          },
+          {
+            "path": "../Component/fal/samples/porting/fal_flash_sfud_port.c"
+          },
+          {
+            "path": "../Component/FlashDB/src/fdb.c"
+          },
+          {
+            "path": "../Component/FlashDB/src/fdb_file.c"
+          },
+          {
+            "path": "../Component/FlashDB/src/fdb_kvdb.c"
+          },
+          {
+            "path": "../Component/FlashDB/src/fdb_tsdb.c"
+          },
+          {
+            "path": "../Component/FlashDB/src/fdb_utils.c"
+          },
+          {
+            "path": "../Component/SFUD/sfud/src/sfud.c"
+          },
+          {
+            "path": "../Component/SFUD/sfud/src/sfud_sfdp.c"
+          },
+          {
+            "path": "../Component/SFUD/sfud/port/sfud_port.c"
+          },
+          {
+            "path": "../Component/FlashDB/port/fal/samples/porting/fal_flash_stm32f1_port.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "freemodbus",
+        "files": [],
+        "folders": [
+          {
+            "name": "modbus",
+            "files": [
+              {
+                "path": "../Component/modbus/modbus/rtu/mbcrc.c"
+              },
+              {
+                "path": "../Component/modbus/modbus/functions/mbfuncother.c"
+              },
+              {
+                "path": "../Component/modbus/modbus/functions/mbutils.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "slave",
+            "files": [
+              {
+                "path": "../Component/modbus/slave/mb.c"
+              },
+              {
+                "path": "../Component/modbus/slave/mbfunccoils.c"
+              },
+              {
+                "path": "../Component/modbus/slave/mbfuncdisc.c"
+              },
+              {
+                "path": "../Component/modbus/slave/mbfuncholding.c"
+              },
+              {
+                "path": "../Component/modbus/slave/mbfuncinput.c"
+              },
+              {
+                "path": "../Component/modbus/slave/mbrtu.c"
+              },
+              {
+                "path": "../Component/modbus/slave/portevent.c"
+              },
+              {
+                "path": "../Component/modbus/slave/portserial.c"
+              },
+              {
+                "path": "../Component/modbus/modbus/ascii/mbascii.c"
+              },
+              {
+                "path": "../Component/modbus/slave/porttimer.c"
+              },
+              {
+                "path": "../Component/modbus/slave/slave_mb_app.c"
+              },
+              {
+                "path": "../Component/modbus/slave/slave_mb_app.h"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "master",
+            "files": [
+              {
+                "path": "../Component/modbus/master/master_mb_app.c"
+              },
+              {
+                "path": "../Component/modbus/master/master_mb_app.h"
+              },
+              {
+                "path": "../Component/modbus/master/inc/agile_modbus.h"
+              },
+              {
+                "path": "../Component/modbus/master/inc/agile_modbus_rtu.h"
+              },
+              {
+                "path": "../Component/modbus/master/inc/agile_modbus_tcp.h"
+              },
+              {
+                "path": "../Component/modbus/master/src/agile_modbus.c"
+              },
+              {
+                "path": "../Component/modbus/master/src/agile_modbus_rtu.c"
+              },
+              {
+                "path": "../Component/modbus/master/src/agile_modbus_tcp.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "PID",
+        "files": [
+          {
+            "path": "../Component/PID/src/qpid.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "AT",
+        "files": [
+          {
+            "path": "../Component/AT/AT_Device.c"
+          },
+          {
+            "path": "../Component/AT/AT_Device.h"
+          },
+          {
+            "path": "../Component/cJSON-v1.7.17/user_cjson.c"
+          },
+          {
+            "path": "../Component/cJSON-v1.7.17/user_cjson.h"
+          },
+          {
+            "path": "../Component/AT/AT_Function.c"
+          },
+          {
+            "path": "../Component/AT/AT_Function.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "list_status",
+        "files": [
+          {
+            "path": "../Hardware/list_status.c"
+          },
+          {
+            "path": "../Hardware/list_status.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "::Data Exchange",
+        "files": [],
+        "folders": []
+      },
+      {
+        "name": "::RTOS",
+        "files": [
+          {
+            "path": "../RTE/RTOS/FreeRTOSConfig.h"
+          },
+          {
+            "path": "../RTE/RTOS/board.c"
+          },
+          {
+            "path": "../RTE/RTOS/finsh_config.h"
+          },
+          {
+            "path": "../RTE/RTOS/finsh_port.c"
+          },
+          {
+            "path": "../RTE/RTOS/rtconfig.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "::CMSIS Driver",
+        "files": [
+          {
+            "path": "../RTE/CMSIS_Driver/WiFi_ESP8266_Config.h"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "::Device",
+        "files": [
+          {
+            "path": "../RTE/Device/STM32F103RE/RTE_Device.h"
+          },
+          {
+            "path": "../RTE/Device/STM32F103RE/startup_stm32f10x_hd.s"
+          },
+          {
+            "path": "../RTE/Device/STM32F103RE/stm32f10x_conf.h"
+          },
+          {
+            "path": "../RTE/Device/STM32F103RE/system_stm32f10x.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "::Network",
+        "files": [
+          {
+            "path": "../RTE/Network/Net_Config_BSD.h"
+          },
+          {
+            "path": "../RTE/Network/Net_Config_HTTP_Server.h"
+          },
+          {
+            "path": "../RTE/Network/Net_Config_TCP.h"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "3e12984ad64e9afa4153ecdb8e66f9b3"
+  },
+  "targets": {
+    "Target 1": {
+      "excludeList": [],
+      "toolchain": "AC6",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x10000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x8000000",
+                "size": "0x80000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "../Start",
+          "../Library",
+          "../User",
+          "../System",
+          "../Hardware",
+          "../RTT",
+          "../Component/fal/inc",
+          "../Component/FlashDB/inc",
+          "../Component/SFUD/sfud/inc",
+          "../Component/fal/samples/porting",
+          "../Component/XMODEM",
+          "../Component/ymodem",
+          "../Component/modbus/modbus/ascii",
+          "../Component/modbus/modbus/functions",
+          "../Component/modbus/modbus/include",
+          "../Component/modbus/modbus/rtu",
+          "../Component/modbus/slave",
+          "../Component/modbus/modbus",
+          "../Component/modbus/master/inc",
+          "../Component/modbus/master",
+          "../Component/modbus/modbus/tcp",
+          "../Component/PID/inc",
+          "../Component/AT",
+          "../Component/cJSON-v1.7.17",
+          ".cmsis/include",
+          "../RTE/CMSIS_Driver",
+          "../RTE/Device/STM32F103RE",
+          "../RTE/Network",
+          "../RTE/RTOS",
+          "../RTE/_Target 1"
+        ],
+        "libList": [],
+        "defineList": [
+          "USE_STDPERIPH_DRIVER",
+          "STM32F10X_HD"
+        ]
+      },
+      "builderOptions": {
+        "AC6": {
+          "version": 3,
+          "beforeBuildTasks": [],
+          "afterBuildTasks": [],
+          "global": {
+            "use-microLIB": true,
+            "output-debug-info": "enable"
+          },
+          "c/cpp-compiler": {
+            "optimization": "level-0",
+            "language-c": "gnu99",
+            "language-cpp": "c++11",
+            "link-time-optimization": false,
+            "one-elf-section-per-function": true,
+            "short-enums#wchar": true,
+            "warnings": "ac5-like-warnings"
+          },
+          "asm-compiler": {
+            "$use": "asm-auto"
+          },
+          "linker": {
+            "output-format": "elf",
+            "misc-controls": "--diag_suppress=L6329",
+            "xo-base": "",
+            "ro-base": "0x08000000",
+            "rw-base": "0x20000000"
+          }
+        }
+      }
+    }
+  },
+  "version": "3.5"
+}

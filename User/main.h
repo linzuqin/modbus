@@ -16,7 +16,6 @@
 
 /*应用驱动*/
 #include "user_DB.h"
-#include "AT_Device.h"
 #include "mb.h"
 #include "slave_mb_app.h"
 #include "master_mb_app.h"
