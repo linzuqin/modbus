@@ -337,5 +337,4 @@ void MODBUS_INIT(void)
 	}  
 }
 
-
 #endif

@@ -29,9 +29,7 @@
 #include "mbport.h"
 #include "string.h"
 /* ----------------------- static functions ---------------------------------*/
-extern UCHAR  ucRTUBuf[256];
-extern uint8_t UART4_RxData[256];
-extern uint8_t UART4_Count;
+
 
 /* ----------------------- Start implementation -----------------------------*/
 
@@ -39,7 +37,7 @@ BOOL
 xMBPortSerialInit(uint32_t bound)//适配串口初始化
 {
 	#if MODBUS_SLAVE_ENABLE
-	My_UART_Init(MODBUS_PORT , bound);
+		My_UART_Init(&MB_S_DEVICE_1);
 	#endif
 	return TRUE;
 }
@@ -50,17 +48,17 @@ xMBPortSerialPutByte(uint8_t port , UCHAR *ucByte , uint16_t len)//适配串口�
     /* Put a byte in the UARTs transmit buffer. This function is called
      * by the protocol stack if pxMBFrameCBTransmitterEmpty( ) has been
      * called. */
-		USART_TypeDef* USARTx;
+		uart_device_t* mb_device;
 		switch(port)
 		{
-			case 1:USARTx = USART1;break;
-			case 2:USARTx = USART2;break;
-			case 3:USARTx = USART3;break;
-			case 4:USARTx = UART4;break;
-			case 5:USARTx = UART5;break;
+			case 1:mb_device = &uart1_device;break;
+			case 2:mb_device = &uart2_device;break;
+			case 3:mb_device = &uart3_device;break;
+			case 4:mb_device = &uart4_device;break;
+			case 5:mb_device = &uart5_device;break;
 			default:return 0;
 		}
-		UART_SendData(USARTx , ucByte , len);
+		UART_SendData(mb_device->port , ucByte , len);
 		return TRUE;
 }
 

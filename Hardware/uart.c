@@ -1,18 +1,48 @@
 #include "main.h"
 
-uart_device_t uart1_device;
-uart_device_t uart2_device;
-uart_device_t uart3_device;
-uart_device_t uart4_device;
-uart_device_t uart5_device;
-
 static uint8_t uart1_rx_buf[uart1_rx_size];
 static uint8_t uart2_rx_buf[uart2_rx_size];
 static uint8_t uart3_rx_buf[uart3_rx_size];
 static uint8_t uart4_rx_buf[uart4_rx_size];
 static uint8_t uart5_rx_buf[uart5_rx_size];
 
-void My_UART_Init(USART_TypeDef *USARTx, uint32_t baudrate)
+uart_device_t uart1_device = {
+  .port = USART1,
+  .baudrate = 115200,
+  .rx_flag = 0,
+  .rx_size = 0,
+  .rx_buffer = uart1_rx_buf,
+};
+uart_device_t uart2_device = {
+  .port = USART2,
+  .baudrate = 115200,
+  .rx_flag = 0,
+  .rx_size = 0,
+  .rx_buffer = uart2_rx_buf,
+};
+uart_device_t uart3_device = {
+  .port = USART3,
+  .baudrate = 115200,
+  .rx_flag = 0,
+  .rx_size = 0,
+  .rx_buffer = uart3_rx_buf,
+};
+uart_device_t uart4_device = {
+  .port = UART4,
+  .baudrate = 115200,
+  .rx_flag = 0,
+  .rx_size = 0,
+  .rx_buffer = uart4_rx_buf,
+};
+uart_device_t uart5_device = {
+  .port = UART5,
+  .baudrate = 115200,
+  .rx_flag = 0,
+  .rx_size = 0,
+  .rx_buffer = uart5_rx_buf,
+};
+
+void My_UART_Init(uart_device_t *uart_device)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   USART_InitTypeDef USART_InitStructure;
@@ -21,14 +51,12 @@ void My_UART_Init(USART_TypeDef *USARTx, uint32_t baudrate)
 
   DMA_Channel_TypeDef *DMA_Channel;
   uint32_t buf_addr = 0;
-  uart_device_t *uart_device;
   uint16_t rx_size = 0;
 
-  if (USARTx == USART1)
+  if (uart_device->port == USART1)
   {
-    uart_device = &uart1_device;
-    uart_device->rx_buffer = uart1_rx_buf;
     rx_size = uart1_rx_size;
+
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
     MyGPIO_Init(GPIOA, GPIO_Pin_9, GPIO_Mode_AF_PP);
@@ -43,10 +71,8 @@ void My_UART_Init(USART_TypeDef *USARTx, uint32_t baudrate)
     buf_addr = (uint32_t)&USART1->DR;
     USART_DMACmd(USART1, USART_DMAReq_Rx, ENABLE);
   }
-  else if (USARTx == USART2)
+  else if (uart_device->port == USART2)
   {
-    uart_device = &uart2_device;
-    uart_device->rx_buffer = uart2_rx_buf;
     rx_size = uart2_rx_size;
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
@@ -62,10 +88,8 @@ void My_UART_Init(USART_TypeDef *USARTx, uint32_t baudrate)
     buf_addr = (uint32_t)&USART2->DR;
     USART_DMACmd(USART2, USART_DMAReq_Rx, ENABLE);
   }
-  else if (USARTx == USART3)
+  else if (uart_device->port == USART3)
   {
-    uart_device = &uart3_device;
-    uart_device->rx_buffer = uart3_rx_buf;
     rx_size = uart3_rx_size;
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
@@ -81,10 +105,8 @@ void My_UART_Init(USART_TypeDef *USARTx, uint32_t baudrate)
     buf_addr = (uint32_t)&USART3->DR;
     USART_DMACmd(USART3, USART_DMAReq_Rx, ENABLE);
   }
-  else if (USARTx == UART4)
+  else if (uart_device->port == UART4)
   {
-    uart_device = &uart4_device;
-    uart_device->rx_buffer = uart4_rx_buf;
     rx_size = uart4_rx_size;
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, ENABLE);
@@ -100,10 +122,8 @@ void My_UART_Init(USART_TypeDef *USARTx, uint32_t baudrate)
     buf_addr = (uint32_t)&UART4->DR;
     USART_DMACmd(UART4, USART_DMAReq_Rx, ENABLE);
   }
-  else if (USARTx == UART5)
+  else if (uart_device->port == UART5)
   {
-    uart_device = &uart5_device;
-    uart_device->rx_buffer = uart5_rx_buf;
     rx_size = uart5_rx_size;
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, ENABLE);
@@ -123,15 +143,15 @@ void My_UART_Init(USART_TypeDef *USARTx, uint32_t baudrate)
     return;
   }
 
-  USART_InitStructure.USART_BaudRate = baudrate;
+  USART_InitStructure.USART_BaudRate = uart_device->baudrate;
   USART_InitStructure.USART_WordLength = USART_WordLength_8b;
   USART_InitStructure.USART_StopBits = USART_StopBits_1;
   USART_InitStructure.USART_Parity = USART_Parity_No;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
-  USART_Init(USARTx, &USART_InitStructure);
-  USART_Cmd(USARTx, ENABLE);
+  USART_Init(uart_device->port, &USART_InitStructure);
+  USART_Cmd(uart_device->port, ENABLE);
 
   DMA_DeInit(DMA_Channel);
   DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&uart_device->rx_buffer[2];

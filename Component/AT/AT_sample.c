@@ -2,28 +2,54 @@
 #include <rtthread.h>
 #include "GPIO.h" 
 
+/*定义AT指令集*/
+AT_Command_t CAT_Init_Cmd[AT_COMMAND_ARRAY_SIZE] ={
+    {"AT\r\n",          "OK",   100 , NULL , NULL},
+    {"AT+RESET\r\n",    "NITZ", 2000 , NULL , NULL},
+};
+
+
+AT_Command_t CAT_Run_Cmd[AT_COMMAND_ARRAY_SIZE] = {
+};
+
 // Static initialization for cat1
-#define cat1_stack_size	1024
+#define cat1_stack_size	4096
 static struct rt_thread cat1_thread;
 static uint8_t cat1_stack[cat1_stack_size];
 
-#define cat1_URC_stack_size	1024
+#define cat1_URC_stack_size	512
 static struct rt_thread cat1_URC_thread;
 static uint8_t cat1_URC_stack[cat1_URC_stack_size];
 
 static AT_Device_t CAT_Device;
 
-extern uart_device_t uart2_device;
 extern AT_Command_t CAT_Init_Cmd[AT_COMMAND_ARRAY_SIZE];
 extern AT_Command_t CAT_Run_Cmd[AT_COMMAND_ARRAY_SIZE];
 extern AT_URC_t AT_URC_Msg[AT_COMMAND_ARRAY_SIZE];
+extern uint16_t MyRTC_Time[];
 
-static list_status_t* AT_IDLE_list = NULL;
-static list_status_t* AT_CHECK_list = NULL;
+static void CCLK_CallBack(void)
+{
+    char *time_data = strstr((char *)CAT_Device.rx_buf, "+CCLK: ");
+    if (time_data != NULL) {
+        time_data += strlen("+CCLK: ");
+        // Assuming RTC_Time_Array is a predefined array to store RTC time
+        MyRTC_Time[0] = (time_data[0] - '0') * 10 + (time_data[1] - '0'); // Year
+        MyRTC_Time[1] = (time_data[3] - '0') * 10 + (time_data[4] - '0'); // Month
+        MyRTC_Time[2] = (time_data[6] - '0') * 10 + (time_data[7] - '0'); // Day
+        MyRTC_Time[3] = (time_data[9] - '0') * 10 + (time_data[10] - '0'); // Hour
+        MyRTC_Time[4] = (time_data[12] - '0') * 10 + (time_data[13] - '0'); // Minute
+        MyRTC_Time[5] = (time_data[15] - '0') * 10 + (time_data[16] - '0'); // Second
+    }
+    MyRTC_SetTime();
+    rt_kprintf("RTC Time: %d-%02d-%02d %02d:%02d:%02d\n", MyRTC_Time[0], MyRTC_Time[1], MyRTC_Time[2], MyRTC_Time[3], MyRTC_Time[4], MyRTC_Time[5]);
 
-static list_status_t* AT_UP_list = NULL;
-static list_status_t* AT_current = NULL;
+    rt_kprintf("Unix Time: %d\n", Unix_Time);
 
+    rt_memset(CAT_Device.rx_buf , 0 , sizeof(CAT_Device.rx_buf));
+}
+
+/*下发数据解析*/
 uint8_t *get_msg(void)//UART1_RxData
 {
 	uint8_t *buf_ptr = NULL;
@@ -34,16 +60,17 @@ uint8_t *get_msg(void)//UART1_RxData
 	return buf_ptr;
 }
 
-void mqtt_send(char *data)
+/*数据发送*/
+void mqtt_send(char *topic , char *data)
 {
 	//AT_SendCmd("\r\nAT+MPUBEX=\"%s\",0,0,%d\r\n",topic,1000);
 	char cmd[256];
-	sprintf(cmd , "AT+MPUBEX=\"%s\",0,0,%d\r\n" , SET_ACK_TOPIC , strlen(data));
+	sprintf(cmd , "AT+MPUBEX=\"%s\",0,0,%d\r\n" , topic , strlen(data));
 	if(AT_SendCmd(&CAT_Device,cmd , ">" ,1000) == 1)return;
 	AT_SendCmd(&CAT_Device,data,"OK",1000);
 }
 
-
+/*onenet数据组包*/
 uint16_t mqtt_msg(char *buf)
 {
 	char text[128];
@@ -67,7 +94,7 @@ void AT_UpStatus(void)
     uint16_t len = mqtt_msg(data);
     if(len > 0)
     {
-        mqtt_send(data);
+        mqtt_send(POST_TOPIC , data);
         return ;
     }
     else
@@ -75,11 +102,6 @@ void AT_UpStatus(void)
         LOG_I("Failed to create MQTT message\n");
         return ;
     }
-}
-
-void AT_To_IDLE(void)
-{
-    list_status_remove(AT_UP_list);
 }
 
 void AT_CHECK(void)
@@ -92,7 +114,7 @@ void set_ack(char *id)
 	char ack_buf[64];
 	memset(ack_buf,0,64);
 	sprintf(ack_buf , "{\"id\": \"%s\",\"code\": 200,\"msg\": \"success\"}" , id);
-    mqtt_send(ack_buf);
+    mqtt_send(SET_ACK_TOPIC , ack_buf);
 }
 
 void AT_Parase(void)
@@ -141,25 +163,34 @@ void AT_Parase(void)
 }
 
 void cat1_init_thread(void *parameter) {
+    /*状态初始化*/
     static uint8_t *step = &CAT_Device.init_step;
     CAT_Device.status = AT_DISCONNECT;
 
+    /*初始化复位引脚*/
     MyGPIO_Init(AT_RST_PORT, AT_RST_PIN, GPIO_Mode_Out_PP); // Initialize GPIO for reset
-//    My_UART_Init(CAT_Device.PORT, CAT_Device.Bound); // Initialize UART for cat1
-    at_device_register(&CAT_Device , CAT_PORT , CAT_BAUD , &(uart2_device.rx_buffer) , &uart2_device.rx_flag ,CAT_Init_Cmd , CAT_Run_Cmd);
+
+    /*AT设备注册*/
+    at_device_register(&CAT_Device , &AT_DEVICE ,CAT_Init_Cmd , CAT_Run_Cmd);
 	
+    /*添加自定义指令（获取NTP时间）*/
+    AT_Cmd_Regsiter(CAT_Init_Cmd , "OK" , 1000 , NULL , NULL , "AT+SAPBR=3,1,\"Contype\",\"GPRS\"\r\n");
+    AT_Cmd_Regsiter(CAT_Init_Cmd , "OK" , 1000 , NULL , NULL , "AT+SAPBR=3,1,\"APN\",\"\"\r\n");
+    AT_Cmd_Regsiter(CAT_Init_Cmd , "OK" , 1000 , NULL , NULL , "AT+SAPBR=1,1\r\n");
+    AT_Cmd_Regsiter(CAT_Init_Cmd , "OK" , 1000 , NULL , NULL , "AT+CNTPCID=1\r\n");
+    AT_Cmd_Regsiter(CAT_Init_Cmd , "+CNTP:1" , 1000 , NULL , NULL , "AT+CNTP=\"%s\"\r\n", NTP_SERVER);
+    AT_Cmd_Regsiter(CAT_Init_Cmd , "OK" , 1000 , CCLK_CallBack , NULL , "AT+CCLK?\r\n");
+
+
+    /*添加自定义指令（连接平台）*/
     AT_Cmd_Regsiter(CAT_Init_Cmd , "OK" , 1000 , NULL , NULL , "AT+MCONFIG=\"%s\",\"%s\",\"%s\"\r\n",DEVICE_NAME , PRODUCT_ID , PASSWORD);
     AT_Cmd_Regsiter(CAT_Init_Cmd , "CONNECT OK" , 1000 , NULL , NULL , "AT+MIPSTART=\"%s\",%d\r\n",IP_ADDRESS , PORT_NUMBER);
     AT_Cmd_Regsiter(CAT_Init_Cmd , "CONNACK OK" , 1000 , NULL , NULL , "AT+MCONNECT=1,120\r\n");
-    AT_Cmd_Regsiter(CAT_Init_Cmd , "SUBACK" , 1000 , NULL , NULL , "AT+MSUB=\"%s\",0\r\n" , SET_TOPIC);
+    AT_Cmd_Regsiter(CAT_Init_Cmd , "SUBACK" , 1000 , NULL , NULL , "AT+MSUB=\"%s\",0\r\n" , SUB_TOPIC);
+
+    /*获取指令长度*/
     uint16_t cmd_size = sizeof(CAT_Init_Cmd) / sizeof(AT_Command_t);
 
-    //AT_Cmd_Regsiter(CAT_Run_Cmd , ">" , 1000 , NULL , NULL , "AT+MPUBEX=\"%s\",0,0,%d\r\n" , SET_ACK_TOPIC);
-
-    AT_IDLE_list = list_status_create("AT IDLE" , NULL , AT_Parase , NULL);
-    AT_UP_list = list_status_create("AT UP" , NULL , AT_UpStatus , AT_To_IDLE);
-		AT_CHECK_list = list_status_create("AT CHECK" , NULL , AT_CHECK , NULL);
-		list_status_add(&AT_IDLE_list , AT_CHECK_list);
     while (1) {
 
         // Perform initialization tasks for cat1
@@ -196,9 +227,7 @@ void cat1_init_thread(void *parameter) {
             if(CAT_Device.is_status_up == 1)
             {
                 CAT_Device.is_status_up = 0;
-                list_status_add(&AT_IDLE_list , AT_UP_list);
             }
-            list_poll(AT_IDLE_list , &AT_current);
             rt_thread_mdelay(10);  // Delay for demonstration purposes
         }
         

@@ -383,32 +383,17 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Start</GroupName>
+          <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>core_cm3.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Start\core_cm3.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f10x.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Start\stm32f10x.h</FilePath>
+              <FileName>startup_stm32f10x_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Start\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Start\system_stm32f10x.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f10x.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Start\system_stm32f10x.h</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f10x_hd.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Start\startup_stm32f10x_hd.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -964,9 +949,19 @@
               <FilePath>.\Component\modbus\master\master_mb_app.c</FilePath>
             </File>
             <File>
-              <FileName>master_mb_app.h</FileName>
+              <FileName>sensor_mb_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\modbus\master\sensor_mb_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>master_function.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\modbus\master\master_function.c</FilePath>
+            </File>
+            <File>
+              <FileName>master_function.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Component\modbus\master\master_mb_app.h</FilePath>
+              <FilePath>.\Component\modbus\master\master_function.h</FilePath>
             </File>
             <File>
               <FileName>agile_modbus.h</FileName>

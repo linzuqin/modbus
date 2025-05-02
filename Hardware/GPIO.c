@@ -2,30 +2,37 @@
 
 void MyGPIO_Init(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIOMode_TypeDef mode)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-
     // 启用GPIO时钟
     if (GPIOx == GPIOA)
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+        RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
     else if (GPIOx == GPIOB)
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+        RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
     else if (GPIOx == GPIOC)
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+        RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
     else if (GPIOx == GPIOD)
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
+        RCC->APB2ENR |= RCC_APB2ENR_IOPDEN;
     else if (GPIOx == GPIOE)
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
+        RCC->APB2ENR |= RCC_APB2ENR_IOPEEN;
     else
     {
         LOG_I("error: invalid GPIO port"); // 无效的GPIO端口
         return; // 无效的GPIO端口
-
     }
 
     // 配置GPIO引脚
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin;
-    GPIO_InitStructure.GPIO_Mode = mode==1?GPIO_Mode_Out_PP : GPIO_Mode_IN_FLOATING;  // 默认推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // 默认速度
+    uint32_t pin_pos = 0;
+    while ((GPIO_Pin >> pin_pos) != 1)
+        pin_pos++;
 
-    GPIO_Init(GPIOx, &GPIO_InitStructure);
+    if (pin_pos < 8)
+    {
+        GPIOx->CRL &= ~(0xF << (pin_pos * 4)); // 清除原有设置
+        GPIOx->CRL |= (mode << (pin_pos * 4)); // 设置模式
+    }
+    else
+    {
+        pin_pos -= 8;
+        GPIOx->CRH &= ~(0xF << (pin_pos * 4)); // 清除原有设置
+        GPIOx->CRH |= (mode << (pin_pos * 4)); // 设置模式
+    }
 }

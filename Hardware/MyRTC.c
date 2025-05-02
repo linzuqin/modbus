@@ -5,6 +5,9 @@
 uint16_t MyRTC_Time[] = {2025, 3, 11, 18, 22, 30};
 uint32_t Unix_Time=1717077100;
 
+static struct rt_thread rtc_thread;
+static char rtc_thread_stack[1024];
+
 
 void MyRTC_SetTime(void);
 
@@ -99,5 +102,37 @@ void sys_time(void)
 	rt_kprintf("Unix_Time:%d\n", Unix_Time);
 }
 
+static void rtc_time_thread_entry(void *parameter)
+{
+	MyRTC_Init();
+	while (1)
+	{
+		MyRTC_ReadTime();
+		rt_thread_mdelay(1000); // Delay for 1 second
+	}
+}
+
+static int create_rtc_time_thread(void)
+{
+	rt_err_t result = rt_thread_init(&rtc_thread, 
+									 "rtc_time", 
+									 rtc_time_thread_entry, 
+									 RT_NULL, 
+									 rtc_thread_stack, 
+									 sizeof(rtc_thread_stack), 
+									 25, 
+									 10);
+	if (result == RT_EOK)
+	{
+		rt_thread_startup(&rtc_thread);
+	}
+	else
+	{
+		rt_kprintf("Failed to initialize RTC time thread\n");
+		return -1; // Return error code if thread initialization fails
+	}
+	return 0; // Return success code
+}
+
+INIT_APP_EXPORT(create_rtc_time_thread);
 MSH_CMD_EXPORT(sys_time, system time);
-INIT_APP_EXPORT(MyRTC_Init);

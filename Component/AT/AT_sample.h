@@ -8,6 +8,7 @@
 #include "uart.h"
 #include "cJSON.h"
 
+
 #define CAT_PORT USART2
 #define CAT_BAUD 115200
 
@@ -20,6 +21,7 @@
 #define POST_TOPIC		    "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/post"
 #define SET_TOPIC           "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/set"
 #define SET_ACK_TOPIC       "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/set_reply"
+#define SUB_TOPIC           "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/#"
 
 int create_cat1_init_thread(void);
 

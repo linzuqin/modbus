@@ -21,6 +21,8 @@
 
 #define AT_COMMAND_ARRAY_SIZE 32
 
+#define NTP_SERVER "time.windows.com"
+
 typedef struct
 {
     const char *cmd;                            // AT command string
@@ -59,7 +61,7 @@ void Device_RST_Soft(AT_Device_t *at_device);
 void Device_RST_Hard(void);
 
 uint8_t AT_SendCmd( AT_Device_t *at_device , const char *cmd , const char *response , uint16_t timeout);
-void at_device_register(AT_Device_t *at_device  , USART_TypeDef *USARTx , uint32_t bound , uint8_t **rx_buffer , uint8_t *rx_flag , AT_Command_t *init_cmd , AT_Command_t *run_cmd);
+void at_device_register(AT_Device_t *at_device  , uart_device_t *uart_device , AT_Command_t *init_cmd , AT_Command_t *run_cmd);
 uint8_t AT_Cmd_Regsiter(AT_Command_t *at_cmd_array , const char *response, uint16_t timeout, void (*ack_right_response)(void), void (*ack_err_response)(void) , const char *cmd, ...);
 
 
