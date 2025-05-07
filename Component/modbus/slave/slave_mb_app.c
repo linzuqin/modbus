@@ -280,7 +280,7 @@ eMBErrorCode eMBRegDiscreteCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT us
 
 #if MODBUS_SLAVE_ENABLE
 
-void MODBUS_RX_TASK(void *params)
+static void MODBUS_RX_TASK(void *params)
 {
 	uint8_t buf[MODBUS_RX_LEN];
 	while(1)
@@ -293,7 +293,7 @@ void MODBUS_RX_TASK(void *params)
 	}
 }
 
-void  MODBUS_TASK(void *params)
+static void  MODBUS_TASK(void *params)
 {
 	eMBInit(MB_RTU , MODBUS_SLAVE_ADDR ,MODBUS_SLAVE_BOUND , MB_PAR_NONE);
 	eMBEnable();
@@ -304,14 +304,14 @@ void  MODBUS_TASK(void *params)
 	}
 }
 
-void MODBUS_INIT(void)
+int MODBUS_INIT(void)
 {
 	rt_err_t result = 0;
 	result = rt_mq_init(&modbus_rx_mq , "modbus_rx_mq" , &MODBUS_Rx_MQ[0] , MODBUS_RX_LEN , sizeof(MODBUS_Rx_MQ) , RT_IPC_FLAG_FIFO );
 	if (result != RT_EOK)
 	{
 		//LOG_E("Failed to initialize modbus_rx_mq\r\n");
-		return;
+		return 0;
 	}
 
 	result = rt_thread_init(&MODBUS_RX_PANNEL , "mb_rx" , MODBUS_RX_TASK , RT_NULL , &MODBUS_RX_PANNEL_STACK[0] , sizeof(MODBUS_RX_PANNEL_STACK) , 22 , 100);
@@ -335,6 +335,9 @@ void MODBUS_INIT(void)
 	{
 		//LOG_E("MODBUS TASK START FAIL\r\n");
 	}  
+    return 1;
 }
+
+INIT_APP_EXPORT(MODBUS_INIT);
 
 #endif

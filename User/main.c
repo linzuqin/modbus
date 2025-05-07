@@ -7,14 +7,6 @@ int main(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	
 	/*User TASK Init*/
-	#if MODBUS_SLAVE_ENABLE
-		MODBUS_INIT();
-	#endif
-
-
-	#if USE_AT_DEVICE
-		//AT_START();
-	#endif
 
 	//IWDG_Init(IWDG_Prescaler_64, 0x0FFF);
 	while (1)

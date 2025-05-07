@@ -31,4 +31,4 @@
   Component\modbus\slave\slave_mb_app.h \
   Component\modbus\modbus\include\mbconfig.h \
   Component\modbus\modbus\include\mbframe.h \
-  Component\modbus\modbus\include\mbutils.h Hardware\list_status.h
+  Component\modbus\modbus\include\mbutils.h

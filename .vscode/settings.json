@@ -4,6 +4,11 @@
         "time.h": "c",
         "stm32f10x.h": "c",
         "main.h": "c",
-        "user_db.h": "c"
+        "user_db.h": "c",
+        "log.h": "c",
+        "variant": "c",
+        "uart.h": "c",
+        "stdarg.h": "c",
+        "gpio.h": "c"
     }
 }
