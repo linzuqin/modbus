@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\fal\inc;.\Component\FlashDB\inc;.\Component\SFUD\sfud\inc;.\Component\fal\samples\porting;.\Component\XMODEM;.\Component\ymodem;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\ymodem;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc;.\Component\AT;.\Component\cJSON-v1.7.17</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc;.\Component\AT;.\Component\FlashDB\FAL\inc;.\Component\FlashDB\FlashDB\inc;.\Component\FlashDB</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -734,19 +734,9 @@
               <FilePath>.\User\stm32f10x_it.h</FilePath>
             </File>
             <File>
-              <FileName>user_DB.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\User\user_DB.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f10x_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\User\stm32f10x_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>user_DB.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\User\user_DB.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -772,86 +762,6 @@
               <FileName>SEGGER_RTT.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\RTT\SEGGER_RTT.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>FlashDB</GroupName>
-          <Files>
-            <File>
-              <FileName>fal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\fal\src\fal.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\fal\src\fal_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_partition.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\fal\src\fal_partition.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_rtt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\fal\src\fal_rtt.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Component\fal\samples\porting\fal_cfg.h</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash_sfud_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\fal\samples\porting\fal_flash_sfud_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\FlashDB\src\fdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_file.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\FlashDB\src\fdb_file.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_kvdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\FlashDB\src\fdb_kvdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_tsdb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\FlashDB\src\fdb_tsdb.c</FilePath>
-            </File>
-            <File>
-              <FileName>fdb_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\FlashDB\src\fdb_utils.c</FilePath>
-            </File>
-            <File>
-              <FileName>sfud.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\SFUD\sfud\src\sfud.c</FilePath>
-            </File>
-            <File>
-              <FileName>sfud_sfdp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\SFUD\sfud\src\sfud_sfdp.c</FilePath>
-            </File>
-            <File>
-              <FileName>sfud_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\SFUD\sfud\port\sfud_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>fal_flash_stm32f1_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Component\FlashDB\port\fal\samples\porting\fal_flash_stm32f1_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1032,6 +942,86 @@
               <FileName>list_status.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\list_status.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FlashDB</GroupName>
+          <Files>
+            <File>
+              <FileName>fdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FlashDB\src\fdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_file.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FlashDB\src\fdb_file.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_kvdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FlashDB\src\fdb_kvdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_tsdb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FlashDB\src\fdb_tsdb.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FlashDB\src\fdb_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>fdb_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\FlashDB\FlashDB\inc\fdb_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>user_DB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\user_DB.c</FilePath>
+            </File>
+            <File>
+              <FileName>user_DB.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\FlashDB\user_DB.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FAL</GroupName>
+          <Files>
+            <File>
+              <FileName>fal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FAL\src\fal.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FAL\src\fal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_flash_stm32f1_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FAL\src\fal_flash_stm32f1_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_partition.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Component\FlashDB\FAL\src\fal_partition.c</FilePath>
+            </File>
+            <File>
+              <FileName>fal_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\FlashDB\FAL\inc\fal_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>fal_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Component\FlashDB\FAL\inc\fal_cfg.h</FilePath>
             </File>
           </Files>
         </Group>

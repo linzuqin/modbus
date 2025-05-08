@@ -8,7 +8,9 @@
  * sending data over a serial interface.
  */
 
- #include "master_function.h"
+#include "master_function.h"
+
+#if	MODBUS_MASTER_ENABLE
 
 void serial_send(USART_TypeDef* USARTx ,uint8_t *data , int send_len)
 {
@@ -380,3 +382,5 @@ int mater_mb_input_read(agile_modbus_t *ctx , uint8_t slave_addr , uint16_t star
         //LOG_I("Register [%d]: 0x%04X", i, input_register[i]);
     return 0;
 }
+
+#endif

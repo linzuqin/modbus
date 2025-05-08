@@ -1,5 +1,4 @@
 #include "main.h"
-
 int main(void)
 {
 	/*Hardware Init*/
@@ -7,7 +6,7 @@ int main(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	
 	/*User TASK Init*/
-
+	
 	//IWDG_Init(IWDG_Prescaler_64, 0x0FFF);
 	while (1)
 	{

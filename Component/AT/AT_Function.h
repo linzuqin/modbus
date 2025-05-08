@@ -11,6 +11,19 @@
 #include "uart.h"
 #include "GPIO.h"
 
+#define AT_SUCCESS 0
+#define AT_ERR_INVALID_PARAM 1
+#define AT_ERR_UART_NOT_INIT 2
+#define AT_ERR_TIMEOUT 3
+#define AT_ERR_TABLE_NOT_INIT 4
+#define AT_ERR_TABLE_FULL 5
+#define AT_ERR_MQTT_PUB 6
+#define AT_ERR_MEMORY 7 // Memory allocation failure
+
+#define AT_RX_BUF_SIZE 1024
+#define AT_MAX_CMD_LEN 256
+#define AT_DEFAULT_TIMEOUT 1000
+
 #define AT_RST_PORT     GPIOC
 #define AT_RST_PIN      GPIO_Pin_5
 
@@ -37,11 +50,12 @@
 
 typedef enum
 {
-    AT_NO_REGISTER = 0,
-    AT_REGISTERED,
+    AT_HW_INIT = 0,
+    AT_REGISTER,
+    AT_INIT,
     AT_DISCONNECT,
     AT_CONNECT,
-    AT_IDEL,
+    AT_IDLE,
     AT_PARSE,
     AT_UPDATA,
 } AT_STATUS_t;
@@ -63,7 +77,6 @@ typedef struct
 // 定义 AT 设备结构体
 typedef struct {
     AT_STATUS_t status;                 // 设备状态
-    uint8_t init_step;              // 初始化步骤
     uint8_t *rx_buf;                // 接收缓冲区指针
     uint8_t *rx_flag;               // 接收标志指针
     USART_TypeDef *PORT;            // 串口端口
@@ -73,10 +86,6 @@ typedef struct {
 
 } AT_Device_t;
 
-
-
-void Device_RST_Soft(AT_Device_t *at_device);
-void Device_RST_Hard(void);
 
 uint8_t AT_SendCmd( AT_Device_t *at_device , const char *cmd , const char *response , uint16_t timeout); 
 void at_device_register(AT_Device_t *at_device  , uart_device_t *uart_device , AT_CMD_t *cmd_table , AT_URC_t *urc_table);

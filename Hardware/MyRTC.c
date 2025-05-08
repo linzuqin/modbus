@@ -6,7 +6,7 @@ uint16_t MyRTC_Time[] = {2025, 3, 11, 18, 22, 30};
 uint32_t Unix_Time=1717077100;
 
 static struct rt_thread rtc_thread;
-static char rtc_thread_stack[1024];
+static char rtc_thread_stack[256];
 
 
 void MyRTC_SetTime(void);

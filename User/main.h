@@ -32,17 +32,17 @@
 
 /*协议*/
 /*modbus master*/
-#define MODBUS_MASTER_ENABLE        1
+#define MODBUS_MASTER_ENABLE        0
 #if MODBUS_MASTER_ENABLE
 #define MB_M_DEVICE				            uart3_device  //serial port
 #endif
 
-#define MODBUS_MASTER_SENSOR_ENABLE        1
+#define MODBUS_MASTER_SENSOR_ENABLE        0
 #if MODBUS_MASTER_SENSOR_ENABLE
 #define MODBUS_MASTER_SENSOR_DEVICE        uart3_device
 #endif
 
-#define MODBUS_SLAVE_ENABLE        1
+#define MODBUS_SLAVE_ENABLE        0
 #if MODBUS_SLAVE_ENABLE
 #define MB_S_DEVICE_1							uart1_device
 #define MODBUS_SLAVE_ADDR						1  //device addr
@@ -52,12 +52,12 @@
 
 /*Device*/
 #define AT_DEVICE                                uart1_device
-#define USE_AT_SAMPLE									1
+#define USE_AT_SAMPLE									0
 
 
 
 /*计算公式*/
-#define USE_PID										 1
+#define USE_PID										 0
 
 #define uart1_rx_size    256 // Size of the UART receive buffer
 

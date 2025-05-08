@@ -26,8 +26,9 @@
   Component\modbus\modbus\include\mbframe.h \
   Component\modbus\modbus\include\mbutils.h User\main.h Hardware\uart.h \
   Hardware\MyRTC.h Hardware\GPIO.h RTT\log.h RTT\SEGGER_RTT.h \
-  RTT\SEGGER_RTT_Conf.h Hardware\TIM.h Hardware\iwdog.h User\user_DB.h \
-  Component\FlashDB\inc\flashdb.h Component\FlashDB\inc\fdb_cfg.h \
-  Component\fal\inc\fal.h Component\fal\samples\porting\fal_cfg.h \
-  Component\fal\inc\fal_def.h Component\FlashDB\inc\fdb_def.h \
-  Component\AT\AT_Function.h
+  RTT\SEGGER_RTT_Conf.h Hardware\TIM.h Hardware\iwdog.h \
+  Component\FlashDB\user_DB.h Component\FlashDB\FlashDB\inc\flashdb.h \
+  Component\FlashDB\FlashDB\inc\fdb_cfg.h \
+  Component\FlashDB\FAL\inc\fal.h Component\FlashDB\FAL\inc\fal_cfg.h \
+  Component\FlashDB\FAL\inc\fal_def.h \
+  Component\FlashDB\FlashDB\inc\fdb_def.h Component\AT\AT_Function.h

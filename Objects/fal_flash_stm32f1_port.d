@@ -1,7 +1,7 @@
 ./objects/fal_flash_stm32f1_port.o: \
-  Component\FlashDB\port\fal\samples\porting\fal_flash_stm32f1_port.c \
-  Component\fal\inc\fal.h Component\fal\samples\porting\fal_cfg.h \
-  Component\fal\inc\fal_def.h Start\stm32f10x.h Start\core_cm3.h \
+  Component\FlashDB\FAL\src\fal_flash_stm32f1_port.c \
+  Component\FlashDB\FAL\inc\fal.h Component\FlashDB\FAL\inc\fal_cfg.h \
+  Component\FlashDB\FAL\inc\fal_def.h Start\stm32f10x.h Start\core_cm3.h \
   Start\system_stm32f10x.h User\stm32f10x_conf.h Library\stm32f10x_adc.h \
   Library\stm32f10x_bkp.h Library\stm32f10x_can.h \
   Library\stm32f10x_cec.h Library\stm32f10x_crc.h \
