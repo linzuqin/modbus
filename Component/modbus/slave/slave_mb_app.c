@@ -19,7 +19,7 @@
  * File: $Id: user_mb_app.c,v 1.60 2013/11/23 11:49:05 Armink $
  */
 #include "slave_mb_app.h"
-#include "main.h"
+#include "sys.h"
 
 #define MODBUS_TX_MAX   256
 #define MODBUS_RX_PANNEL_STACK_SIZE    1024

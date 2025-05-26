@@ -1,11 +1,9 @@
 #ifndef _MASTER_FUNCTION_H
 #define _MASTER_FUNCTION_H
-#include "stm32f10x.h"                  // Device header
 #include "agile_modbus.h"
 #include "agile_modbus_rtu.h"
-#include "log.h"
-#include "rtthread.h"
-#include "main.h"
+
+#include "sys.h"
 
  /**
   * @brief Sends data over the serial interface.

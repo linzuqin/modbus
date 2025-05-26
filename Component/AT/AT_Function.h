@@ -1,52 +1,34 @@
 #ifndef _AT_FUNCTION_H_
 #define _AT_FUNCTION_H_
-#include "stm32f10x.h"                  // Device header
-#include <stdint.h>
-#include <stdbool.h>
-#include "string.h"
-#include "log.h"
-#include "rtthread.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include "uart.h"
-#include "GPIO.h"
 
-#define AT_SUCCESS 0
-#define AT_ERR_INVALID_PARAM 1
-#define AT_ERR_UART_NOT_INIT 2
-#define AT_ERR_TIMEOUT 3
-#define AT_ERR_TABLE_NOT_INIT 4
-#define AT_ERR_TABLE_FULL 5
-#define AT_ERR_MQTT_PUB 6
-#define AT_ERR_MEMORY 7 // Memory allocation failure
-
-#define AT_RX_BUF_SIZE 1024
-#define AT_MAX_CMD_LEN 256
-#define AT_DEFAULT_TIMEOUT 1000
+#include "sys.h"
 
 #define AT_RST_PORT     GPIOC
 #define AT_RST_PIN      GPIO_Pin_5
 
-#define AT_DEFAULT_UART_DEVICE  uart3_device
+#define AT_DEFAULT_UART_DEVICE  uart_devices[0]
 
-#define AT_COMMAND_ARRAY_SIZE 32
+#define AT_COMMAND_ARRAY_SIZE 16
+#define AT_MSG_SIZE 256
 
+
+/*平台连接参数宏定义*/
 #define NTP_SERVER "time.windows.com"
 
-#define DEFAULT_WIFI_SSID "main" // 默认WiFi SSID
-#define DEFAULT_WIFI_PWD  "12345678" // 默认WiFi密码
+#define DEFAULT_WIFI_SSID 					"main" // 默认WiFi SSID
+#define DEFAULT_WIFI_PWD  					"12345678" // 默认WiFi密码
 
-#define IP_ADDRESS "mqtts.heclouds.com"
-#define PORT_NUMBER 1883
-#define PRODUCT_ID "9le3c1Ex8I"
-#define DEVICE_NAME "channel_test"
-#define TOKEN    "version=2018-10-31&res=products%2F9le3c1Ex8I%2Fdevices%2Fchannel_test&et=1924876800&method=md5&sign=QXNNJE4w3QFoCC%2FIbqaH5w%3D%3D"
+#define IP_ADDRESS 									"mqtts.heclouds.com"
+#define PORT_NUMBER 								1883
+#define PRODUCT_ID 									"2Its5wq8a3"
+#define DEVICE_NAME 								"lot_device"
+#define TOKEN    										"version=2018-10-31&res=products%2F2Its5wq8a3%2Fdevices%2Flot_device&et=1924876800&method=md5&sign=yEio49aeh%2BTf3XPlD8OyPQ%3D%3D"
 
-#define POST_TOPIC		    "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/post"
-#define SET_TOPIC_ALL     "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/#"
+#define POST_TOPIC		    					"$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/post"
+#define SET_TOPIC_ALL     					"$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/#"
 
-#define SET_TOPIC           "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/set"
-#define SET_ACK_TOPIC       "$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/set_reply"
+#define SET_TOPIC          				 	"$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/set"
+#define SET_ACK_TOPIC       				"$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/set_reply"
 
 typedef enum
 {
@@ -58,6 +40,7 @@ typedef enum
     AT_IDLE,
     AT_PARSE,
     AT_UPDATA,
+    AT_GET_NTP,
 } AT_STATUS_t;
 
 typedef struct
@@ -71,25 +54,49 @@ typedef struct
 typedef struct
 {
     char *urc_msg;              // AT command string
-    void (*callback)(void);     // Expected response string
+    void (*callback)(void *a);     // Expected response string
 } AT_URC_t;
 
 // 定义 AT 设备结构体
 typedef struct {
     AT_STATUS_t status;                 // 设备状态
-    uint8_t *rx_buf;                // 接收缓冲区指针
-    uint8_t *rx_flag;               // 接收标志指针
-    USART_TypeDef *PORT;            // 串口端口
-    uint32_t Bound;                 // 波特率
-    AT_CMD_t *CMD_TABLE;         // AT 命令数组指针
-    AT_URC_t *URC_TABLE;         // AT 命令数组指针
-
+    AT_CMD_t *CMD_TABLE;                // AT 命令数组指针
+    AT_URC_t *URC_TABLE;                // AT 命令数组指针
+    uart_device_t *uart_device;         // UART 设备指针
+    uint8_t *msg_buf;                   // 消息缓冲区
+		uint8_t init_step;									//初始化步骤
 } AT_Device_t;
 
 
-uint8_t AT_SendCmd( AT_Device_t *at_device , const char *cmd , const char *response , uint16_t timeout); 
-void at_device_register(AT_Device_t *at_device  , uart_device_t *uart_device , AT_CMD_t *cmd_table , AT_URC_t *urc_table);
-uint8_t AT_Cmd_Regsiter(AT_Device_t *at_device , const char *response, uint16_t timeout, void (*callback_response)(void), int insert_count , const char *cmd, ...);
+typedef enum
+{
+	/*AT指令相关错误类型*/
+	AT_CMD_OK = 0,                          //AT指令发送成功
+	AT_ERR_INVALID_PARAM,                   //AT指令参数错误
+	AT_ERR_TIMEOUT,                         //AT指令应答超时
+	AT_ERR_ACK,                             //AT指令应答错误
+	
+	/*AT指令列表相关错误类型*/
+  AT_CMD_ADD_SUCCESS,                     //AT指令添加成功
+	AT_ERR_TABLE_NOT_INIT,                  //AT设备指令集未初始化
+	AT_ERR_TABLE_FULL,                      //AT指令集已满
+	AT_ERR_MEMORY,                          //内存不足
+	
+	/*NTP相关错误类型*/
+  AT_NTP_GET_SUCCESS,                     //NTP指令获取成功
+	AT_NTP_SEND_ERROR,                      //NTP获取指令发送失败
+  AT_NTP_ACK_ERROR,                       //NTP指令应答失败
+	AT_NTP_PARSE_ERROR,
+	
+	/*MQTT相关错误类型*/
+	AT_MQTT_SEND_SUCCESS,                   //MQTT指令上报成功
+	AT_MQTT_SEND_FAIL,                      //MQTT指令上报失败
 
+}at_err_t;
+
+void AT_poll(AT_Device_t *at_device);
+uint8_t AT_Cmd_Register(AT_Device_t *at_device, const char *response,
+                        uint16_t timeout, void (*callback_response)(void),
+                        int insert_count, const char *cmd, ...);
 
 #endif

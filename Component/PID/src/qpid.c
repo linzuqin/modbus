@@ -8,9 +8,7 @@
  */
 
 #include <qpid.h>
-#include <rtthread.h>
-#include <string.h>
-#include "main.h"
+#include "sys.h"
 
 #if		USE_PID
 

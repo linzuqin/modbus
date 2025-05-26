@@ -56,7 +56,7 @@ int user_db_init(void)
          * &default_kv: The default KV nodes. It will auto add to KVDB when first initialize successfully.
          *        NULL: The user data if you need, now is empty.
          */
-        uint8_t result = fdb_kvdb_init(&kvdb, "env", "fdb_kvdb1", &default_kv, NULL);
+        uint8_t result = fdb_kvdb_init(&kvdb, "env", "fdb_kvdb", &default_kv, NULL);
         if (result != FDB_NO_ERR) {
             return -1;
         }
@@ -67,7 +67,7 @@ int user_db_init(void)
     }
 		return 1;
 }
-INIT_APP_EXPORT(user_db_init);
+//INIT_APP_EXPORT(user_db_init);
 
 static bool query_cb(fdb_tsl_t tsl, void *arg);
 static bool query_by_time_cb(fdb_tsl_t tsl, void *arg);

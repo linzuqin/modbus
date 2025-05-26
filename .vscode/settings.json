@@ -1,14 +1,9 @@
 {
     "files.associations": {
-        "stdio.h": "c",
-        "time.h": "c",
-        "stm32f10x.h": "c",
-        "main.h": "c",
-        "user_db.h": "c",
-        "log.h": "c",
-        "variant": "c",
         "uart.h": "c",
-        "stdarg.h": "c",
-        "gpio.h": "c"
+        "mpu6050_reg.h": "c",
+        "adc.h": "c",
+        "cstring": "c",
+        "condition_variable": "c"
     }
 }

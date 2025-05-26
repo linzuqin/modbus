@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>C8T6</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pArmCC>6230000::V6.23::ARMCLANG</pArmCC>
@@ -15,16 +15,16 @@
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F103ZE</Device>
+          <Device>STM32F103C8</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F1xx_DFP.2.4.1</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x00010000) IROM(0x08000000,0x00080000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x00005000) IROM(0x08000000,0x00010000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F10x_512 -FS08000000 -FL080000 -FP0($$Device:STM32F103ZE$Flash\STM32F10x_512.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F10x_128 -FS08000000 -FL020000 -FP0($$Device:STM32F103C8$Flash\STM32F10x_128.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32F103ZE$Device\Include\stm32f10x.h</RegisterFile>
+          <RegisterFile>$$Device:STM32F103C8$Device\Include\stm32f10x.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -34,7 +34,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32F103ZE$SVD\STM32F103xx.svd</SFDFile>
+          <SFDFile>$$Device:STM32F103C8$SVD\STM32F103xx.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -50,7 +50,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>control</OutputName>
+          <OutputName>ac6demo</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -81,9 +81,9 @@
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <UserProg1Name>"D:\project\ac6 demo\keil5_disp_size_bar.exe"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -248,12 +248,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x5000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x10000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -278,7 +278,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -303,7 +303,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x5000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -339,9 +339,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F103xE</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F103_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc;.\Component\AT;.\Component\FlashDB\FAL\inc;.\Component\FlashDB\FlashDB\inc;.\Component\FlashDB</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc;.\Component\AT;.\Component\FlashDB\FAL\inc;.\Component\FlashDB\FlashDB\inc;.\Component\FlashDB;.\Component\My_OTA</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -391,9 +391,9 @@
               <FilePath>.\Start\system_stm32f10x.c</FilePath>
             </File>
             <File>
-              <FileName>startup_stm32f103xe.s</FileName>
+              <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\Start\startup_stm32f103xe.s</FilePath>
+              <FilePath>.\Start\startup_stm32f10x_md.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -634,6 +634,18 @@
         </Group>
         <Group>
           <GroupName>System</GroupName>
+          <Files>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\System\sys.h</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Hardware</GroupName>
@@ -644,19 +656,9 @@
               <FilePath>.\Hardware\MyRTC.c</FilePath>
             </File>
             <File>
-              <FileName>MyRTC.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\MyRTC.h</FilePath>
-            </File>
-            <File>
               <FileName>W25Q64Flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\W25Q64Flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>W25Q64Flash.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\W25Q64Flash.h</FilePath>
             </File>
             <File>
               <FileName>TIM.c</FileName>
@@ -664,19 +666,9 @@
               <FilePath>.\Hardware\TIM.c</FilePath>
             </File>
             <File>
-              <FileName>TIM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\TIM.h</FilePath>
-            </File>
-            <File>
               <FileName>iwdog.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\iwdog.c</FilePath>
-            </File>
-            <File>
-              <FileName>iwdog.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\iwdog.h</FilePath>
             </File>
             <File>
               <FileName>uart.c</FileName>
@@ -684,19 +676,9 @@
               <FilePath>.\Hardware\uart.c</FilePath>
             </File>
             <File>
-              <FileName>uart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\uart.h</FilePath>
-            </File>
-            <File>
               <FileName>spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>spi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\spi.h</FilePath>
             </File>
             <File>
               <FileName>GPIO.c</FileName>
@@ -704,9 +686,34 @@
               <FilePath>.\Hardware\GPIO.c</FilePath>
             </File>
             <File>
-              <FileName>GPIO.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\GPIO.h</FilePath>
+              <FileName>mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\mpu6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>DS18B20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\DS18B20.c</FilePath>
+            </File>
+            <File>
+              <FileName>OLED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\OLED.c</FilePath>
+            </File>
+            <File>
+              <FileName>OLED_Data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\OLED_Data.c</FilePath>
+            </File>
+            <File>
+              <FileName>AT_TASK.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\AT_TASK.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\ADC.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -717,11 +724,6 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\User\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\User\main.h</FilePath>
             </File>
             <File>
               <FileName>stm32f10x_it.c</FileName>
@@ -931,21 +933,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>list_status</GroupName>
-          <Files>
-            <File>
-              <FileName>list_status.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\list_status.c</FilePath>
-            </File>
-            <File>
-              <FileName>list_status.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Hardware\list_status.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>FlashDB</GroupName>
           <Files>
             <File>
@@ -1018,12 +1005,10 @@
               <FileType>5</FileType>
               <FilePath>.\Component\FlashDB\FAL\inc\fal_cfg.h</FilePath>
             </File>
-            <File>
-              <FileName>fal_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Component\FlashDB\FAL\inc\fal_cfg.h</FilePath>
-            </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
           <GroupName>::Data Exchange</GroupName>
@@ -1038,22 +1023,22 @@
   <RTE>
     <apis/>
     <components>
+      <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="6.1.0" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.7.36" url="https://www.keil.com/pack/" vendor="ARM" version="6.1.0"/>
+        <targetInfos>
+          <targetInfo name="C8T6"/>
+        </targetInfos>
+      </component>
       <component Cclass="Data Exchange" Cgroup="JSON" Csub="cJSON" Cvendor="MDK-Packs" Cversion="1.7.7" condition="ARMCC">
         <package name="cJSON" schemaVersion="1.4" url="https://github.com/MDK-Packs/Pack/raw/master/cJSON/" vendor="MDK-Packs" version="1.0.0"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="C8T6"/>
         </targetInfos>
       </component>
       <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="kernel" Cvendor="RealThread" Cversion="3.1.5" condition="CMSIS Core with RTOS">
         <package name="RT-Thread" schemaVersion="1.4" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
-      <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="shell" Cvendor="RealThread" Cversion="3.1.5" condition="shell">
-        <package name="RT-Thread" schemaVersion="1.4" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="C8T6"/>
         </targetInfos>
       </component>
     </components>
@@ -1117,31 +1102,27 @@
         <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="kernel" Cvendor="RealThread" Cversion="3.1.5" condition="CMSIS Core with RTOS"/>
         <package name="RT-Thread" schemaVersion="1.4" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="C8T6"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="components\finsh\finsh_config.h" version="3.1.5">
-        <instance index="0">RTE\RTOS\finsh_config.h</instance>
+        <instance index="0" removed="1">RTE\RTOS\finsh_config.h</instance>
         <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="shell" Cvendor="RealThread" Cversion="3.1.5" condition="shell"/>
         <package name="RT-Thread" schemaVersion="1.4" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
+        <targetInfos/>
       </file>
       <file attr="config" category="source" name="components\finsh\finsh_port.c" version="3.1.5">
-        <instance index="0">RTE\RTOS\finsh_port.c</instance>
+        <instance index="0" removed="1">RTE\RTOS\finsh_port.c</instance>
         <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="shell" Cvendor="RealThread" Cversion="3.1.5" condition="shell"/>
         <package name="RT-Thread" schemaVersion="1.4" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
+        <targetInfos/>
       </file>
       <file attr="config" category="header" name="bsp\_template\rtconfig.h" version="3.1.5">
         <instance index="0">RTE\RTOS\rtconfig.h</instance>
         <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="kernel" Cvendor="RealThread" Cversion="3.1.5" condition="CMSIS Core with RTOS"/>
         <package name="RT-Thread" schemaVersion="1.4" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
         <targetInfos>
-          <targetInfo name="Target 1"/>
+          <targetInfo name="C8T6"/>
         </targetInfos>
       </file>
     </files>

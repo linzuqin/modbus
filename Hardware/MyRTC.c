@@ -1,8 +1,8 @@
 #include "stm32f10x.h"                  // Device header
 #include <time.h>
-#include "main.h"
+#include "sys.h"
 
-uint16_t MyRTC_Time[] = {2025, 3, 11, 18, 22, 30};
+uint16_t MyRTC_Time[] = {2025, 5, 24, 14, 46, 55};
 uint32_t Unix_Time=1717077100;
 
 static struct rt_thread rtc_thread;
@@ -22,7 +22,7 @@ int MyRTC_Init(void)
 	
 	PWR_BackupAccessCmd(ENABLE);
 	
-	if (BKP_ReadBackupRegister(BKP_DR1) != 0xA5B5)
+	if (BKP_ReadBackupRegister(BKP_DR1) != 0xA5B4)
 	{
 		BKP_DeInit();
 
@@ -40,7 +40,7 @@ int MyRTC_Init(void)
 		
 		MyRTC_SetTime();
 		
-		BKP_WriteBackupRegister(BKP_DR1, 0xA5B5);
+		BKP_WriteBackupRegister(BKP_DR1, 0xA5B4);
 	}
 	else
 	{
@@ -135,4 +135,3 @@ static int create_rtc_time_thread(void)
 }
 
 INIT_APP_EXPORT(create_rtc_time_thread);
-MSH_CMD_EXPORT(sys_time, system time);

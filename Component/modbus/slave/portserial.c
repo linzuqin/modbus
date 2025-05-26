@@ -20,9 +20,7 @@
  */
 
 #include "port.h"
-#include "stm32f10x.h"
-#include "main.h"
-#include "uart.h"
+#include "sys.h"
 
 /* ----------------------- Modbus includes ----------------------------------*/
 #include "mb.h"
@@ -49,16 +47,8 @@ xMBPortSerialPutByte(uint8_t port , UCHAR *ucByte , uint16_t len)//适配串口�
      * by the protocol stack if pxMBFrameCBTransmitterEmpty( ) has been
      * called. */
 		uart_device_t* mb_device;
-		switch(port)
-		{
-			case 1:mb_device = &uart1_device;break;
-			case 2:mb_device = &uart2_device;break;
-			case 3:mb_device = &uart3_device;break;
-			case 4:mb_device = &uart4_device;break;
-			case 5:mb_device = &uart5_device;break;
-			default:return 0;
-		}
-		UART_SendData(mb_device->port , ucByte , len);
+		mb_device = &uart_devices[port - 1];
+		UART_SendData(mb_device , ucByte , len);
 		return TRUE;
 }
 
