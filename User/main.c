@@ -2,7 +2,6 @@
 
 int main(void)
 {
-	
 	/*Hardware Init*/
 	LOG_I("version:%s  System Init..." , Version);
 	

@@ -5,7 +5,7 @@
 #include "log.h"
 #include "GPIO.h"
 
-void TIMx_Init(TIM_TypeDef* TIMx, uint16_t period, uint16_t prescaler , uint8_t is_pwm , uint16_t pulse  , uint16_t channel);
+void TIMx_Init(TIM_TypeDef *TIMx, uint16_t period, uint16_t prescaler, uint16_t pulse, uint16_t channel);
 
 
 

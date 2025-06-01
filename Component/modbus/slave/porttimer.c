@@ -34,7 +34,7 @@ void prvvTIMERExpiredISR(void);
 BOOL
 xMBPortTimersInit(USHORT usTim1Timerout50us)
 {
-	TIMx_Init(TIM2 , usTim1Timerout50us , 3600 - 1 , 0 , 0 , 0);
+	TIMx_Init(TIM2 , usTim1Timerout50us , 3600 - 1 , 0 , 0);
 	return TRUE;
 }
 

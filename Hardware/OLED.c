@@ -1469,7 +1469,7 @@ struct rt_thread OLED_PANNEL;
 uint8_t OLED_PANNEL_STACK[512];
 extern float temperature;
 
-static char Display_buf[128];
+static char Display_buf[64];
 
 void OLED_UPDATA(void)
 {

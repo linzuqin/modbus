@@ -6,9 +6,10 @@
 #include "uart.h"
 #include "MyRTC.h"
 #include "GPIO.h"
-#include "TIM.h"
+#include "PWM.h"
 #include "iwdog.h"
 #include "ADC.h"
+#include "TIM.h"
 
 
 /*²Ù×÷ÏµÍ³*/
@@ -23,6 +24,7 @@
 #include "MPU6050.h"
 #include "ds18b20.h"
 #include "cJSON.h"
+#include "string_Optimize.h"
 
 /*c¿â*/
 #include "string.h"

@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F103_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc;.\Component\AT;.\Component\FlashDB\FAL\inc;.\Component\FlashDB\FlashDB\inc;.\Component\FlashDB;.\Component\My_OTA</IncludePath>
+              <IncludePath>.\Start;.\Library;.\User;.\System;.\Hardware;.\RTT;.\Component\modbus\modbus\ascii;.\Component\modbus\modbus\functions;.\Component\modbus\modbus\include;.\Component\modbus\modbus\rtu;.\Component\modbus\slave;.\Component\modbus\modbus;.\Component\modbus\master\inc;.\Component\modbus\master;.\Component\modbus\modbus\tcp;.\Component\PID\inc;.\Component\AT;.\Component\FlashDB\FAL\inc;.\Component\FlashDB\FlashDB\inc;.\Component\FlashDB;.\Component\My_OTA;.\Component\Optimize</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -661,11 +661,6 @@
               <FilePath>.\Hardware\W25Q64Flash.c</FilePath>
             </File>
             <File>
-              <FileName>TIM.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\TIM.c</FilePath>
-            </File>
-            <File>
               <FileName>iwdog.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\iwdog.c</FilePath>
@@ -714,6 +709,16 @@
               <FileName>ADC.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Hardware\ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>TIM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\TIM.c</FilePath>
             </File>
           </Files>
         </Group>

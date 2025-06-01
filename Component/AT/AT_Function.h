@@ -6,7 +6,7 @@
 #define AT_RST_PORT     GPIOC
 #define AT_RST_PIN      GPIO_Pin_5
 
-#define AT_DEFAULT_UART_DEVICE  uart_devices[0]
+#define AT_DEFAULT_UART_DEVICE  uart_devices[1]
 
 #define AT_COMMAND_ARRAY_SIZE 16
 #define AT_MSG_SIZE 256
@@ -98,5 +98,6 @@ void AT_poll(AT_Device_t *at_device);
 uint8_t AT_Cmd_Register(AT_Device_t *at_device, const char *response,
                         uint16_t timeout, void (*callback_response)(void),
                         int insert_count, const char *cmd, ...);
+at_err_t AT_SendCmd(AT_Device_t *at_device, const char *cmd, const char *response, uint16_t timeout , uint8_t *data_buf);
 
 #endif

@@ -25,9 +25,9 @@ AT_URC_t AT_URC_table[AT_COMMAND_ARRAY_SIZE] = {
 
 };
 
-at_err_t AT_SendCmd(AT_Device_t *at_device, const char *cmd, const char *response, uint16_t timeout)
+at_err_t AT_SendCmd(AT_Device_t *at_device, const char *cmd, const char *response, uint16_t timeout , uint8_t *data_buf)
 {
-    // 参数检查增强
+		uint16_t index_count = 0;
     if (!at_device || !cmd || !at_device->uart_device) {
         return AT_ERR_INVALID_PARAM;
     }
@@ -49,27 +49,34 @@ at_err_t AT_SendCmd(AT_Device_t *at_device, const char *cmd, const char *respons
     uint32_t start_time = rt_tick_get();
     char *rsp_str = NULL;
     char *error_str = NULL;
-//    uint16_t rsp_size = strlen(response);                   //计算应答的长度 需加上\r\n
-    uint16_t error_size = strlen("error") + 2;                   //计算应答的长度 需加上\r\n
 
     while (rt_tick_get() - start_time < timeout) {
         if (at_device->uart_device->rx_flag) 
         {
-            rsp_str = strstr((char *)at_device->uart_device->rx_buffer, response);
-            error_str = strstr((char *)at_device->uart_device->rx_buffer, "ERROR");
+            rt_memset(at_device->msg_buf , 0 , AT_MSG_SIZE);						
+						rt_memcpy(at_device->msg_buf , &(at_device->uart_device->rx_buffer[0]) + index_count ,  AT_MSG_SIZE);
+            rsp_str = strstr((char *)at_device->msg_buf, response);
+            error_str = strstr((char *)at_device->msg_buf, "ERROR");
 
             if (rsp_str!= NULL) 
             {
-//                rt_memset(rsp_str , 0 , rsp_size);
-//                memmove(rsp_str , rsp_str + rsp_size , rsp_size);               //只清除应答部分的指令，并将剩余指令前移
+							if(data_buf != NULL)
+							{
+								rt_memcpy(data_buf , at_device->uart_device->rx_buffer , (index_count + 1) * AT_MSG_SIZE);
+							}
+                rt_memset(at_device->uart_device->rx_buffer , 0 , (index_count + 1) * AT_MSG_SIZE);
+                memmove(at_device->uart_device->rx_buffer , at_device->uart_device->rx_buffer + (index_count + 1) * AT_MSG_SIZE , (index_count + 1) * AT_MSG_SIZE);               //只清除应答部分的指令，并将剩余指令前移
                 return AT_CMD_OK;
             }
             else if (error_str != NULL) 
             {
-                rt_memset(error_str , 0 , error_size);
-                memmove(error_str , error_str + error_size , error_size);               //只清除error部分的指令，并将剩余指令前移
                 return AT_ERR_ACK;
             }
+						index_count += AT_MSG_SIZE;
+						if(index_count >= at_device->uart_device->rx_max_size)
+						{
+							index_count = 0;
+						}
         }
         rt_thread_mdelay(10);
     }
@@ -118,7 +125,7 @@ uint8_t Get_NTP_Time(AT_Device_t *at_device)
     char timeStr[64] = {0};
     
     // 发送获取NTP时间的命令
-    if(AT_SendCmd(at_device, "AT+CIPSNTPTIME?\r\n", "+CIPSNTPTIME:", 5000) != 0) {
+    if(AT_SendCmd(at_device, "AT+CIPSNTPTIME?\r\n", "+CIPSNTPTIME:", 5000,NULL) != 0) {
         return AT_NTP_SEND_ERROR;
     }
     
@@ -177,9 +184,9 @@ at_err_t mqtt_pub(AT_Device_t *at_device, const char *topic, const char *data, u
     // 构造MQTT发布命令
     snprintf(cmd, sizeof(cmd), "AT+MQTTPUBRAW=0,\"%s\",%d,0,0\r\n", topic, len);
 	
-		if (AT_SendCmd(at_device, cmd, ">", 500) == AT_CMD_OK) 
+		if (AT_SendCmd(at_device, cmd, ">", 500,NULL) == AT_CMD_OK) 
 		{
-				if (AT_SendCmd(at_device, data, "OK", 500) == AT_CMD_OK) 
+				if (AT_SendCmd(at_device, data, "OK", 500,NULL) == AT_CMD_OK) 
 				{
 						return AT_MQTT_SEND_SUCCESS;
 				}
@@ -289,21 +296,11 @@ uint8_t set_ack(AT_Device_t *at_device , char *id)
 
 void AT_HW_INIT_TASK(AT_Device_t *at_device)
 {
-	// 先禁用所有相关中断
-	USART_ITConfig(at_device->uart_device->port, USART_IT_RXNE, DISABLE);
-	USART_ITConfig(at_device->uart_device->port, USART_IT_IDLE, DISABLE);
-	
 	// 初始化UART
 	My_UART_Init(&AT_DEFAULT_UART_DEVICE);
 	
 	// 确保DMA配置完成
-	rt_thread_mdelay(10);
-	
-	// 清除中断标志
-	USART_ClearITPendingBit(at_device->uart_device->port, USART_IT_IDLE);
-	
-	// 最后启用中断
-	USART_ITConfig(at_device->uart_device->port, USART_IT_IDLE, ENABLE);	
+	rt_thread_mdelay(10);	
 }
 
 static void AT_INIT_TASK(AT_Device_t *at_device)
@@ -320,7 +317,7 @@ static void AT_INIT_TASK(AT_Device_t *at_device)
         at_device->status = AT_IDLE;
         return;
     }else{
-        if(AT_SendCmd(at_device , at_device->CMD_TABLE[at_device->init_step].cmd ,at_device->CMD_TABLE[at_device->init_step].response, at_device->CMD_TABLE[at_device->init_step].timeout) == AT_CMD_OK)
+        if(AT_SendCmd(at_device , at_device->CMD_TABLE[at_device->init_step].cmd ,at_device->CMD_TABLE[at_device->init_step].response, at_device->CMD_TABLE[at_device->init_step].timeout,NULL) == AT_CMD_OK)
         {
             if(at_device->CMD_TABLE[at_device->init_step].callback_response != NULL)
             {
@@ -342,7 +339,7 @@ static void AT_IDLE_TASK(AT_Device_t *at_device)
 
     (at_device->uart_device->rx_flag) = 0;
 
-    UART_ReadData(at_device->uart_device, at_device->msg_buf, &at_device->uart_device->rx_size);
+		rt_memcpy(at_device->msg_buf , at_device->uart_device->rx_buffer ,AT_MSG_SIZE);
 
     for (uint16_t i = 0; i < AT_COMMAND_ARRAY_SIZE && at_device->URC_TABLE[i].urc_msg; i++)
     {
@@ -353,8 +350,11 @@ static void AT_IDLE_TASK(AT_Device_t *at_device)
             {
                 at_device->URC_TABLE[i].callback(at_device);
             }
-            //LOG_I("URC received: %s", at_device->URC_TABLE[i].urc_msg);
             rt_memset(at_device->msg_buf, 0, AT_MSG_SIZE);
+						rt_memset(at_device->uart_device->rx_buffer , 0 , strlen(at_device->URC_TABLE[i].urc_msg));
+						memmove(at_device->uart_device->rx_buffer , at_device->uart_device->rx_buffer + strlen(at_device->URC_TABLE[i].urc_msg) , 
+										strlen(at_device->URC_TABLE[i].urc_msg));               //只清除应答部分的指令，并将剩余指令前移
+            //LOG_I("URC received: %s", at_device->URC_TABLE[i].urc_msg);
             return;
         }
     }
@@ -364,7 +364,7 @@ static void AT_IDLE_TASK(AT_Device_t *at_device)
 
 static void AT_PARSE_TASK(AT_Device_t *at_device)
 {
-		char *data_start = strstr((char *)&at_device->msg_buf[2] , "+MSUB:");
+		char *data_start = strstr((char *)&at_device->msg_buf[0] , "+MSUB:");
 		if( data_start!= NULL)
 		{
 				char* json_start = strchr(data_start, '{');
