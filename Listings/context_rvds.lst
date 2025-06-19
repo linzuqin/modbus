@@ -303,11 +303,11 @@ ARM Macro Assembler    Page 5
               FFFF0000 
               E000ED08 
 Command Line: --debug --xref --diag_suppress=9931,A1950W --cpu=Cortex-M3 --depe
-nd=.\objects\context_rvds.d -o.\objects\context_rvds.o -I.\RTE\RTOS -I.\RTE\_C8
+nd=.\objects\context_rvds.d -o.\objects\context_rvds.o -I.\RTE\RTOS -I.\RTE\_ZE
 T6 -ID:\KEIL\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include -ID:\KEIL\PACK\Keil\STM32F
 1xx_DFP\2.4.1\Device\Include -ID:\KEIL\PACK\MDK-Packs\cJSON\1.0.0 -ID:\KEIL\PAC
 K\RealThread\RT-Thread\3.1.5\include --predefine="__MICROLIB SETA 1" --predefin
-e="__UVISION_VERSION SETA 542" --predefine="STM32F10X_MD SETA 1" --predefine="_
+e="__UVISION_VERSION SETA 542" --predefine="STM32F10X_HD SETA 1" --predefine="_
 RTE_ SETA 1" --list=.\listings\context_rvds.lst D:/KEIL/PACK/RealThread/RT-Thre
 ad/3.1.5/libcpu/arm/cortex-m3/context_rvds.S
 

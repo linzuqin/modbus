@@ -67,7 +67,7 @@ int user_db_init(void)
     }
 		return 1;
 }
-//INIT_APP_EXPORT(user_db_init);
+INIT_APP_EXPORT(user_db_init);
 
 static bool query_cb(fdb_tsl_t tsl, void *arg);
 static bool query_by_time_cb(fdb_tsl_t tsl, void *arg);

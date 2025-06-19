@@ -12,7 +12,7 @@ int main(void)
 	while (1)
 	{
 		//IWDG_Feed();
-	LOG_I("time:%04d-%02d-%02d %02d:%02d:%02d\r\nTemp:%.1f  %.1f\r\nGX:%d GY:%d GZ:%d", MyRTC_Time[0] , MyRTC_Time[1] , MyRTC_Time[2], MyRTC_Time[3] , MyRTC_Time[4] , MyRTC_Time[5], temperature , mpu6050.temp, mpu6050.GX , mpu6050.GY, mpu6050.GZ);
+		LOG_I("time:%04d-%02d-%02d %02d:%02d:%02d\r\n", MyRTC_Time[0] , MyRTC_Time[1] , MyRTC_Time[2], MyRTC_Time[3] , MyRTC_Time[4] , MyRTC_Time[5]);
 		rt_thread_mdelay(1000);
 	}
 }

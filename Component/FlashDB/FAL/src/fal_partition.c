@@ -49,7 +49,7 @@ struct part_flash_info
 static const struct fal_partition partition_table_def[] = FAL_PART_TABLE;
 static const struct fal_partition *partition_table = NULL;
 /* partition and flash object information cache table */
-static struct part_flash_info part_flash_cache[sizeof(partition_table_def) / sizeof(partition_table_def[0])] = { 0 };
+static struct part_flash_info part_flash_cache[sizeof(partition_table_def) / sizeof(partition_table_def[0])];
 
 #else /* FAL_PART_HAS_TABLE_CFG */
 

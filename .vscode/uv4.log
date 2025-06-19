@@ -1,11 +1,15 @@
 *** Using Compiler 'V6.23', folder: 'D:\KEIL\CORE\ARM\ARMCLANG\Bin'
 Build target 'C8T6'
+compiling AT_Function.c...
+linking...
+Program Size: Code=42722 RO-data=5058 RW-data=1492 ZI-data=16116  
+FromELF: creating hex file...
 After Build - User command #1: "D:\project\ac6 demo\keil5_disp_size_bar.exe"
 ram:
   RW_IRAM1 :0x20000000
    20.00 KB :|¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö___|   85.98 % (   17.20 KB /    20.00 KB) [2872 B]
 flash:
   ER_IROM1 :0x8000000
-   64.00 KB :|¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö_______|   66.31 % (   42.44 KB /    64.00 KB) [22076 B]
+   64.00 KB :|¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö______|   72.91 % (   46.66 KB /    64.00 KB) [17756 B]
 ".\Objects\ac6demo.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03

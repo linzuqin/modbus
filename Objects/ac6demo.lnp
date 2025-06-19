@@ -1,6 +1,6 @@
 --cpu Cortex-M3
 ".\objects\system_stm32f10x.o"
-".\objects\startup_stm32f10x_md.o"
+".\objects\startup_stm32f103xe.o"
 ".\objects\misc.o"
 ".\objects\stm32f10x_adc.o"
 ".\objects\stm32f10x_bkp.o"
@@ -65,6 +65,10 @@
 ".\objects\agile_modbus_tcp.o"
 ".\objects\qpid.o"
 ".\objects\at_function.o"
+".\objects\lot_function.o"
+".\objects\base64.o"
+".\objects\hmac_sha1.o"
+".\objects\onenet.o"
 ".\objects\fdb.o"
 ".\objects\fdb_file.o"
 ".\objects\fdb_kvdb.o"

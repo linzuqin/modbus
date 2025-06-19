@@ -11,10 +11,9 @@ static void MQTTDISCONNECTED_CallBack(void *device)
 /*指令集*/
 AT_CMD_t AT_Cmd_table[AT_COMMAND_ARRAY_SIZE] = {
     {"AT\r\n", "OK", 1000, NULL},
-    {"ATE1\r\n", "OK", 1000, NULL},
 
     {"AT+CWMODE=1\r\n", "OK", 1000, NULL},
-    {"AT+RST\r\n", "OK", 5000, NULL},
+//    {"AT+RST\r\n", "OK", 5000, NULL},
     {"AT+CWDHCP=1,1\r\n", "OK", 1000, NULL},
     {"AT+MQTTCLEAN=0\r\n", "ERROR", 1000, NULL},					//返回error说明当前无mqtt链接 可以进行新的连接
 
@@ -27,60 +26,52 @@ AT_URC_t AT_URC_table[AT_COMMAND_ARRAY_SIZE] = {
 
 at_err_t AT_SendCmd(AT_Device_t *at_device, const char *cmd, const char *response, uint16_t timeout , uint8_t *data_buf)
 {
-		uint16_t index_count = 0;
-    if (!at_device || !cmd || !at_device->uart_device) {
-        return AT_ERR_INVALID_PARAM;
-    }
-
-    // 检查指令长度是否超出缓冲区
-    uint16_t len = strlen(cmd);
-    if (len >= AT_MSG_SIZE) {
-        LOG_E("AT command too long!");
-        return AT_ERR_INVALID_PARAM;
-    }
-		
-    rt_memset(at_device->uart_device->rx_buffer, 0, AT_MSG_SIZE);
-    at_device->uart_device->rx_size = 0;
-    at_device->uart_device->rx_flag = 0;
-		
-		UART_DMA_Transmit(at_device->uart_device , (uint8_t *)cmd , len);
-
-    // 等待响应
+// 清空接收缓冲区
+		ring_reset(at_device->uart_device->ring_buf);
+    memset(at_device->msg_buf , 0, AT_MSG_SIZE);
+    memset(at_device->uart_device->rx_buffer, 0, at_device->uart_device->rx_max_size);
+		uartbuf_clear(at_device->uart_device);
+	
+	// 发送命令到串口（确保以\r\n结尾）
+    char full_cmd[256];
+		memset(full_cmd , 0 , 256);
+    snprintf(full_cmd, sizeof(full_cmd), "%s", cmd);
+    UART_DMA_Transmit(at_device->uart_device  ,(uint8_t *)full_cmd, strlen(full_cmd));
+	LOG_I("AT->:%s\r\n", cmd);
+    uint8_t read_count = 0;
+    // 增加发送后的延时
+    rt_thread_mdelay(100);
+    
+    // 等待应答
     uint32_t start_time = rt_tick_get();
-    char *rsp_str = NULL;
-    char *error_str = NULL;
-
-    while (rt_tick_get() - start_time < timeout) {
-        if (at_device->uart_device->rx_flag) 
+    while (rt_tick_get() - start_time < timeout) 
+    {
+        if(at_device->uart_device->rx_flag == 1)
         {
-            rt_memset(at_device->msg_buf , 0 , AT_MSG_SIZE);						
-						rt_memcpy(at_device->msg_buf , &(at_device->uart_device->rx_buffer[0]) + index_count ,  AT_MSG_SIZE);
-            rsp_str = strstr((char *)at_device->msg_buf, response);
-            error_str = strstr((char *)at_device->msg_buf, "ERROR");
+//						rt_thread_mdelay(10);
+//					if (strstr((char *)&(at_device->msg_buf[0 + read_count *10]),  ack )) 
+            ringbuf_get(at_device->uart_device->ring_buf , at_device->msg_buf , AT_MSG_SIZE);
+//						memcpy(at_device->msg_buf ,&(at_device->uart_device.rx_buffer[0]) ,  AT_MSG_SIZE);
 
-            if (rsp_str!= NULL) 
+            if(binary_strstr(at_device->msg_buf , uart3_rx_size , response , strlen(response)))
             {
-							if(data_buf != NULL)
-							{
-								rt_memcpy(data_buf , at_device->uart_device->rx_buffer , (index_count + 1) * AT_MSG_SIZE);
-							}
-                rt_memset(at_device->uart_device->rx_buffer , 0 , (index_count + 1) * AT_MSG_SIZE);
-                memmove(at_device->uart_device->rx_buffer , at_device->uart_device->rx_buffer + (index_count + 1) * AT_MSG_SIZE , (index_count + 1) * AT_MSG_SIZE);               //只清除应答部分的指令，并将剩余指令前移
-                return AT_CMD_OK;
+								memset(at_device->msg_buf, 0, AT_MSG_SIZE);
+
+//								memcpy(at_device->msg_buf ,&(at_device->uart_device.rx_buffer) ,  AT_MSG_SIZE);
+                at_device->uart_device->rx_flag = 0;
+                return 0; // 命令执行成功
             }
-            else if (error_str != NULL) 
+            if((++read_count) * 10 >= uart3_rx_size)
             {
-                return AT_ERR_ACK;
+                read_count = 0;
             }
-						index_count += AT_MSG_SIZE;
-						if(index_count >= at_device->uart_device->rx_max_size)
-						{
-							index_count = 0;
-						}
         }
         rt_thread_mdelay(10);
     }
-    return AT_ERR_TIMEOUT;
+    at_device->uart_device->rx_flag = 0;
+		ring_reset(at_device->uart_device->ring_buf);
+    printf("Command '%s' timed out! Last received: %s\n", cmd, at_device->msg_buf);
+    return 1; // 命令执行失败或超时
 }
 
 /**
@@ -88,16 +79,33 @@ at_err_t AT_SendCmd(AT_Device_t *at_device, const char *cmd, const char *respons
  */
 void user_cmd_register(AT_Device_t *at_device)
 {
+    char token[256] = {0};
+    mqtt_connect_params_t mqtt_params = {
+        .WiFi_SSID = DEFAULT_WIFI_SSID,
+        .WiFi_Password = DEFAULT_WIFI_PWD,
+        .IP_Address = IP_ADDRESS,
+        .Port = PORT_NUMBER,
+        .Product_ID = PRODUCT_ID,
+        .Device_Name = DEVICE_NAME,
+        .SECRET_KEY = MY_SECRET_KEY,
+        .Token = token
+    };
+
+    OneNET_Authorization("2018-10-31", mqtt_params.Product_ID, 1956499200, mqtt_params.SECRET_KEY, mqtt_params.Device_Name,token, sizeof(token), 1);
+
     AT_Cmd_Register(at_device, "OK", 1000, NULL, -1,
-                    "AT+CWJAP=\"%s\",\"%s\"\r\n", DEFAULT_WIFI_SSID, DEFAULT_WIFI_PWD);
+                    "AT+CWJAP=\"%s\",\"%s\"\r\n", mqtt_params.WiFi_SSID, mqtt_params.WiFi_Password);
 
     AT_Cmd_Register(at_device, "OK", 1000, NULL, -1,
                     "AT+CIPSNTPCFG=1,8,\"ntp1.aliyun.com\"\r\n");	
 	
     AT_Cmd_Register(at_device, "OK", 1000, NULL, -1,
                     "AT+MQTTUSERCFG=0,1,\"%s\",\"%s\",\"%s\",0,0,\"\"\r\n",
-                    DEVICE_NAME, PRODUCT_ID, TOKEN);
+                    mqtt_params.Device_Name, mqtt_params.Product_ID, mqtt_params.Token);
 
+    AT_Cmd_Register(at_device, "OK", 1000, NULL, -1,
+                    "AT+MQTTCONNCFG=0,10,0,\"\",\"\",0,0\r\n");	
+	
 //    AT_Cmd_Register(at_device, "OK", 100, NULL, -1,
 //                    "AT+MQTTCLIENTID=0,\"%s\"\r\n",
 //                    clientId);
@@ -431,6 +439,12 @@ static void AT_PARSE_TASK(AT_Device_t *at_device)
 static void AT_UPDATA_TASK(AT_Device_t *at_device)
 {
     // Update task logic can be implemented here
+    lot_msg_t msg;
+    lot_create_root(&msg);
+    lot_Add_Number(&msg, "test_time", Unix_Time);
+    lot_generate_str(&msg);
+    mqtt_pub(at_device, POST_TOPIC, msg.str, msg.len);
+    lot_clean(&msg);
 }
 
 /**
@@ -475,6 +489,7 @@ void AT_poll(AT_Device_t *at_device)
 
         case AT_UPDATA:
             // Update sequence could go here
+            AT_UPDATA_TASK(at_device);
             at_device->status = AT_IDLE;
             break;
 

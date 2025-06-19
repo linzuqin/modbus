@@ -1,4 +1,11 @@
 #include "sys.h"
+
+sys_params_t sys_params = 
+{
+    .version = "1.0.1"  // ϵͳ�汾
+};
+
+
 int dwt_init(void) 
 {
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;

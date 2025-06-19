@@ -164,4 +164,4 @@ int ds18b20_start(void)
 	return 1;
 }
 
-INIT_APP_EXPORT(ds18b20_start);
+//INIT_APP_EXPORT(ds18b20_start);

@@ -11,12 +11,9 @@
 #include "ADC.h"
 #include "TIM.h"
 
-
-/*操作系统*/
 #include "log.h"
 #include "rtthread.h"
 
-/*应用驱动*/
 #include "user_DB.h"
 #include "mb.h"
 #include "slave_mb_app.h"
@@ -25,8 +22,11 @@
 #include "ds18b20.h"
 #include "cJSON.h"
 #include "string_Optimize.h"
+#include "base64.h"
+#include "hmac_sha1.h"
+#include "onenet.h"
+#include "lot_function.h"
 
-/*c库*/
 #include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -61,6 +61,14 @@
 
 /*计算公式*/
 #define USE_PID										 0
+
+typedef struct 
+{
+    /* data */
+    char *version;          //系统版本
+}sys_params_t;
+
+extern sys_params_t sys_params;
 
 void rt_hw_us_delay(uint32_t us) ;
 

@@ -6,10 +6,10 @@
 #define AT_RST_PORT     GPIOC
 #define AT_RST_PIN      GPIO_Pin_5
 
-#define AT_DEFAULT_UART_DEVICE  uart_devices[1]
+#define AT_DEFAULT_UART_DEVICE  uart_devices[2]
 
 #define AT_COMMAND_ARRAY_SIZE 16
-#define AT_MSG_SIZE 256
+#define AT_MSG_SIZE 2048
 
 
 /*平台连接参数宏定义*/
@@ -22,6 +22,7 @@
 #define PORT_NUMBER 								1883
 #define PRODUCT_ID 									"2Its5wq8a3"
 #define DEVICE_NAME 								"lot_device"
+#define MY_SECRET_KEY               "VDZEcm1HRFRaOG9mZ2NGeEtwenRkd25hQ0dIWTZDVGo="
 #define TOKEN    										"version=2018-10-31&res=products%2F2Its5wq8a3%2Fdevices%2Flot_device&et=1924876800&method=md5&sign=yEio49aeh%2BTf3XPlD8OyPQ%3D%3D"
 
 #define POST_TOPIC		    					"$sys/"PRODUCT_ID"/"DEVICE_NAME"/thing/property/post"
@@ -67,7 +68,6 @@ typedef struct {
 		uint8_t init_step;									//初始化步骤
 } AT_Device_t;
 
-
 typedef enum
 {
 	/*AT指令相关错误类型*/
@@ -93,6 +93,20 @@ typedef enum
 	AT_MQTT_SEND_FAIL,                      //MQTT指令上报失败
 
 }at_err_t;
+
+typedef struct AT_Function
+{
+  /* data */
+  char *WiFi_SSID;                // WiFi SSID
+  char *WiFi_Password;            // WiFi 密码
+  char *IP_Address;               // IP 地址
+  uint16_t Port;                  // 端口号
+  char *Product_ID;              // 产品 ID
+  char *Device_Name;              // 设备名称
+  char *SECRET_KEY;              // 设备密钥
+  char *Token;                    // 令牌
+}mqtt_connect_params_t;
+
 
 void AT_poll(AT_Device_t *at_device);
 uint8_t AT_Cmd_Register(AT_Device_t *at_device, const char *response,

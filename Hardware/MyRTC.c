@@ -108,7 +108,7 @@ static void rtc_time_thread_entry(void *parameter)
 	while (1)
 	{
 		MyRTC_ReadTime();
-		rt_thread_mdelay(1000); // Delay for 1 second
+		rt_thread_mdelay(100); // Delay for 1 second
 	}
 }
 

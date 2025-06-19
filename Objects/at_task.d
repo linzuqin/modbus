@@ -33,4 +33,6 @@
   Component\modbus\modbus\include\mbutils.h Hardware\MPU6050.h \
   Hardware\MPU6050_Reg.h Hardware\ds18b20.h \
   D:\KEIL\PACK\MDK-Packs\cJSON\1.0.0\cJSON.h \
-  Component\Optimize\string_Optimize.h
+  Component\Optimize\string_Optimize.h Component\AT\base64.h \
+  Component\AT\hmac_sha1.h Component\AT\onenet.h \
+  Component\AT\lot_function.h
